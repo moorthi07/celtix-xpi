@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<?xml-stylesheet href="chrome://celtx/content/celtx.css" type="text/css"?> 
+
+<!DOCTYPE page [
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<page xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+      id="markup-panel-page"
+      onload="panel.init()"
+      onunload="panel.destroy()">
+
+  <script type="application/x-javascript"
+          src="chrome://global/content/globalOverlay.js"/>
+  <script type="application/x-javascript"
+          src="chrome://global/content/nsDragAndDrop.js"/>
+  <script type="application/x-javascript"
+          src="chrome://global/content/nsTransferable.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/util.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/markup-panel.js"/>
+
+  <commandset id="markup-command-set">
+    <command id="cmd-tag-item"
+             oncommand="panel.tagItem()"/>
+    <command id="cmd-delete-item"
+             oncommand="panel.deleteItem()"/>
+    <command id="cmd-add-media"
+             oncommand="panel.addMedia()"/>
+    <command id="cmd-remove-media"
+             oncommand="panel.removeMedia()"/>
+    <command id="cmd-img-search"
+             oncommand="panel.imageSearch()"/>
+  </commandset>
+
+  <commandset commandupdater="true"
+              events="richview-select"
+              oncommandupdate="panel.updateCommands()"/>
+
+  <vbox flex="1">
+
+    <hbox>
+
+      <vbox>
+
+        <listbox id="dept-list" width="125" rows="8"
+                 onselect="panel.deptSelected()"
+                 datasources="chrome://celtx/content/schema.rdf"
+                 ref=""
+                 sortResource="http://www.w3.org/2000/01/rdf-schema#label"
+                 sortDirection="ascending">
+          <listhead>
+            <listheader label="&category.label;"/>
+          </listhead>
+          <template>
+            <rule>
+              <conditions>
+                <content uri="?uri"/>
+                <member container="?uri" child="?item"/>
+                <triple subject="?item"
+                        predicate="http://www.w3.org/2000/01/rdf-schema#label"
+                        object="?label"/>
+                <triple subject="?item"
+                        predicate="http://celtx.com/NS/v1/element"
+                        object="?elem"/>
+              </conditions>
+              <action>
+                <listitem uri="?item"
+                          label="?label"
+                          tooltiptext="?label"
+                          cxelement="?elem"/>
+              </action>
+            </rule>
+          </template>
+        </listbox>
+
+      </vbox>
+
+      <vbox>
+
+        <listbox id="item-list" width="125" rows="8"
+                 onselect="panel.itemSelected()"
+                 datasources="rdf:null"
+                 ref=""
+                 sortResource="http://purl.org/dc/elements/1.1/title"
+                 sortDirection="ascending">
+          <listhead>
+            <listheader label="&item.label;"/>
+          </listhead>
+          <template>
+            <rule>
+              <conditions>
+                <content uri="?uri"/>
+                <member container="?uri" child="?item"/>
+                <triple subject="?item"
+                        predicate="http://purl.org/dc/elements/1.1/title"
+                        object="?label"/>
+                <triple id="item-list-filter"
+                        subject="?item"
+                        predicate="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                        object="?unused"/>
+              </conditions>
+              <bindings>
+                <binding subject="?item"
+                         predicate="http://purl.org/dc/elements/1.1/description"
+                         object="?desc"/>
+              </bindings>
+              <action>
+                <listitem uri="?item"
+                          label="?label"
+                          dcdesc="?desc"/>
+              </action>
+            </rule>
+          </template>
+          <listitem id="new-item" label="&lt;&newMarkup.label;&gt;"/>
+        </listbox>
+
+      </vbox>
+
+    </hbox>
+
+    <label value="&nameCol.label;"/>
+    <textbox id="item-name"
+             type="autosave"
+             class="mp-textbox"
+             onsave="panel.nameChanged()"/>
+
+    <label value="&description.label;"/>
+    <textbox id="item-desc"
+             type="autosave"
+             class="mp-textbox"
+             multiline="true"
+             rows="3"
+             onsave="panel.descChanged()"/>
+
+    <hbox align="right">
+      <button id="tag-btn" label="&tagItemCmd.label;"
+              maxwidth="100" command="cmd-tag-item"/>
+      <button id="delete-btn" label="&delItemCmd.label;"
+              maxwidth="100" command="cmd-delete-item"/>
+    </hbox>
+    
+    <label value="&objViewMediaTab.label;"/>
+    <mediaview id="media-view"
+               flex="1"
+               xxxtooltiptext="&mediaBox.tooltip;"
+               ondblclick="panel.mediaDoubleClick(event)"
+               onitemchange="panel.mediaItemChanged(item)"
+               ondragover="panel.mediaDragOver(event)"
+               ondragdrop="panel.mediaDragDrop(event)"
+               datasources="rdf:null">
+      <template>
+        <rule>
+          <conditions>
+            <content uri="?uri"/>
+            <triple subject="?uri"
+                    predicate="http://celtx.com/NS/v1/media"
+                    object="?media"/>
+            <member container="?media" child="?item"/>
+            <triple subject="?item"
+                    predicate="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                    object="?type"/>
+          </conditions>
+          <bindings>
+            <binding subject="?item"
+                     predicate="http://purl.org/dc/elements/1.1/title"
+                     object="?title"/>
+            <binding subject="?item"
+                     predicate="http://celtx.com/NS/v1/state"
+                     object="?state"/>
+            <binding subject="?item"
+                     predicate="http://celtx.com/NS/v1/progress"
+                     object="?progress"/>
+          </bindings>
+          <action>
+            <mediaitem uri="?item" title="?title" type="?type"
+                       state="?state" progress="?progress"/>
+          </action>
+        </rule>
+      </template>
+    </mediaview>
+
+
+    <hbox align="right">
+      <button id="gis-btn" label="Images" command="cmd-img-search"/>
+      <button label="&add.label;" maxwidth="75" command="cmd-add-media"/>
+      <button label="&remove.label;" maxwidth="75" command="cmd-remove-media"/>
+    </hbox>
+
+  </vbox>
+
+</page>

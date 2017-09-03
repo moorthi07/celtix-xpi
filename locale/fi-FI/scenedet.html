@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>Scene Details</title>
+<style>
+body {
+margin: 20px;
+font-family: helvetica, arial, verdana;
+font-size: 12px;
+}
+textarea {
+height:100px;
+width: 90%;
+font-family: helvetica, arial, verdana;
+font-size: 12px;
+padding: 1px;
+}
+p {
+float: left;
+width: 50%;
+}
+br {
+clear: both;
+}
+
+input {
+width:90%;
+}
+
+.container {
+margin-bottom: 15px;
+}
+
+.scene {
+  background-color: lightgreen;
+  border: 1px solid green;
+  padding: 5px 2px 5px 10px;
+  font-weight: normal;
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-topright: 6px;
+}
+
+.contents {
+  border: 1px solid green;
+  border-top: 0px;
+  background-color: #FFFFFF;
+  -moz-border-radius-bottomleft: 6px;
+  -moz-border-radius-bottomright: 6px;
+  padding: 5px 0px 8px 20px;
+}
+</style>
+</head>
+<body>
+<form>
+
+<div class="container">
+<div class="scene"><span style="font-weight:bold;">Kohtauksen yksityiskohdat</span></div>
+<div class="contents">
+<p>Mikä on kohtauksen keskeisin tapahtuma?<br />
+<textarea type="text" name="scene-event"></textarea></p>
+<p>Kuinka tämä kohtaus vaikuttaa koko juoneen?<br />
+<textarea type="text" name="scene-plot"></textarea></p>
+<br />
+<p>Ketkä hahmot ovat tässä kohtauksessa?<br />
+<textarea type="text" name="scene-char"></textarea></p>
+<p>Mikä on kohtauksen asettelu?<br />
+<textarea type="text" name="scene-set"></textarea></p>
+<br />
+<p>Milloin tämä kohtaus tapahtuu?<br />
+<textarea type="text" name="scene-when"></textarea></p>
+<p>Mikä on tämän kohtauksen tunnelma?<br />
+<textarea type="text" name="scene-mood"></textarea></p>
+
+<br />
+</div>
+</div>
+
+<div class="container">
+<div class="scene"><span style="font-weight:bold;">Protagonisti(päähenkilö)/Antagonisti(vastustaja)</span></div>
+<div class="contents">
+<p>Kuka on protagonisti tässä kohtauksessa?<br />
+<input type="text" name="protagonist" /></p>
+<p>Kuka on antagonisti tässä kohtauksessa?<br />
+<input type="text" name="antagonist" /></p>
+<br />
+<p>Mikä on protagonistin tavoite tässä kohtauksessa?<br />
+<textarea type="text" name="pro_goal"></textarea></p>
+<p>Mikä on antagonistin tavoite tässä kohtauksessa?<br />
+<textarea type="text" name="an_goal"></textarea></p>
+<br />
+<p>Kuinka protagonisti saavuttaa tavoitteensa?<br />
+<textarea type="text" name="pro_achieve"></textarea></p>
+<p>Kuinka antagonisti saavuttaa tavoitteensa?<br />
+<textarea type="text" name="an_achieve"></textarea></p>
+<br />
+</div>
+</div>
+
+
+</form>
+</body>
+</html>

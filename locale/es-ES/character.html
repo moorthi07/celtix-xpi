@@ -1,0 +1,129 @@
+<html>
+<head>
+<title>Characters</title>
+<style>
+body {
+margin: 20px;
+font-family: helvetica, arial, verdana;
+font-size: 12px;
+}
+textarea {
+height:100px;
+width: 90%;
+font-family: helvetica, arial, verdana;
+font-size: 12px;
+padding: 1px;
+}
+p {
+float: left;
+width: 50%;
+}
+br {
+clear: both;
+}
+
+
+
+.container {
+margin-bottom: 15px;
+}
+
+.scene {
+  background-color: lightblue;
+  border: 1px solid blue;
+  padding: 5px 2px 5px 10px;
+  font-weight: normal;
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-topright: 6px;
+}
+
+.contents {
+  border: 1px solid blue;
+  border-top: 0px;
+  background-color: #FFFFFF;
+  -moz-border-radius-bottomleft: 6px;
+  -moz-border-radius-bottomright: 6px;
+  padding: 8px 6px 8px 24px;
+}
+</style>
+</head>
+<body>
+<form>
+
+<div class="container">
+<div class="scene"><span style="font-weight:bold;">Detailed Physical Description</span></div>
+<div class="contents">
+<p>Age:<br />
+<input type="text" name="age" style="width:90%;"/></p>
+<p>Distinguishing Features:<br />
+<input type="text" name="dist_feat" style="width:90%;"/></p>
+<br />
+<p>Hair:<br />
+<input type="text" name="hair" style="width:90%;"/></p>
+<p>Eyes:<br />
+<input type="text" name="eyes" style="width:90%;"/></p>
+<br />
+<p>Height:<br />
+<input type="text" name="height" style="width:90%;"/></p>
+<p>Weight:<br />
+<input type="text" name="weight" style="width:90%;"/></p>
+<br />
+</div>
+</div>
+
+<div class="container">
+<div class="scene"><span style="font-weight:bold;">Character Traits</span></div>
+<div class="contents">
+<p>Three Key Character Traits:<br />
+<input type="text" name="trait1" style="width:90%;margin-bottom:10px;"/></textarea><br /><input type="text" name="trait2" style="width:90%;margin-bottom:10px;"/></textarea><br /><input type="text" name="trait3" style="width:90%;margin-bottom:10px;"/></textarea></p>
+<p>What is the Principal Function of this Character?<br />
+<select name="princ_func">
+<option>protagonist</option>
+<option>antagonist</option>
+<option>best friend</option>
+<option>love interest</option>
+<option>confidante</option>
+<option>partner</option>
+<option>catalyst</option>
+<option>mentor</option>
+<option>comic relief</option>
+<option>other</option>
+</select></p>
+<br />
+</div>
+</div>
+
+<div class="container">
+<div class="scene"><span style="font-weight:bold;">Motivation</span></div>
+<div class="contents">
+<p>What is the Goal of this Character?<br />
+<textarea type="text" name="goal" /></textarea></p>
+<p>What is the Character's plan to achieve the goal?<br />
+<textarea type="text" name="ach_goalmotivation2" /></textarea></p>
+<br />
+</div>
+</div>
+
+<div class="container">
+<div class="scene"><span style="font-weight:bold;">Character Background</span></div>
+<div class="contents">
+<p>Family Background:<br />
+<textarea type="text" name="fam_back" /></textarea></p>
+<p>Habits/Vices:<br />
+<textarea type="text" name="upbring" /></textarea></p>
+<br />
+<p>Education:<br />
+<textarea type="text" name="education" /></textarea></p>
+<p>Personality:<br />
+<textarea type="text" name="person" /></textarea></p>
+<p>Likes:<br />
+<textarea type="text" name="likes" /></textarea></p>
+<p>Dislikes:<br />
+<textarea type="text" name="dislikes" style="align:bottom;"/></textarea></p>
+<br />
+</div>
+</div>
+</form>
+</body>
+
+</html>

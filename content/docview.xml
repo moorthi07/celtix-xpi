@@ -1,0 +1,1476 @@
+<?xml version="1.0"?>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!DOCTYPE bindings [
+<!ENTITY % bookmarksDTD SYSTEM
+  "chrome://browser/locale/bookmarks/bookmarks.dtd" >
+%bookmarksDTD;
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+%browserDTD;
+<!ENTITY % editMenuDTD SYSTEM "chrome://global/locale/editMenuOverlay.dtd" >
+%editMenuDTD;
+<!ENTITY % bindingsDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%bindingsDTD;
+]>
+
+<bindings id="celtx-bindings"
+          xmlns="http://www.mozilla.org/xbl"
+          xmlns:xbl="http://www.mozilla.org/xbl"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+          xmlns:html="http://www.w3.org/1999/xhtml">
+
+  <!-- =====[ Document (Base) ]===== -->
+
+  <!-- Navigation Panel Tempate
+  <binding id="document-panel">
+    <content>
+      <xul:vbox>
+      </xul:vbox>
+    </content>
+  </binding>
+  -->
+
+  <!-- Main Panel -->
+  <binding id="document-view">
+
+    <resources>
+      <stylesheet src="chrome://celtx/content/toolbar.css"/>
+    </resources>
+
+    <!-- Template
+    <content>
+      <xul:vbox flex="1">
+      </xul:vbox>
+    </content>
+    -->
+
+    <implementation>
+      <property name="tab"
+                onget="return this._tab"
+                onset="this._tab = val; return val;"/>
+      <property name="navpanel"
+                onget="return this._navpanel"
+                onset="this._navpanel = val; return val;"/>
+      <property name="editor" readonly="true" onget="return this._editor"/>
+      <property name="doc" readonly="true" onget="return this._document"/>
+      <property name="controller"
+                onget="return this._controller"
+                onset="this._controller = val; return val;"/>
+      <property name="inPrintPreview" readonly="true">
+        <getter>
+          return document.getElementById("print-preview-toolbar") != null;
+        </getter>
+      </property>
+      <!-- This is for fooling printUtils.js -->
+      <property name="webNavigation" readonly="true">
+        <getter>
+          return this.editor.webNavigation;
+        </getter>
+      </property>
+      <!-- Template
+      <property name="allowSidebar" readonly="true" onget="return true"/>
+      <property name="title" readonly="true" onget="return 'Document'"/>
+      <constructor>
+<![CDATA[
+]]>
+      </constructor>
+      <method name="open">
+        <parameter name="project"/>
+        <parameter name="doc"/>
+        <body>
+<![CDATA[
+  this._editor = document.getAnonymousElementByAttribute(this, "anonid",
+    "editor");
+  this._controller = new DocumentController(...);
+  this._project = project;
+  this._document = doc;
+  // Load the document
+  var filearc = RES(Cx.NS_CX + "filename");
+  var filename = project.model.target(RES(doc), filearc);
+  var uri = project.fileURLOf(filename.value);
+  this.editor.loadURI(uri, null, null);
+
+  // Register timers
+]]>
+        </body>
+      </method>
+      <method name="focus">
+        <body>
+<![CDATA[
+  window.controllers.appendController(this.controller);
+  this.editor.setAttribute("type", "content-primary");
+  if (this._focusedElement)
+    this._focusedElement.focus();
+  else
+    _content.focus();
+]]>
+        </body>
+      </method>
+      <method name="blur">
+        <body>
+<![CDATA[
+  if (this.inPrintPreview)
+    PrintUtils.exitPrintPreview();
+  this._focusedElement = document.commandDispatcher.focusedElement;
+  this.editor.setAttribute("type", "content");
+  window.controllers.removeController(this.controller);
+]]>
+        </body>
+      </method>
+      <method name="close">
+        <body>
+<![CDATA[
+  return true;
+]]>
+        </body>
+      </method>
+      <method name="save">
+        <body>
+<![CDATA[
+]]>
+        </body>
+      </method>
+      -->
+    </implementation>
+  </binding>
+
+  <!-- =====[ Script ]===== -->
+
+  <!-- Navigation Panel -->
+  <binding id="script-panel">
+    <content>
+      <xul:vbox flex="1">
+        <xul:toolbar>
+          <xul:toolbarbutton class="nav-item-down-button"
+                             command="cmd-treeitem-down"
+                             tooltiptext="&moveDownCmd.label;"/>
+          <xul:toolbarbutton class="nav-item-up-button"
+                             command="cmd-treeitem-up"
+                             tooltiptext="&moveUpCmd.label;"/>
+          <xul:toolbarbutton class="nav-recycle-scene-button"
+                             command="cmd-recycle-scene"
+                             tooltiptext="&recycleCmd.label;"/>
+          <xul:toolbarbutton class="nav-item-delete-button"
+                             command="cmd-treeitem-delete"
+                             tooltiptext="&delItemCmd.label;"/>
+        </xul:toolbar>
+        <!-- onselect and onclick are both needed because an onselect event
+             only fires when the selection changes, and mouse events aren't
+             dispatched until after the onselect event fires -->
+        <xul:tree flex="3"
+                  anonid="project-tree"
+                  context="tree-popup"
+                  datasources="rdf:null"
+                  ref="urn:celtx:scenes"
+                  flags="dont-build-content"
+                  hidecolumnpicker="true"
+            onselect="gProjWin.currentDocumentView.controller.focusedTree
+                      = gProjWin.currentDocumentView.controller.scriptTree;
+                      goDoCommand('cmd-treeitem-selected')"
+            onclick="gProjWin.currentDocumentView.controller.focusedTree
+                   = gProjWin.currentDocumentView.controller.scriptTree"
+            ondblclick="gProjWin.currentDocumentView.controller.focusedTree
+                        = gProjWin.currentDocumentView.controller.scriptTree;
+                        goDoCommand('cmd-treeitem-goto')"
+            ondraggesture="return; nsDragAndDrop.startDrag(event,
+              gProjWin.currentDocumentView.controller.scriptDragObserver)"
+                  seltype="single">
+          <xul:treecols>
+            <xul:treecol id="ordinal-col"
+                         label="#"
+                         sortActive="true"
+                         sortDirection="natural"
+                         sort="?ordinal"
+                         width="30"
+                         fixed="true"/>
+            <xul:splitter class="tree-splitter"/>
+            <xul:treecol id="title-col"
+                         label="&title.label;"
+                         flex="1"/>
+          </xul:treecols>
+          <xul:template>
+            <xul:rule>
+              <xul:conditions>
+                <xul:content uri="?uri"/>
+                <xul:member container="?uri"
+                            child="?res"/>
+                <xul:triple subject="?res"
+                            predicate="http://celtx.com/NS/v1/ordinal"
+                            object="?ordinal"/>
+                <xul:triple subject="?res"
+                            predicate="http://purl.org/dc/elements/1.1/title"
+                            object="?title"/>
+              </xul:conditions>
+              <xul:action>
+                <xul:treechildren>
+                  <xul:treeitem uri="?res" class="scene-item">
+                    <xul:treerow>
+                      <xul:treecell label="?ordinal"/>
+                      <xul:treecell label="?title"/>
+                    </xul:treerow>
+                  </xul:treeitem>
+                </xul:treechildren>
+              </xul:action>
+            </xul:rule>
+          </xul:template>
+        </xul:tree>
+        <xul:toolbar>
+          <xul:toolbarspacer flex="1"/>
+          <xul:toolbarbutton class="boneyard-button"
+                             type="checkbox"
+                             autocheck="false"
+                             autoCheck="false"
+                             command="cmd-toggle-boneyard"
+                             ondragover="nsDragAndDrop.dragOver(event,
+              gProjWin.currentDocumentView.controller.boneDropObserver)"
+                             ondragexit="nsDragAndDrop.dragExit(event,
+              gProjWin.currentDocumentView.controller.boneDropObserver)"
+                             ondragdrop="nsDragAndDrop.drop(event,
+              gProjWin.currentDocumentView.controller.boneDropObserver)"/>
+          <xul:toolbarspacer flex="1"/>
+        </xul:toolbar>
+      </xul:vbox>
+    </content>
+  </binding>
+
+  <!-- Main Panel -->
+  <binding id="script-view" extends="#document-view">
+
+    <content>
+      <xul:vbox flex="1">
+        <xul:toolbox anonid="format-toolbox" orient="horizontal">
+          <xul:toolbar align="center">
+            <xul:toolbaritem>
+              <xul:menulist anonid="format-menulist"
+                            oncommand="
+                var e = gProjWin.currentDocumentView.controller.editor;
+                e.format(this.value);
+                e.editorElement.contentWindow.focus();">
+                <xul:menupopup id="format-menu-popup">
+                  <xul:menuitem label="&formatHeading.label;"
+                                value="sceneheading" />
+                  <xul:menuitem label="&formatAction.label;"
+                                value="action" />
+                  <xul:menuitem label="&formatChar.label;"
+                                value="character" />
+                  <xul:menuitem label="&formatDialog.label;"
+                                value="dialog" />
+                  <xul:menuitem label="&formatParen.label;"
+                                value="parenthetical" />
+                  <xul:menuitem label="&formatTrans.label;"
+                                value="transition" />
+                  <xul:menuitem label="&formatShot.label;"
+                                value="shot" />
+                  <xul:menuitem label="&formatText.label;"
+                                value="" />
+                </xul:menupopup>
+              </xul:menulist>
+            </xul:toolbaritem>
+            <xul:toolbarbutton class="celtx-note-button format-toolbar-button"
+                               tooltiptext="&insertNoteCmd.toolbarLabel;"
+                               command="cmd-insert-note"/>
+            <xul:toolbarseparator />
+            <xul:toolbarbutton class="celtx-bold-button format-toolbar-button"
+                               tooltiptext='&bold.label;'
+                               onclick="goDoCommand('cmd-bold')"/>
+            <xul:toolbarbutton class="celtx-italic-button format-toolbar-button"
+                               tooltiptext='&italic.label;'
+                               onclick="goDoCommand('cmd-italic')"/>
+            <xul:toolbarbutton class="celtx-underline-button
+                                      format-toolbar-button"
+                               tooltiptext='&underline.label;'
+                               onclick="goDoCommand('cmd-underline')"/>
+            <xul:toolbarseparator />
+            <xul:toolbarbutton class="celtx-find-button format-toolbar-button"
+                               tooltiptext="&findCmd.label;"
+                               command="cmd-find" />
+            <xul:toolbarbutton class="celtx-spell-button format-toolbar-button"
+                               tooltiptext="&spellCheckCmd.label;"
+                               command="cmd-check-spelling" />
+            <xul:toolbarbutton class="celtx-remove-button format-toolbar-button"
+                               tooltiptext="&removeMarkupCmd.label;"
+                               oncommand="goDoCommand('cmd-unmarkup')"
+                               observes="script-selection"/>
+            <xul:toolbarseparator />
+            <xul:toolbaritem>
+              <xul:menulist anonid="zoom-menulist"
+                            oncommand="goDoCommand('cmd-set-zoom')">
+                <xul:menupopup>
+                  <xul:menuitem label="100%" value="100"/>
+                  <xul:menuitem label="150%" value="150"/>
+                </xul:menupopup>
+              </xul:menulist>
+            </xul:toolbaritem>
+          </xul:toolbar>
+          <xul:toolbar flex="1"/>
+        </xul:toolbox>
+        <xul:vbox flex="1">
+          <xul:script-editor anonid="editor"
+                             type="content-primary"
+                             context="editor-context"
+                             flex="2"
+                             minheight="100"/>
+          <xul:splitter anonid="bonesplitter">
+            <xul:grippy/>
+          </xul:splitter>
+          <xul:script-editor anonid="boneyardeditor"
+                             type="content"
+                             context="boneyard-context"
+                             flex="1"
+                             minheight="100"
+                             collapsed="true"/>
+        </xul:vbox>
+        <xul:statusbar>
+          <xul:statusbarpanel anonid="status-message" flex="1"/>
+          <xul:statusbarpanel anonid="status-pagecount"
+                              minwidth="50"/>
+        </xul:statusbar>
+      </xul:vbox>
+    </content>
+
+    <implementation>
+      <property name="allowSidebar" readonly="true" onget="return true"/>
+      <property name="zoommenu" readonly="true"
+                onget="return document.getAnonymousElementByAttribute(this,
+                      'anonid', 'zoom-menulist')"/>
+      <property name="zoomed">
+        <getter>
+          return this.scripteditor.zoomed;
+        </getter>
+        <setter>
+          this.scripteditor.zoomed = val;
+          this.boneyardeditor.zoomed = val;
+          return val;
+        </setter>
+      </property>
+      <property name="formatmenu" readonly="true">
+        <getter>
+          return document.getAnonymousElementByAttribute(this, "anonid",
+            "format-menulist");
+        </getter>
+      </property>
+      <property name="boneyardeditor" readonly="true">
+        <getter>
+          return document.getAnonymousElementByAttribute(this, "anonid",
+            "boneyardeditor");
+        </getter>
+      </property>
+      <constructor>
+<![CDATA[
+]]>
+      </constructor>
+      <method name="open">
+        <parameter name="project"/>
+        <parameter name="doc"/>
+        <body>
+<![CDATA[
+  this.scripteditor = document.getAnonymousElementByAttribute(this, "anonid",
+    "editor");
+  this.scripteditor.init();
+  this.boneyardeditor.init();
+  this._controller = new ScriptController(this);
+  this._editor = this.scripteditor.editorElement;
+  this._project = project;
+  this._document = doc;
+
+  // Load the document (using a scratch file)
+  // var filearc = RES(Cx.NS_CX + "filename");
+  // var filename = project.model.target(RES(doc), filearc).value;
+  var filename = "script.html";
+  var scratchname = filename.match(/(.*)\.html/)[1] + "_swap.html";
+  var scratchfile = project.localPath;
+  var origfile = scratchfile.clone();
+  scratchfile.append(scratchname);
+  origfile.append(filename);
+
+  // If a scratch file exists, prompt the user to recover
+  if (scratchfile.exists() && confirmYesNo(null,
+      app.text("ConfirmRecoverTempScript")) == kConfirmYes)
+    this._recovering = true;
+  // Otherwise, create a fresh scratch file
+  else {
+    if (scratchfile.exists())
+      scratchfile.remove(false);
+    origfile.copyTo(null, scratchname);
+  }
+
+  // Load its boneyard
+  var bonename = filename.match(/(.*)\.html/)[1] + "_boneyard.html";
+  var bonefile = project.localPath;
+  bonefile.append(bonename);
+  if (! bonefile.exists())
+    app.projectManager.initScriptFile(bonefile);
+
+  try {
+    var uri = project.fileURLOf(scratchname);
+    this.scripteditor.load(uri);
+  }
+  catch (ex) {
+    dump("*** scripteditor.load: " + ex + "\n");
+  }
+
+  try {
+    var boneuri = project.fileURLOf(bonename);
+    this.boneyardeditor.load(boneuri);
+  }
+  catch (ex) {
+    dump("*** boneyardeditor.load: " + ex + "\n");
+  }
+]]>
+        </body>
+      </method>
+      <method name="focus">
+        <body>
+<![CDATA[
+  window.controllers.appendController(this.controller);
+  this.editor.setAttribute("type", "content-primary");
+  if (this._focusedElement)
+    this._focusedElement.focus();
+  else
+    _content.focus();
+  this.controller.focus();
+]]>
+        </body>
+      </method>
+      <method name="blur">
+        <body>
+<![CDATA[
+  if (this.inPrintPreview)
+    PrintUtils.exitPrintPreview();
+  this._focusedElement = document.commandDispatcher.focusedElement;
+  this.editor.setAttribute("type", "content");
+  this.controller.blur();
+  window.controllers.removeController(this.controller);
+]]>
+        </body>
+      </method>
+      <method name="close">
+        <body>
+<![CDATA[
+  // Check for unsaved changes
+  if (this.scripteditor.modificationCount > 0 ||
+      this.boneyardeditor.modificationCount > 0 ||
+      this._recovering) {
+    var result = confirmYesNoCancel(null, app.text("ConfirmSaveProject"));
+    if (result == kConfirmCancel)
+      return false;
+    else if (result == kConfirmYes)
+      this.save();
+  }
+  this.controller.close();
+  // Delete the scratch file
+  // var filearc = RES(Cx.NS_CX + "filename");
+  // var filename = this._project.model.target(RES(this._document),
+  //   filearc).value;
+  var filename = "script.html"
+  var scratchname = filename.match(/(.*)\.html/)[1] + "_swap.html";
+  var scratchfile = this._project.localPath;
+  scratchfile.append(scratchname);
+  if (scratchfile.exists()) {
+    try { scratchfile.remove(false); }
+    catch (ex) { dump("*** Error deleting " + scratchname + ": " + ex + "\n"); }
+  }
+  return true;
+]]>
+        </body>
+      </method>
+      <method name="saveScratch">
+        <body>
+<![CDATA[
+  this.scripteditor.cleanup();
+  this.boneyardeditor.cleanup();
+  this.checkScriptMetadata();
+  var editors = { script: this.scripteditor, bone: this.boneyardeditor };
+  for (editor in editors) {
+    try {
+      var persist = getWebBrowserPersist();
+      var IPersist = Components.interfaces.nsIWebBrowserPersist;
+      var doc     = editors[editor].doc;
+      var file    = IFile(doc.documentURI);
+  
+      // TODO: more output flags? see ComposerCommands.js
+      var flags = IPersist.ENCODE_FLAGS_WRAP
+                | IPersist.ENCODE_FLAGS_ENCODE_LATIN1_ENTITIES
+                | IPersist.ENCODE_FLAGS_FORMATTED;
+      var wrap = 80;
+  
+      // TODO: other flags?
+      persist.persistFlags = persist.persistFlags
+                           | IPersist.PERSIST_FLAGS_NO_BASE_TAG_MODIFICATIONS
+                           | IPersist.PERSIST_FLAGS_REPLACE_EXISTING_FILES
+                           | IPersist.PERSIST_FLAGS_DONT_FIXUP_LINKS
+                           | IPersist.PERSIST_FLAGS_DONT_CHANGE_FILENAMES
+                           | IPersist.PERSIST_FLAGS_FIXUP_ORIGINAL_DOM;
+  
+      persist.saveDocument(doc,
+                           file,
+                           null,  // related files parent dir
+                           "text/html",
+                           flags,
+                           wrap);
+
+    }
+    catch (ex) {
+      dump("*** scriptview.save: " + ex + "\n");
+    }
+  }
+]]>
+        </body>
+      </method>
+      <method name="save">
+        <body>
+<![CDATA[
+  this.saveScratch();
+  this.scripteditor.resetModificationCount();
+  this.boneyardeditor.resetModificationCount();
+  var doc = this.scripteditor.doc;
+  var file = IFile(doc.documentURI);
+  var filename = file.leafName.match(/(.*)_swap\.html/);
+  if (filename.length > 1) {
+    var origfile = file.clone();
+    origfile.leafName = filename[1] + ".html";
+    origfile.remove(false);
+    file.copyTo(null, origfile.leafName);
+  }
+  else
+    dump("*** Couldn't match _swap.html on end of " + file.leafName + "\n");
+  if (this._project.temporary)
+    this._project.temporary = false;
+]]>
+        </body>
+      </method>
+      <method name="onprint">
+        <body>
+<![CDATA[
+  // Force page numbers
+  var svc = Components.classes['@mozilla.org/gfx/printsettings-service;1'].
+    getService(Components.interfaces.nsIPrintSettingsService);
+  var settings = ScriptPrinting.getGlobalPrintSettings();
+  settings.headerStrRight = "&P";
+  svc.savePrintSettingsToPrefs(settings, false,
+    Components.interfaces.nsIPrintSettings.kInitSaveAll);
+]]>
+        </body>
+      </method>
+      <method name="enterPrintPreview">
+        <body>
+          var toolbox = document.getAnonymousElementByAttribute(this,
+            "anonid", "format-toolbox");
+          toolbox.collapsed = true;
+        </body>
+      </method>
+      <method name="exitPrintPreview">
+        <body>
+          var toolbox = document.getAnonymousElementByAttribute(this,
+            "anonid", "format-toolbox");
+          toolbox.collapsed = false;
+        </body>
+      </method>
+      <method name="setZoomByMenu">
+        <body>
+<![CDATA[
+  switch (this.zoommenu.selectedItem.value) {
+    case "100":
+      this.zoomed = false;
+      break;
+    case "150":
+      this.zoomed = true;
+      break;
+    default:
+      dump("*** scriptview.setZoomByMenu: Unknown zoom level "
+        + this.zoommenu.selectedItem.value + "\n");
+  }
+]]>
+        </body>
+      </method>
+      <method name="checkScriptMetadata">
+        <body>
+<![CDATA[
+  var doc = this.scripteditor.doc;
+  var proj = this._project;
+
+  // Find all the existing META tags
+  var headtag  = doc.documentElement.getElementsByTagName("head")[0];
+  var metatags = headtag.getElementsByTagName("meta");
+  var foundNodes = {
+    author: null,
+    source: null,
+    rights: null,
+    contact: null,
+    numbering: null
+  };
+  for (var i = 0; i < metatags.length; i++)
+  {
+    var tag = metatags[i];
+    var name = tag.getAttribute("name");
+    if (name == "Author")
+      foundNodes.author = tag;
+    else if (name == "DC.source")
+      foundNodes.source = tag;
+    else if (name == "DC.rights")
+      foundNodes.rights = tag;
+    else if (name == "CX.contact")
+      foundNodes.contact = tag;
+    else if (name == "CX.sceneNumbering")
+      foundNodes.numbering = tag;
+  }
+
+  // Add/replace/remove as necessary
+  if (proj.author) {
+    var authorNode = doc.createElement("meta");
+    authorNode.setAttribute("name", "Author");
+    authorNode.setAttribute("content", proj.author);
+    if (foundNodes.author)
+      headtag.replaceChild(authorNode, foundNodes.author);
+    else
+      headtag.appendChild(authorNode);
+  } else if (foundNodes.author)
+    headtag.removeChild(foundNodes.author);
+
+  if (proj.source) {
+    var sourceNode = doc.createElement("meta");
+    sourceNode.setAttribute("name", "DC.source");
+    sourceNode.setAttribute("content", proj.source);
+    if (foundNodes.source)
+      headtag.replaceChild(sourceNode, foundNodes.source);
+    else
+      headtag.appendChild(sourceNode);
+  } else if (foundNodes.source)
+    headtag.removeChild(foundNodes.source);
+
+  if (proj.rights) {
+    var rightsNode = doc.createElement("meta");
+    rightsNode.setAttribute("name", "DC.rights");
+    rightsNode.setAttribute("content", proj.rights);
+    if (foundNodes.rights)
+      headtag.replaceChild(rightsNode, foundNodes.rights);
+    else
+      headtag.appendChild(rightsNode);
+  } else if (foundNodes.rights)
+    headtag.removeChild(foundNodes.rights);
+
+  if (proj.contact) {
+    var contactNode = doc.createElement("meta");
+    contactNode.setAttribute("name", "CX.contact");
+    contactNode.setAttribute("content", proj.contact);
+    if (foundNodes.contact)
+      headtag.replaceChild(contactNode, foundNodes.contact);
+    else
+      headtag.appendChild(contactNode);
+  } else if (foundNodes.contact)
+    headtag.removeChild(foundNodes.contact);
+
+  var numberingNode = doc.createElement("meta");
+  numberingNode.setAttribute("name", "CX.sceneNumbering");
+  numberingNode.setAttribute("content", proj.sceneNumbering);
+  if (foundNodes.numbering)
+    headtag.replaceChild(numberingNode, foundNodes.numbering);
+  else
+    headtag.appendChild(numberingNode);
+]]>
+        </body>
+      </method>
+      <method name="setStatusMessage">
+        <parameter name="msg"/>
+        <body>
+          var elem = document.getAnonymousElementByAttribute(this, "anonid",
+            "status-message");
+          elem.label = msg;
+        </body>
+      </method>
+      <!-- These are invoked by the Sidebar -->
+      <method name="markup">
+        <parameter name="obj"/>
+        <body>
+          this.controller.editor.markup(obj.elem, obj.uri);
+        </body>
+      </method>
+      <method name="itemDeleted">
+        <parameter name="uri"/>
+        <body>
+          this.scripteditor.removeReferences(uri);
+          this.boneyardeditor.removeReferences(uri);
+        </body>
+      </method>
+    </implementation>
+  </binding>
+
+  <!-- =====[ Title Page ]===== -->
+
+  <!-- Navigation Panel -->
+  <binding id="titlepage-panel">
+    <content>
+      <xul:vbox>
+      </xul:vbox>
+    </content>
+  </binding>
+
+  <!-- Main Panel -->
+  <binding id="titlepage-view" extends="#document-view">
+
+    <content>
+      <xul:vbox flex="1">
+        <xul:browser anonid="editor" flex="1"
+                     src="chrome://celtx/content/titlepage.xhtml"
+                     type="content"/>
+      </xul:vbox>
+    </content>
+
+    <implementation>
+      <property name="allowSidebar" readonly="true" onget="return false"/>
+      <property name="contentDocument" readonly="true">
+        <getter>
+          return this.editor.contentDocument;
+        </getter>
+      </property>
+      <constructor>
+<![CDATA[
+]]>
+      </constructor>
+      <method name="open">
+        <parameter name="project"/>
+        <parameter name="doc"/>
+        <body>
+<![CDATA[
+  this._editor = document.getAnonymousElementByAttribute(this, "anonid",
+    "editor");
+  this._controller = new TitlePageController(this);
+  this._project = project;
+  this._document = doc;
+  this.controller.open();
+]]>
+        </body>
+      </method>
+      <method name="focus">
+        <body>
+<![CDATA[
+  window.controllers.appendController(this.controller);
+  this.editor.setAttribute("type", "content-primary");
+  this.controller.syncFromProject();
+  if (this._focusedElement)
+    this._focusedElement.focus();
+  else
+    _content.focus();
+]]>
+        </body>
+      </method>
+      <method name="blur">
+        <body>
+<![CDATA[
+  if (this.inPrintPreview)
+    PrintUtils.exitPrintPreview();
+  this._focusedElement = document.commandDispatcher.focusedElement;
+  this.controller.syncToProject();
+  this.editor.setAttribute("type", "content");
+  window.controllers.removeController(this.controller);
+]]>
+        </body>
+      </method>
+      <method name="close">
+        <body>
+<![CDATA[
+  this.controller.close();
+  return true;
+]]>
+        </body>
+      </method>
+      <method name="save">
+        <body>
+<![CDATA[
+]]>
+        </body>
+      </method>
+      <method name="onprint">
+        <body>
+<![CDATA[
+  // Suppress page numbers
+  var svc = Components.classes['@mozilla.org/gfx/printsettings-service;1'].
+    getService(Components.interfaces.nsIPrintSettingsService);
+  var settings = ScriptPrinting.getGlobalPrintSettings();
+  settings.headerStrRight = "";
+  svc.savePrintSettingsToPrefs(settings, false,
+    Components.interfaces.nsIPrintSettings.kInitSaveAll);
+]]>
+        </body>
+      </method>
+    </implementation>
+  </binding>
+
+  <!-- =====[ Research Browser ]===== -->
+
+  <!-- Navigation Panel -->
+  <binding id="browser-panel">
+    <content>
+      <xul:vbox flex="1">
+        <xul:label class="header" value="&bookmarksRoot.label;"/>
+        <xul:hbox align="center">
+          <xul:label value="&search.label;"
+                     accesskey="&search.accesskey;"/>
+          <xul:textbox anonid="search-box" flex="1"
+                       type="timed" timeout="500"
+                       oncommand="goDoCommand('cmd-filter-bookmarks')"/>
+        </xul:hbox>
+        <xul:hbox flex="1">
+        <xul:bookmarks-tree id="bookmarks-view"
+                            type="single-column"
+                            flex="1"
+            onkeypress="if (event.keyCode == 13)
+              goDoCommand('cmd-open-bookmark')"
+            onclick="goDoCommand('cmd-open-bookmark')"/>
+        </xul:hbox>
+      </xul:vbox>
+    </content>
+    <implementation>
+      <property name="filtervalue" readonly="true">
+        <getter>
+          return document.getAnonymousElementByAttribute(this, "anonid",
+            "search-box").value;
+        </getter>
+      </property>
+      <property name="tree" readonly="true">
+        <getter>
+          return document.getElementById("bookmarks-view");
+        </getter>
+      </property>
+    </implementation>
+  </binding>
+
+  <!-- Main Panel -->
+  <binding id="browser-view" extends="#document-view">
+
+    <content>
+      <xul:vbox flex="1">
+        <xul:toolbar anonid="research-toolbar" iconsize="small" mode="icons"
+                     class="toolbar-primary chromeclass-toolbar">
+          <xul:toolbarbutton anonid="back-button"
+                             class="celtx-back-button main-toolbar-button"
+                             iconsize="small"
+                             label="&backCmd.label;"
+                             command="cmd-back"
+                             tooltiptext="&backButton.tooltip;"/>
+          <xul:toolbarbutton anonid="forward-button"
+                             class="celtx-forward-button main-toolbar-button"
+                             iconsize="small"
+                             label="&forwardCmd.label;"
+                             command="cmd-forward"
+                             tooltiptext="&forwardButton.tooltip;"/>
+          <xul:toolbarbutton anonid="reload-button"
+                             class="celtx-reload-button main-toolbar-button"
+                             iconsize="small"
+                             label="&reloadCmd.label;"
+                             command="cmd-reload"
+                             tooltiptext="&reloadButton.tooltip;"/>
+          <xul:toolbarbutton anonid="stop-button"
+                             class="celtx-stop-button main-toolbar-button"
+                             iconsize="small"
+                             label="&stopCmd.label;"
+                             command="cmd-stop"
+                             tooltiptext="&stopButton.tooltip;"/>
+          <xul:toolbaritem anonid="urlbar-container"
+                           id="urlbar-container" align="center" flex="1"
+                           title="&locationItem.title;"
+                           class="chromeclass-location">
+            <xul:textbox anonid="urlbar" id="urlbar" flex="1"
+                         type="autocomplete"
+                         autocompletesearch="history"
+                         autocompletepopup="PopupAutoComplete"
+                         completeselectedindex="true"
+                         tabscrolling="true"
+                         showcommentcolumn="true"
+                         enablehistory="true">
+              <xul:deck anonid="page-proxy-deck" id="page-proxy-deck">
+                <xul:image anonid="page-proxy-button"
+                           id="page-proxy-button"
+                           ondraggesture="PageProxyDragGesture(event);"
+                           tooltiptext="&proxyIcon.tooltip;"/>
+                <xul:image anonid="page-proxy-favicon"
+                           id="page-proxy-favicon"
+                           ondraggesture="PageProxyDragGesture(event);"
+                           onload="this.parentNode.selectedIndex = 1;
+                                   event.stopPropagation();
+                                   event.preventBubble();"
+                           onerror="this.remoteAttribute('src');
+                                    this.parentNode.selectedIndex = 0;"
+                           tooltiptext="&proxyIcon.tooltip;"/>
+              </xul:deck>
+            </xul:textbox>
+          </xul:toolbaritem>
+          <!--
+          <xul:toolbarbutton anonid="go-button"
+                             class="celtx-go-button main-toolbar-button"
+                             iconsize="small"
+                             label="&goButton.label;"
+                             oncommand="BrowserGo()"
+                             tooltiptext="&goButton.tooltip;"/>
+          -->
+        </xul:toolbar>
+        <xul:browser flex="1"
+                     anonid="browser"
+                     src="http://www.google.com/"
+                     type="content"/>
+        <xul:statusbar>
+          <xul:statusbarpanel anonid="research-status" crop="end" flex="1"/>
+          <xul:progressmeter anonid="research-progress" mode="determined"
+                             collapsed="true" value="0%"/>
+          <xul:statusbarpanel anonid="research-security"
+                              style="display: none;"/>
+        </xul:statusbar>
+      </xul:vbox>
+    </content>
+
+    <implementation>
+      <property name="allowSidebar" readonly="true" onget="return true"/>
+      <property name="urlbar" readonly="true">
+        <getter>
+          return document.getAnonymousElementByAttribute(this, "anonid",
+            "urlbar");
+        </getter>
+      </property>
+      <constructor>
+<![CDATA[
+]]>
+      </constructor>
+      <method name="open">
+        <parameter name="project"/>
+        <parameter name="doc"/>
+        <body>
+<![CDATA[
+  this._editor = document.getAnonymousElementByAttribute(this, "anonid",
+    "browser");
+  this._controller = new BrowserController(this);
+  this._project = project;
+  this._document = doc;
+  // this.editor.loadURI(document, null, null);
+]]>
+        </body>
+      </method>
+      <method name="focus">
+        <body>
+<![CDATA[
+  window.controllers.appendController(this.controller);
+  window.controllers.appendController(BookmarksController);
+  this.editor.setAttribute("type", "content-primary");
+  if (this._focusedElement)
+    this._focusedElement.focus();
+  else
+    _content.focus();
+  this.controller.updateCommands();
+]]>
+        </body>
+      </method>
+      <method name="blur">
+        <body>
+<![CDATA[
+  if (this.inPrintPreview)
+    PrintUtils.exitPrintPreview();
+  this._focusedElement = document.commandDispatcher.focusedElement;
+  this.editor.setAttribute("type", "content");
+  window.controllers.appendController(BookmarksController);
+  window.controllers.removeController(this.controller);
+]]>
+        </body>
+      </method>
+      <method name="close">
+        <body>
+<![CDATA[
+  return true;
+]]>
+        </body>
+      </method>
+      <method name="save">
+        <body>
+<![CDATA[
+]]>
+        </body>
+      </method>
+      <method name="enterPrintPreview">
+        <body>
+          var toolbar = document.getAnonymousElementByAttribute(this,
+            "anonid", "research-toolbar");
+          toolbar.collapsed = true;
+        </body>
+      </method>
+      <method name="exitPrintPreview">
+        <body>
+          var toolbar = document.getAnonymousElementByAttribute(this,
+            "anonid", "research-toolbar");
+          toolbar.collapsed = false;
+        </body>
+      </method>
+    </implementation>
+  </binding>
+
+  <!-- =====[ Reports ]===== -->
+
+  <!-- Navigation Panel -->
+  <binding id="reports-panel">
+    <content>
+      <xul:vbox flex="1">
+        <xul:tree anonid="report-tree"
+                  flex="1"
+                  seltype="single"
+                  onselect="goDoCommand('cmd-report-changed')"
+                  hidecolumnpicker="true">
+          <xul:treecols>
+            <xul:treecol id="report-type-col"
+                         label="&reportsMenu.label;"
+                         flex="1"/>
+          </xul:treecols>
+          <xul:treechildren>
+            <xul:treeitem>
+              <xul:treerow>
+                <xul:treecell label="&sceneBreakdown.label;"
+                              tooltiptext="&sceneBreakdown.label;"/>
+              </xul:treerow>
+            </xul:treeitem>
+            <xul:treeitem>
+              <xul:treerow>
+                <xul:treecell label="&sceneBreakdownWithDesc.label;"
+                              tooltiptext="&sceneBreakdownWithDesc.label;"/>
+              </xul:treerow>
+            </xul:treeitem>
+          </xul:treechildren>
+        </xul:tree>
+      </xul:vbox>
+    </content>
+    <implementation>
+      <property name="selectedIndex">
+        <getter>
+<![CDATA[
+          var tree = document.getAnonymousElementByAttribute(this, "anonid",
+            "report-tree");
+          if (tree.view.selection.count == 0)
+            return -1;
+          else
+            return tree.view.selection.currentIndex;
+]]>
+        </getter>
+        <setter>
+<![CDATA[
+          var tree = document.getAnonymousElementByAttribute(this, "anonid",
+            "report-tree");
+          tree.view.selection.select(val);
+          return val;
+]]>
+        </setter>
+      </property>
+    </implementation>
+  </binding>
+
+  <!-- Main Panel -->
+  <binding id="reports-view" extends="#document-view">
+
+    <content>
+      <xul:vbox flex="1">
+        <xul:hbox>
+          <xul:tree anonid="scene-listbox"
+                   flex="1"
+                   rows="6"
+                   flags="dont-build-content"
+                   seltype="multiple"
+                   ref="urn:celtx:scenes"
+                   hidecolumnpicker="true"
+                   datasources="rdf:null"
+                   onselect="goDoCommand('cmd-report-scene-changed')">
+            <xul:treecols>
+              <xul:treecol id="report-scene-title-col"
+                           label="&scene.label;"
+                           flex="1"/>
+              <xul:treecol id="report-scene-value-col"
+                           hidden="true"/>
+            </xul:treecols>
+            <xul:treechildren>
+            <!--
+              <xul:treeitem>
+                <xul:treerow>
+                  <xul:treecell label="ALL"/>
+                  <xul:treecell label="all"/>
+                </xul:treerow>
+              </xul:treeitem>
+            -->
+            </xul:treechildren>
+            <xul:template>
+              <!-- XXX: Kludge -->
+              <xul:rule>
+                <xul:conditions>
+                  <xul:content uri="?uri"/>
+                  <xul:member container="?uri"
+                              child="?scene"/>
+                  <xul:triple subject="?scene"
+                              predicate="http://purl.org/dc/elements/1.1/title"
+                              object="ALL"/>
+                </xul:conditions>
+                <xul:action>
+                  <xul:treechildren>
+                    <xul:treeitem uri="?scene">
+                      <xul:treerow>
+                        <xul:treecell label="&allUppercase.label;"/>
+                        <xul:treecell label="?scene"/>
+                      </xul:treerow>
+                    </xul:treeitem>
+                  </xul:treechildren>
+                </xul:action>
+              </xul:rule>
+              <xul:rule>
+                <xul:conditions>
+                  <xul:content uri="?uri"/>
+                  <xul:member container="?uri"
+                              child="?scene"/>
+                  <xul:triple subject="?scene"
+                          predicate="http://purl.org/dc/elements/1.1/title"
+                          object="?title"/>
+                  <xul:triple subject="?scene"
+                          predicate="http://celtx.com/NS/v1/ordinal"
+                          object="?ordinal"/>
+                </xul:conditions>
+                <xul:action>
+                  <xul:treechildren>
+                    <xul:treeitem uri="?scene">
+                      <xul:treerow>
+                        <xul:treecell label="?ordinal ?title"/>
+                        <xul:treecell label="?scene"/>
+                      </xul:treerow>
+                    </xul:treeitem>
+                  </xul:treechildren>
+                </xul:action>
+              </xul:rule>
+            </xul:template>
+          </xul:tree>
+          <xul:tree anonid="dept-listbox"
+                   flex="1"
+                   rows="6"
+                   seltype="multiple"
+                   hidecolumnpicker="true"
+                   ref="#default-markup"
+                   datasources="chrome://celtx/content/schema.rdf"
+                   onselect="goDoCommand('cmd-report-dept-changed')">
+            <xul:treecols>
+              <xul:treecol id="report-dept-title-col"
+                           label="&department.label;"
+                           flex="1"/>
+              <xul:treecol id="report-dept-value-col"
+                           hidden="true"/>
+            </xul:treecols>
+            <xul:treechildren>
+              <xul:treeitem>
+                <xul:treerow>
+                  <xul:treecell label="&allUppercase.label;"/>
+                  <xul:treecell label="all"/>
+                </xul:treerow>
+              </xul:treeitem>
+            </xul:treechildren>
+            <xul:template>
+              <xul:rule>
+                <xul:conditions>
+                  <xul:content uri="?uri"/>
+                  <xul:member container="?uri"
+                          child="?markup"/>
+                  <xul:triple subject="?markup"
+                          predicate="http://www.w3.org/2000/01/rdf-schema#label"
+                          object="?title"/>
+                </xul:conditions>
+                <xul:action>
+                  <xul:treechildren>
+                    <xul:treeitem uri="?markup">
+                      <xul:treerow>
+                        <xul:treecell label="?title"/>
+                        <xul:treecell label="?markup"/>
+                      </xul:treerow>
+                    </xul:treeitem>
+                  </xul:treechildren>
+                </xul:action>
+              </xul:rule>
+            </xul:template>
+          </xul:tree>
+          <xul:tree anonid="item-listbox"
+                   flex="1"
+                   rows="6"
+                   flags="dont-build-content"
+                   seltype="multiple"
+                   hidecolumnpicker="true"
+                   ref="http://celtx.com/selection/scenes"
+                   datasources="rdf:null"
+                   onselect="goDoCommand('cmd-report-item-changed')">
+            <xul:treecols>
+              <xul:treecol id="report-item-title-col"
+                           label="&item.label;"
+                           flex="1"/>
+              <xul:treecol id="report-item-value-col"
+                           hidden="true"/>
+            </xul:treecols>
+            <xul:treechildren/>
+            <xul:template>
+              <xul:rule>
+                <xul:conditions>
+                  <xul:content uri="?uri"/>
+                  <xul:member container="?uri"
+                          child="?scene"/>
+                  <xul:triple subject="?scene"
+                          predicate="http://celtx.com/NS/v1/members"
+                          object="?itemlist"/>
+                  <xul:member container="?itemlist"
+                          child="?item"/>
+                  <xul:triple subject="?item"
+                    predicate="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                          object="?type"/>
+                  <xul:triple subject="http://celtx.com/selection/departments"
+                          predicate="http://celtx.com/NS/v1/member"
+                          object="?type"/>
+                  <xul:triple subject="?item"
+                          predicate="http://purl.org/dc/elements/1.1/title"
+                          object="?title"/>
+                </xul:conditions>
+                <xul:action>
+                  <xul:treechildren>
+                    <xul:treeitem uri="?item">
+                      <xul:treerow>
+                        <xul:treecell label="?title"/>
+                        <xul:treecell label="?item"/>
+                      </xul:treerow>
+                    </xul:treeitem>
+                  </xul:treechildren>
+                </xul:action>
+              </xul:rule>
+            </xul:template>
+          </xul:tree>
+        </xul:hbox>
+        <xul:toolbar>
+          <xul:toolbarspacer flex="1"/>
+          <xul:toolbaritem>
+            <xul:checkbox anonid="media-checkbox"
+                      label="&displayMedia.label;"
+                      checked="false"
+                      oncommand="goDoCommand('cmd-report-toggle-media')"/>
+          </xul:toolbaritem>
+        </xul:toolbar>
+        <xul:browser anonid="reportframe"
+                 type="content"
+                 flex="1"
+                 src="about:blank"/>
+      </xul:vbox>
+    </content>
+
+    <implementation>
+      <property name="allowSidebar" readonly="true" onget="return false"/>
+      <property name="title" readonly="true" onget="return 'Document'"/>
+      <property name="scenelist" readonly="true">
+        <getter>
+          return document.getAnonymousElementByAttribute(this, "anonid",
+            "scene-listbox");
+        </getter>
+      </property>
+      <property name="deptlist" readonly="true">
+        <getter>
+          return document.getAnonymousElementByAttribute(this, "anonid",
+            "dept-listbox");
+        </getter>
+      </property>
+      <property name="itemlist" readonly="true">
+        <getter>
+          return document.getAnonymousElementByAttribute(this, "anonid",
+            "item-listbox");
+        </getter>
+      </property>
+      <property name="mediachecked">
+        <getter>
+          return document.getAnonymousElementByAttribute(this, "anonid",
+            "media-checkbox").checked;
+        </getter>
+        <setter>
+          document.getAnonymousElementByAttribute(this, "anonid",
+            "media-checkbox").checked = val;
+          return val;
+        </setter>
+      </property>
+      <method name="open">
+        <parameter name="project"/>
+        <parameter name="doc"/>
+        <body>
+<![CDATA[
+  this._editor = document.getAnonymousElementByAttribute(this, "anonid",
+    "reportframe");
+  this._controller = new ReportController(this);
+  this._project = project;
+  this._document = doc;
+  // try {
+    this.controller.init();
+  // }
+  // catch (ex) {
+  //   dump("*** reports.open: " + ex + "\n");
+  }
+  // Load the document
+  // var filearc = RES(Cx.NS_CX + "filename");
+  // var filename = project.model.target(RES(doc), filearc);
+  // var uri = project.fileURLOf(filename.value);
+  // this.editor.loadURI(uri, null, null);
+
+  // Register timers
+]]>
+        </body>
+      </method>
+      <method name="focus">
+        <body>
+<![CDATA[
+  window.controllers.appendController(this.controller);
+  this.editor.setAttribute("type", "content-primary");
+  if (this._focusedElement)
+    this._focusedElement.focus();
+  else
+    _content.focus();
+  this.controller.refreshScriptDS();
+]]>
+        </body>
+      </method>
+      <method name="blur">
+        <body>
+<![CDATA[
+  if (this.inPrintPreview)
+    PrintUtils.exitPrintPreview();
+  this._focusedElement = document.commandDispatcher.focusedElement;
+  this.editor.setAttribute("type", "content");
+  window.controllers.removeController(this.controller);
+]]>
+        </body>
+      </method>
+      <method name="close">
+        <body>
+<![CDATA[
+  return true;
+]]>
+        </body>
+      </method>
+      <method name="save">
+        <body>
+<![CDATA[
+]]>
+        </body>
+      </method>
+    </implementation>
+  </binding>
+
+  <!-- =====[ Dummy Placeholder ]===== -->
+
+  <!-- Navigation Panel -->
+  <binding id="dummy-panel">
+    <content>
+      <xul:vbox flex="1"/>
+    </content>
+  </binding>
+
+  <!-- Main Panel -->
+  <binding id="dummy-view" extends="#document-view">
+
+    <content>
+      <xul:vbox flex="1">
+        <xul:browser anonid="browser"
+                     flex="1"
+                     src="about:blank"
+                     type="content"/>
+      </xul:vbox>
+    </content>
+
+    <implementation>
+      <property name="allowSidebar" readonly="true" onget="return true"/>
+      <constructor>
+<![CDATA[
+]]>
+      </constructor>
+      <method name="open">
+        <parameter name="project"/>
+        <parameter name="doc"/>
+        <body>
+<![CDATA[
+  this._editor = document.getAnonymousElementByAttribute(this, "anonid",
+    "browser");
+  this._controller = {
+    supportsCommand: function (cmd) { return false; },
+    isCommandEnabled: function (cmd) { return false; },
+    doCommand: function (cmd) {}
+  };
+  this._project = project;
+  this._document = doc;
+]]>
+        </body>
+      </method>
+      <method name="focus">
+        <body>
+<![CDATA[
+  window.controllers.appendController(this.controller);
+  this.editor.setAttribute("type", "content-primary");
+  if (this._focusedElement)
+    this._focusedElement.focus();
+  else
+    _content.focus();
+]]>
+        </body>
+      </method>
+      <method name="blur">
+        <body>
+<![CDATA[
+  if (this.inPrintPreview)
+    PrintUtils.exitPrintPreview();
+  this._focusedElement = document.commandDispatcher.focusedElement;
+  this.editor.setAttribute("type", "content");
+  window.controllers.removeController(this.controller);
+]]>
+        </body>
+      </method>
+      <method name="close">
+        <body>
+<![CDATA[
+  return true;
+]]>
+        </body>
+      </method>
+      <method name="save">
+        <body>
+<![CDATA[
+]]>
+        </body>
+      </method>
+      <method name="print">
+        <body>
+<![CDATA[
+  PrintUtils.print();
+]]>
+        </body>
+      </method>
+      <method name="printPreview">
+        <body>
+<![CDATA[
+  PrintUtils.printPreview(null, null);
+]]>
+        </body>
+      </method>
+    </implementation>
+  </binding>
+
+</bindings>
+

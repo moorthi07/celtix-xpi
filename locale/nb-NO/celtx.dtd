@@ -1,0 +1,472 @@
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!ENTITY appName "Celtx">
+
+<!ENTITY celtxWindow.titleModifier "celtx">
+<!ENTITY celtxWindow.titleMenuSeparator " - ">
+
+<!ENTITY reportsMenu.label "Rapportér">
+<!ENTITY reportsMenu.accessKey "R">
+
+<!ENTITY resMenu.label "Ressurs">
+<!ENTITY resMenu.accessKey "s">
+
+<!ENTITY helpMenu.label "Hjelp">
+<!ENTITY helpMenu.accessKey "H">
+
+<!ENTITY helpSupportCmd.label "Støtte på nettet">
+<!ENTITY helpSupportCmd.accessKey "S">
+
+<!ENTITY helpReportBugCmd.label "Rapportér en feil">
+<!ENTITY helpReportBugCmd.accessKey "R">
+
+<!ENTITY helpAboutCmd.label "Om &appName;">
+<!ENTITY helpAboutCmd.accessKey "A">
+
+<!ENTITY celtxAccountCmd.label "&appName; konto ...">
+<!ENTITY celtxAccountCmd.accessKey "K">
+
+<!ENTITY openProjCmd.label "Åpne prosjekt ...">
+
+<!ENTITY newProjCmd.label "Nytt prosjekt ...">
+
+<!ENTITY copyProjCmd.label "Kopier prosjekt ...">
+
+<!ENTITY saveProjCmd.label "Lagre">
+
+<!ENTITY downloadProjCmd.label "Last ned prosjekt ...">
+<!ENTITY downloadProjCmd.toolbarLabel "Last ned">
+<!ENTITY downloadProjCmd.accessKey "L">
+
+<!ENTITY publishProjCmd.label "Legg ut prosjekt ...">
+<!ENTITY publishProjCmd.toolbarLabel "Legg ut">
+<!ENTITY publishProjCmd.accessKey "L">
+<!ENTITY uploadProjCmd.label "Legg ut prosjekt ...">
+<!ENTITY uploadProjCmd.toolbarLabel "Legg ut">
+<!ENTITY uploadProjCmd.accessKey "L">
+
+<!ENTITY importCmd.label "Importér manus ...">
+<!ENTITY importCmd.accessKey "I">
+<!ENTITY importCmd.toolbarLabel "Importér">
+
+<!ENTITY exportScriptCmd.label "Eksportér manus ...">
+<!ENTITY exportScriptCmd.accessKey "E">
+<!ENTITY exportScriptCmd.toolbarLabel "Eksportér">
+
+<!ENTITY saveAsCmd.label "Lagre som ...">
+<!ENTITY saveAsCmd.accessKey "a">
+<!ENTITY saveAsCmd.toolbarLabel "Lagre som">
+
+<!ENTITY insertNoteCmd.label "Legg inn notat ...">
+<!ENTITY insertNoteCmd.toolbarLabel "Notat">
+
+<!ENTITY insertSceneCmd.label "Legg inn scene ...">
+<!ENTITY insertSceneCmd.toolbarLabel "Scene">
+
+<!ENTITY titlePage "Tittelside">
+
+<!ENTITY delResCmd.label "Fjern">
+<!ENTITY gotoResCmd.label "Gå til">
+
+<!ENTITY showResCmd.toolbarLabel "Vis">
+
+<!ENTITY removeMarkupCmd.label "Remove">
+
+<!ENTITY newMarkup.label "Ny ...">
+
+<!ENTITY openProj.title "Åpne prosjekt">
+
+<!ENTITY resources.label "Ressurser">
+
+<!ENTITY options.label "Valg">
+
+<!ENTITY projects.label "Prosjekter">
+<!ENTITY title.label "Tittel">
+<!ENTITY description.label "Beskrivelse">
+<!ENTITY created.label "Opprettet">
+
+<!ENTITY objViewOverviewTab.label "Oversikt">
+<!ENTITY objViewMediaTab.label "Media">
+
+<!ENTITY insertScene.title     "Legg til scene">
+<!ENTITY insertScene.caption   "Legg til scene">
+<!ENTITY insertScene.after     "Etter gjeldende scene">
+<!ENTITY insertScene.before    "Før gjeldende scene">
+<!ENTITY insertScene.beginning "Ved starten på manuset">
+<!ENTITY insertScene.end       "Ved slutten av manuset">
+
+<!ENTITY projDialog.title      "Prosjektegenskaper">
+
+<!ENTITY noteDialog.title      "Rediger notat">
+<!ENTITY note.label            "Notat">
+
+<!ENTITY untitled.label "(uten tittel)">
+
+<!ENTITY regDialog.title "&appName; registrering">
+
+<!ENTITY getProjDialog.title   "Last ned prosjekt">
+<!ENTITY getProjDialog.caption "Tilgjengelige prosjekter">
+
+<!ENTITY nameCol.label     "Navn">
+<!ENTITY createdCol.label  "Opprettet">
+<!ENTITY modifiedCol.label "Redigert">
+<!ENTITY creatorCol.label  "Forfatter">
+
+<!ENTITY downloadDialog.title   "Laster ned prosjekt">
+
+<!ENTITY publishDialog.title        "Publisér prosjekt">
+<!ENTITY uploadDialog.title         "Last opp prosjekt">
+<!ENTITY publishDialog.serverLabel  "Server">
+<!ENTITY publishDialog.publicLabel  "Offentlig">
+<!ENTITY publishDialog.privateLabel "Privat">
+<!ENTITY publishDialog.sharedLabel  "Delt av">
+<!ENTITY publishDialog.userList     "Brukerliste">
+<!ENTITY publishDialog.findUsers    "Finn brukere">
+
+
+<!-- Formatting toolbar -->
+<!ENTITY formatAction.label  "Handling">
+<!ENTITY formatChar.label    "Karakter">
+<!ENTITY formatDialog.label  "Dialog">
+<!ENTITY formatHeading.label "Heading">
+<!ENTITY formatParen.label   "Parantes">
+<!ENTITY formatTrans.label   "Overgang">
+<!ENTITY formatShot.label    "Tagning">
+<!ENTITY formatText.label    "Tekst">
+
+
+<!-- Debugging -->
+<!ENTITY debugMenu.label "Debug">
+<!ENTITY debugMenu.accessKey "D">
+
+<!ENTITY dumpCmd.label "Dump">
+
+<!ENTITY wiz.clickNext "Klikk på 'Neste' knappen for å starte.">
+<!ENTITY wiz.clickFinish "Klikk på 'Fullfør' knappen for å fullføre denne veiviseren.">
+
+
+<!-- Migration wizard -->
+<!ENTITY migWiz.title "&appName; Migreringsveiviser">
+<!ENTITY migWiz.prevVersionDetected
+  "&appName; har funnet en prosjektfil fra en tidligere versjon av programmet.">
+
+<!ENTITY migWiz.aboutThis
+  "Denne veiviseren vil hjelpe deg med å importere eksisterende prosjekter.">
+
+<!ENTITY migWiz.clickNext "&wiz.clickNext;">
+
+<!ENTITY migWiz.clickFinish "&wiz.clickFinish;">
+
+<!ENTITY migWiz.optionsLabel "Importér opsjoner">
+
+<!ENTITY migWiz.chooseOption
+  "Vennligst velg én av de følgende valgsmulighetene, og klikk 'Neste'.">
+
+<!ENTITY migWiz.optionImport
+  "Importér prosjekter fra en tidligere versjon av &appName;">
+
+<!ENTITY migWiz.optionNoImport "Ikke importér">
+
+<!ENTITY migWiz.migratingLabel "Migrerer prosjekter">
+
+<!ENTITY migWiz.doneLabel "Migrering ferdig">
+
+
+<!ENTITY regWiz.title "&appName; registreringsveiviser">
+
+<!ENTITY regWiz.intro "For å få tilgang til nettjenestene til &appName;, må
+  du først opprette en &appName; konto.">
+
+<!ENTITY regWiz.aboutThis "Denne veiviseren vil samle all nødvendig 
+  informasjon som trengs til registreringen.">
+
+<!ENTITY regWiz.identityLabel "Identitet">
+
+<!ENTITY regWiz.identityInstructions "Vennligst oppgi navn, 
+  organisasjon og emailadresse.">
+
+<!ENTITY regWiz.nameLabel  "Navn:">
+<!ENTITY regWiz.orgLabel   "Organisasjon:">
+<!ENTITY regWiz.emailLabel "E-mail:">
+<!ENTITY regWiz.uidLabel   "&appName; brukernavn:">
+
+<!ENTITY regWiz.accountLabel "Brukerkonto">
+
+<!ENTITY regWiz.accountInstructions "Vennligst velg et brukernavn og passord for din &appName; konto.">
+
+<!ENTITY regWiz.usernameLabel      "Brukernavn:">
+<!ENTITY regWiz.passwordLabel      "Passord:">
+<!ENTITY regWiz.passwordAgainLabel "Gjenta passordet:">
+
+<!ENTITY regWiz.noteUsername "Ditt brukernavn må være på minst tre tegn, og kan kun inneholde bokstaver og tall.">
+
+<!ENTITY regWiz.notePassword "Ditt passord må være på minst fem tegn.">
+
+<!ENTITY regWiz.noteCaseSensitive "Pass på forskjellen ved små og store bokstaver i 
+  brukernavnet og passordet på din &appName; konto.">
+
+<!ENTITY regWiz.checkLabel "Sjekk kontoinformasjon">
+
+<!ENTITY regWiz.confirmLabel "Godta innstillingene">
+
+<!ENTITY regWiz.confirmIntro "Du har oppgitt følgende:">
+
+<!ENTITY regWiz.clickFinish "Hvis du er fornøyd med disse opplysningene, klikk 'Fullfør' 
+  for å sende inn din registrering.">
+<!ENTITY regWiz.clickNext "Hvis du er fornøyd med disse opplysningene, klikk 'Neste' 
+  for å sende inn din registrering.">
+
+<!ENTITY report.sample "Eksempelrapport">
+<!ENTITY report.script "Manusrapport">
+<!ENTITY report.allBreakdown "Alle felter">
+
+<!ENTITY report.titleBy "Av">
+<!ENTITY report.titleBasedOn "Basert på">
+<!ENTITY report.titleRights "Kopirett">
+
+<!ENTITY script.label     "Manus">
+<!ENTITY scene.label      "Scene">
+<!ENTITY scenes.label     "Scener">
+
+<!-- Breakdown categories -->
+<!ENTITY bdc.addlabour    "Tilleggsarbeid">
+<!ENTITY bdc.animals      "Dyr">
+<!ENTITY bdc.handler      "Dyrepasser">
+<!ENTITY bdc.camera       "Kamera">
+<!ENTITY bdc.cast         "Rollebesetning">
+<!ENTITY bdc.cgi          "CGI">
+<!ENTITY bdc.construction "Konstruksjon">
+<!ENTITY bdc.electrics    "Elektronikk">
+<!ENTITY bdc.extras       "Statister">
+<!ENTITY bdc.greenery     "Løvverk">
+<!ENTITY bdc.hair         "Hår">
+<!ENTITY bdc.lights       "Lys">
+<!ENTITY bdc.livestock    "Buskap">
+<!ENTITY bdc.location     "Location">
+<!ENTITY bdc.makeup       "Sminke">
+<!ENTITY bdc.mechfx       "Mekaniske effekter">
+<!ENTITY bdc.misc         "Diverse">
+<!ENTITY bdc.music        "Musikk">
+<!ENTITY bdc.opticalfx    "Optiske effekter">
+<!ENTITY bdc.painting     "Maling">
+<!ENTITY bdc.prodnotes    "Produksjonsnotater">
+<!ENTITY bdc.props        "Rekvisitter">
+<!ENTITY bdc.security     "Sikkerhet">
+<!ENTITY bdc.set          "Sett">
+<!ENTITY bdc.setdressing  "Settpåkledning">
+<!ENTITY bdc.sound        "Lyd">
+<!ENTITY bdc.soundfx      "Lydeffekter">
+<!ENTITY bdc.equip        "Spesialutstyr">
+<!ENTITY bdc.specialfx    "Spesialeffekter">
+<!ENTITY bdc.storyboard   "Storyboard">
+<!ENTITY bdc.stunts       "Stunts">
+<!ENTITY bdc.vehicles     "Kjøretøy">
+<!ENTITY bdc.wardrobe     "Garderobe">
+<!ENTITY bdc.weapons      "Våpen">
+
+<!ENTITY splash.welcomePrefix "velkommen til celtx v.">
+<!ENTITY splash.projects      "PROSJEKTER">
+<!ENTITY splash.webServices   "NETTJENESTER">
+<!ENTITY splash.help          "HJELP">
+<!ENTITY splash.discussion    "DISKUSJON">
+
+<!ENTITY splash.newProject      "Start et nytt prosjekt">
+<!ENTITY splash.openProject     "Åpne et eksisterende prosjekt">
+<!ENTITY splash.helpAccount     "Opprett en konto">
+<!ENTITY splash.downloadProject "Last ned et prosjekt">
+<!ENTITY splash.projectCentral  "Prosjektområde">
+<!ENTITY splash.walkthru        "Tre-minutters gjennomgang">
+<!ENTITY splash.guide           "Celtx brukerveiledning">
+<!ENTITY splash.forums          "Celtx forumer">
+<!ENTITY splash.featureTour     "Funksjonsveiviser">
+
+<!ENTITY authDialog.title       "Celtx autentisering">
+<!ENTITY authDialog.description
+  "Denne handlingen forutsetter at du er logget på med din Celtx konto">
+
+<!ENTITY list.label "Liste ...">
+
+<!ENTITY pdfDownloadDialog.title "Konverterer til PDF">
+<!ENTITY downloadingPDF.label    "Konverterer til PDF ...">
+
+<!ENTITY add.label    "Legg til">
+<!ENTITY remove.label "Fjern">
+
+<!ENTITY mediaBox.tooltip "Dra og slipp mediafiler her.">
+<!ENTITY imageSearch.tooltip "Søk etter bilder å dra og slippe.">
+
+<!-- Spellcheck -->
+
+<!ENTITY spellCheckCmd.label "Korrektur">
+
+<!ENTITY addToUserDictionaryButton.accessKey "O">
+<!ENTITY addToUserDictionaryButton.label "Legg til ord">
+<!ENTITY checkwordButton.accessKey "j">
+<!ENTITY checkwordButton.label "Sjekk ord">
+<!ENTITY closeButton.accessKey "L">
+<!ENTITY closeButton.label "Lukk">
+<!ENTITY editUserDictionaryButton.accessKey "R">
+<!ENTITY editUserDictionaryButton.label "Rediger ...">
+<!ENTITY ignoreAllButton.accessKey "A">
+<!ENTITY ignoreAllButton.label "Ignorer alle">
+<!ENTITY ignoreButton.accessKey "I">
+<!ENTITY ignoreButton.label "Ignorer">
+<!ENTITY languagePopup.accessKey "p">
+<!ENTITY languagePopup.label "Språk:">
+<!ENTITY misspelledWord.label "Feilstavet ord:">
+<!ENTITY moreDictionaries.label "Last ned flere">
+<!ENTITY recheckButton.accessKey "e">
+<!ENTITY recheckButton.label "Sjekk siden igjen">
+<!ENTITY replaceAllButton.accessKey "E">
+<!ENTITY replaceAllButton.label "Erstatt alle">
+<!ENTITY replaceButton.accessKey "r">
+<!ENTITY replaceButton.label "Erstatt">
+<!ENTITY sendButton.accessKey "S">
+<!ENTITY sendButton.label "Send">
+<!ENTITY stopButton.accessKey "t">
+<!ENTITY stopButton.label "Stopp">
+<!ENTITY suggestions.accessKey "F">
+<!ENTITY suggestions.label "Forslag:">
+<!ENTITY userDictionary.label "Egendefinert ordbok:">
+<!ENTITY windowTitle.label "Sjekk stavelse">
+<!ENTITY wordEditField.accessKey "m">
+<!ENTITY wordEditField.label "Erstatt med:">
+
+<!-- Find and Replace -->
+
+<!ENTITY findCmd.label "Finn">
+<!ENTITY replaceCmd.label "Erstatt">
+<!ENTITY findReplaceCmd.label "Finn og erstatt ...">
+<!ENTITY findNextCmd.label    "Finn neste">
+<!ENTITY findPrevCmd.label    "Finn siste">
+
+<!ENTITY replaceDialog.title "Finn og erstatt">
+<!ENTITY findField.label "Finn tekst:">
+<!ENTITY findField.accesskey "t">
+<!ENTITY replaceField.label "Erstatt med:">
+<!ENTITY replaceField.accesskey "E">
+<!ENTITY caseSensitiveCheckbox.label "Treff på små og store bokstaver">
+<!ENTITY caseSensitiveCheckbox.accesskey "T">
+<!ENTITY wrapCheckbox.label "Tilpass rundt">
+<!ENTITY wrapCheckbox.accesskey "p">
+<!ENTITY backwardsCheckbox.label "Søk bakover">
+<!ENTITY backwardsCheckbox.accesskey "b">
+<!ENTITY findNextButton.label "Finn neste">
+<!ENTITY findNextButton.accesskey "F">
+<!ENTITY replaceButton.label "Erstatt">
+<!ENTITY replaceButton.accesskey "E">
+<!ENTITY replaceAndFindButton.label "Erstatt og finn">
+<!ENTITY replaceAndFindButton.accesskey "r">
+<!ENTITY replaceAllButton.label "Erstatt alle">
+<!ENTITY replaceAllButton.accesskey "A">
+<!ENTITY notFoundWarning.label "Teksten du oppgav ble ikke funnet.">
+
+<!ENTITY regWiz.newOrExistingLabel
+  "Lag en ny konto eller bruk en eksisterende:">
+<!ENTITY regWiz.createNewAccountLabel
+  "Lag en ny konto.">
+<!ENTITY regWiz.useExistingAccountLabel
+  "Bruk en eksisterende konto.">
+<!ENTITY regWiz.loginSuccessfulLabel
+  "Takk, du er nå logget inn på &appName;.">
+
+<!ENTITY propertiesTab.label "Egenskaper">
+<!ENTITY author.label "Forfatter">
+<!ENTITY projSource.label "Basert på">
+<!ENTITY copyright.label "Kopirett">
+<!ENTITY contactInfo.label "Kontaktinformasjon">
+<!ENTITY printSceneNumbers.label "Skriv ut scenenumre:">
+
+<!ENTITY none "Ingen">
+<!ENTITY left "Venstre">
+<!ENTITY right "Høyre">
+<!ENTITY both "Begge">
+
+<!ENTITY splashScreen.label "Oppstartsbilde">
+
+<!ENTITY generatePDF.label "Generér PDF ...">
+<!ENTITY publishMode.label "Legg-ut-modus">
+
+<!ENTITY addMedia.label "Legg til media ...">
+<!ENTITY removeMedia.label "Fjern media">
+
+<!ENTITY bold.label "Fet">
+<!ENTITY italic.label "Kursiv">
+<!ENTITY underline.label "Understrek">
+
+<!ENTITY styleDialog.title "Formatinnstillinger">
+<!ENTITY styleSettings.label "Formatinnstillinger ...">
+<!ENTITY template.label "Mal">
+
+<!ENTITY mediaViewer.title "Mediaviser">
+
+<!ENTITY browseCmd.label "Bla i  ...">
+<!ENTITY tagItemCmd.label "Hekte">
+<!ENTITY delItemCmd.label "Slett">
+<!ENTITY chooseProjsDir.label "Spesifisér hvor du vil lagre dine 
+prosjekter:">
+<!ENTITY createProjsDir.label "&appName; trenger et sted å lagre dine 
+prosjekter før det kan lagre dem. Vennligst lag en mappe hvor &appName; kan 
+lagre dine prosjekter:">
+<!ENTITY createCmd.label "Opprett ...">
+<!ENTITY invalidFilename.label "Oppgitt navn er ikke et gyldig navn.">
+
+<!ENTITY breakdownCmd.label "Gjennomgang">
+
+<!ENTITY sidebar.label "Sidemeny">
+
+<!ENTITY moveDownCmd.label "Flytt ned">
+<!ENTITY moveUpCmd.label   "Flytt opp">
+
+<!ENTITY department.label "Avdeling">
+<!ENTITY item.label "Objekt">
+
+<!ENTITY category.label "Kategori">
+<!ENTITY database.label "Database">
+<!ENTITY research.label "Nettresearch">
+<!ENTITY schedule.label "Plan">
+<!ENTITY characters.label "Karakterer">
+<!ENTITY sceneDetails.label "Scenedetaljer">
+
+<!ENTITY recycleCmd.label "Send til notatblokk">
+
+<!-- Breakdown View -->
+<!ENTITY breakdownReport.label "Gjennomgangsrapport">
+
+<!ENTITY fullName.label "Fullt navn">
+
+<!ENTITY sceneBreakdown.label "Gjennomgå scene">
+<!ENTITY sceneBreakdownWithDesc.label "Gjennomgå scene med beskrivelser">
+<!ENTITY allUppercase.label "ALLE">
+<!ENTITY displayMedia.label "Vis media">
+
+<!-- *** LOCALISE ME *** -->
+<!ENTITY locationField.label "Location:">
+<!ENTITY saveDirCheckbox.label "Save here by default">
+

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2005 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!DOCTYPE RDF [
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:cx="http://celtx.com/NS/v1/">
+
+  <rdf:Description rdf:about="http://celtx.com/NS/v1/Script">
+    <rdfs:label>&script.label;</rdfs:label>
+  </rdf:Description>
+
+  <!-- Breakdown categories -->
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/AdditionalLabour">
+    <rdfs:label>&bdc.addlabour;</rdfs:label>
+    <cx:element>addlabour</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Animals">
+    <rdfs:label>&bdc.animals;</rdfs:label>
+    <cx:element>animals</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/AnimalHandler">
+    <rdfs:label>&bdc.handler;</rdfs:label>
+    <cx:element>handler</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Camera">
+    <rdfs:label>&bdc.camera;</rdfs:label>
+    <cx:element>camera</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Cast">
+    <rdfs:label>&bdc.cast;</rdfs:label>
+    <cx:element>cast</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/CGI">
+    <rdfs:label>&bdc.cgi;</rdfs:label>
+    <cx:element>cgi</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Construction">
+    <rdfs:label>&bdc.construction;</rdfs:label>
+    <cx:element>construction</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Electrics">
+    <rdfs:label>&bdc.electrics;</rdfs:label>
+    <cx:element>electrics</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Extras">
+    <rdfs:label>&bdc.extras;</rdfs:label>
+    <cx:element>extras</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Greenery">
+    <rdfs:label>&bdc.greenery;</rdfs:label>
+    <cx:element>greenery</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Hair">
+    <rdfs:label>&bdc.hair;</rdfs:label>
+    <cx:element>hair</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Lights">
+    <rdfs:label>&bdc.lights;</rdfs:label>
+    <cx:element>lights</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Livestock">
+    <rdfs:label>&bdc.livestock;</rdfs:label>
+    <cx:element>livestock</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Location">
+    <rdfs:label>&bdc.location;</rdfs:label>
+    <cx:element>location</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Makeup">
+    <rdfs:label>&bdc.makeup;</rdfs:label>
+    <cx:element>makeup</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/MechFX">
+    <rdfs:label>&bdc.mechfx;</rdfs:label>
+    <cx:element>mechfx</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Misc">
+    <rdfs:label>&bdc.misc;</rdfs:label>
+    <cx:element>misc</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Music">
+    <rdfs:label>&bdc.music;</rdfs:label>
+    <cx:element>music</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/OpticalFX">
+    <rdfs:label>&bdc.opticalfx;</rdfs:label>
+    <cx:element>opticalfx</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Painting">
+    <rdfs:label>&bdc.painting;</rdfs:label>
+    <cx:element>painting</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/ProductionNotes">
+    <rdfs:label>&bdc.prodnotes;</rdfs:label>
+    <cx:element>prodnotes</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Props">
+    <rdfs:label>&bdc.props;</rdfs:label>
+    <cx:element>props</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Security">
+    <rdfs:label>&bdc.security;</rdfs:label>
+    <cx:element>security</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Set">
+    <rdfs:label>&bdc.set;</rdfs:label>
+    <cx:element>set</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/SetDressing">
+    <rdfs:label>&bdc.setdressing;</rdfs:label>
+    <cx:element>setdressing</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Sound">
+    <rdfs:label>&bdc.sound;</rdfs:label>
+    <cx:element>sound</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/SoundFX">
+    <rdfs:label>&bdc.soundfx;</rdfs:label>
+    <cx:element>soundfx</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/SpecialEquipment">
+    <rdfs:label>&bdc.equip;</rdfs:label>
+    <cx:element>equip</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/SpecialFX">
+    <rdfs:label>&bdc.specialfx;</rdfs:label>
+    <cx:element>specialfx</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Storyboard">
+    <rdfs:label>&bdc.storyboard;</rdfs:label>
+    <cx:element>storyboard</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Stunts">
+    <rdfs:label>&bdc.stunts;</rdfs:label>
+    <cx:element>stunts</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Vehicles">
+    <rdfs:label>&bdc.vehicles;</rdfs:label>
+    <cx:element>vehicles</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Wardrobe">
+    <rdfs:label>&bdc.wardrobe;</rdfs:label>
+    <cx:element>wardrobe</cx:element>
+  </cx:Breakdown>
+
+  <cx:Breakdown rdf:about="http://celtx.com/NS/v1/Weapons">
+    <rdfs:label>&bdc.weapons;</rdfs:label>
+    <cx:element>weapons</cx:element>
+  </cx:Breakdown>
+
+
+  <!-- Default list of markup categories used if project doesn't specify -->
+  <rdf:Seq rdf:ID="default-markup">
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/AdditionalLabour"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Animals"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/AnimalHandler"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Camera"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Cast"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/CGI"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Construction"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Electrics"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Extras"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Greenery"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Hair"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Lights"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Livestock"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Location"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Makeup"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/MechFX"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Misc"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Music"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/OpticalFX"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Painting"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/ProductionNotes"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Props"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Security"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Set"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/SetDressing"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Sound"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/SoundFX"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/SpecialEquipment"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/SpecialFX"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Storyboard"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Stunts"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Vehicles"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Wardrobe"/>
+    <rdf:li rdf:resource="http://celtx.com/NS/v1/Weapons"/>
+  </rdf:Seq>
+
+</rdf:RDF>

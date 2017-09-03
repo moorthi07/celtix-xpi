@@ -1,0 +1,10 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css"
+          href="chrome://celtx/content/script.css" />
+    <title>Untitled</title>
+  </head>
+  <body>
+    <div class="clickhere"></div>
+  </body>
+</html>

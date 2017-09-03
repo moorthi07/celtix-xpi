@@ -1,0 +1,467 @@
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!ENTITY appName "Celtx">
+
+<!ENTITY celtxWindow.titleModifier "Celtx">
+<!ENTITY celtxWindow.titleMenuSeparator " - ">
+
+<!ENTITY reportsMenu.label "Reportit">
+<!ENTITY reportsMenu.accessKey "R">
+
+<!ENTITY resMenu.label "Lähteet">
+<!ENTITY resMenu.accessKey "s">
+
+<!ENTITY helpMenu.label "Ohje">
+<!ENTITY helpMenu.accessKey "H">
+
+<!ENTITY helpSupportCmd.label "Online avustus">
+<!ENTITY helpSupportCmd.accessKey "O">
+
+<!ENTITY helpReportBugCmd.label "Raportoi virheestä">
+<!ENTITY helpReportBugCmd.accessKey "R">
+
+<!ENTITY helpAboutCmd.label "Lisää &appName;">
+<!ENTITY helpAboutCmd.accessKey "A">
+
+<!ENTITY celtxAccountCmd.label "&appName; Tili...">
+<!ENTITY celtxAccountCmd.accessKey "C">
+
+<!ENTITY openProjCmd.label "Avaa projekti...">
+
+<!ENTITY newProjCmd.label "Uusi projekti...">
+
+<!ENTITY copyProjCmd.label "Kopioi projekti...">
+
+<!ENTITY saveProjCmd.label "Tallenna">
+
+<!ENTITY downloadProjCmd.label "Lataa projekti...">
+<!ENTITY downloadProjCmd.toolbarLabel "Lataa">
+<!ENTITY downloadProjCmd.accessKey "D">
+
+<!ENTITY publishProjCmd.label "Julkaise projekti...">
+<!ENTITY publishProjCmd.toolbarLabel "Julkaise">
+<!ENTITY publishProjCmd.accessKey "u">
+<!ENTITY uploadProjCmd.label "Julkaise projekti...">
+<!ENTITY uploadProjCmd.toolbarLabel "Julkaise">
+<!ENTITY uploadProjCmd.accessKey "u">
+
+<!ENTITY importCmd.label "Tuo käsikirjoitus...">
+<!ENTITY importCmd.accessKey "I">
+<!ENTITY importCmd.toolbarLabel "Tuo">
+
+<!ENTITY exportScriptCmd.label "Vie käsikirjoitus...">
+<!ENTITY exportScriptCmd.accessKey "E">
+<!ENTITY exportScriptCmd.toolbarLabel "Vie">
+
+<!ENTITY insertNoteCmd.label "Lisää muistiinpano...">
+<!ENTITY insertNoteCmd.toolbarLabel "Muistiinpano">
+
+<!ENTITY insertSceneCmd.label "Lisää kohtaus...">
+<!ENTITY insertSceneCmd.toolbarLabel "Kohtaus">
+
+<!ENTITY titlePage "Nimilehti">
+
+<!ENTITY delResCmd.label "Poista">
+<!ENTITY gotoResCmd.label "Mene">
+
+<!ENTITY showResCmd.toolbarLabel "Näytä">
+
+<!ENTITY removeMarkupCmd.label "Poista">
+
+<!ENTITY newMarkup.label "Uusi...">
+
+<!ENTITY openProj.title "Avaa projekti">
+
+<!ENTITY resources.label "Lähteet">
+
+<!ENTITY options.label "Asetukset">
+
+<!ENTITY projects.label "Projektit">
+<!ENTITY title.label "Nimike">
+<!ENTITY description.label "Kuvaus">
+<!ENTITY created.label "Tehty">
+
+<!ENTITY objViewOverviewTab.label "Esikatselu">
+<!ENTITY objViewMediaTab.label "Media">
+
+<!ENTITY insertScene.title     "Lisää kohtaus">
+<!ENTITY insertScene.caption   "Lisää kohtaus">
+<!ENTITY insertScene.after     "Nykyisen kohtauksen jälkeen">
+<!ENTITY insertScene.before    "Ennen nykyistä kohtausta">
+<!ENTITY insertScene.beginning "Käsikirjoituksen alkuun">
+<!ENTITY insertScene.end       "Käsikirjoituksen loppuun">
+
+<!ENTITY projDialog.title      "Projektin ominaisuudet">
+
+<!ENTITY noteDialog.title      "Muokkaa muistiinpanoa">
+<!ENTITY note.label            "Muistiinpano">
+
+<!ENTITY untitled.label "(nimetön)">
+
+<!ENTITY regDialog.title "&appName; Rekisteröinti">
+
+<!ENTITY getProjDialog.title   "Lataa projekti">
+<!ENTITY getProjDialog.caption "Käytettävissä olevat projektit">
+
+<!ENTITY nameCol.label     "Nimi">
+<!ENTITY createdCol.label  "Tehty">
+<!ENTITY modifiedCol.label "Muokattu">
+<!ENTITY creatorCol.label  "Tekijä">
+
+<!ENTITY downloadDialog.title   "Ladataan projektia">
+
+<!ENTITY publishDialog.title        "Julkaise projekti">
+<!ENTITY uploadDialog.title         "Julkaise projekti">
+<!ENTITY publishDialog.serverLabel  "Serveri">
+<!ENTITY publishDialog.publicLabel  "Yleinen">
+<!ENTITY publishDialog.privateLabel "Yksityinen">
+<!ENTITY publishDialog.sharedLabel  "Jakaja">
+<!ENTITY publishDialog.userList     "Käyttäjälista">
+<!ENTITY publishDialog.findUsers    "Etsi käyttäjä">
+
+
+<!-- Formatting toolbar -->
+<!ENTITY formatAction.label  "Toiminta">
+<!ENTITY formatChar.label    "Hahmot">
+<!ENTITY formatDialog.label  "Dialogi">
+<!ENTITY formatHeading.label "Otsikko">
+<!ENTITY formatParen.label   "Sulkumerkit">
+<!ENTITY formatTrans.label   "Siirtymä">
+<!ENTITY formatShot.label    "Kuvaus">
+<!ENTITY formatText.label    "Teksti">
+
+
+<!-- Debugging -->
+<!ENTITY debugMenu.label "Virheiden korjaus">
+<!ENTITY debugMenu.accessKey "D">
+
+<!ENTITY dumpCmd.label "Vedos">
+
+<!ENTITY wiz.clickNext "Paina 'Seuraava' nappia aloittaaksesi.">
+<!ENTITY wiz.clickFinish "Paina 'Valmis' nappia viimeistelläksesi tämän ohjelman.">
+
+
+<!-- Migration wizard -->
+<!ENTITY migWiz.title "&appName; Muutto ohjelma">
+<!ENTITY migWiz.prevVersionDetected
+  "&appName; on löytänyt projekti tiedostoja aiemmista versioista kyseistä ohjelmaa.">
+
+<!ENTITY migWiz.aboutThis
+  "Tämä ohjelma antaa sinun tuoda minkä tahansa olemassa olevan projektin.">
+
+<!ENTITY migWiz.clickNext "&wiz.painaSeuraava;">
+
+<!ENTITY migWiz.clickFinish "&wiz.painaValmis;">
+
+<!ENTITY migWiz.optionsLabel "Tuonti Asetukset">
+
+<!ENTITY migWiz.chooseOption
+  "Ole hyvä ja valitse yksi seuraavista asetuksista, ja paina sitten 'Seuraava'.">
+
+<!ENTITY migWiz.optionImport
+  "Tuo projekteja aiemmista versiosta ohjelmasta: &appName;">
+
+<!ENTITY migWiz.optionNoImport "Älä tuo">
+
+<!ENTITY migWiz.migratingLabel "Muutto projektit">
+
+<!ENTITY migWiz.doneLabel "Muutto valmis">
+
+
+<!ENTITY regWiz.title "&appName; Rekisteröinti ohjelma">
+
+<!ENTITY regWiz.intro "Päästäksesi &appName;, online ominaisuuksiin
+  sinun täytyy ensin rekisteröidä &appName; tili.">
+
+<!ENTITY regWiz.aboutThis "Tämä ohjelma kerää tarvittavat tiedot rekisteröitymiseen.">
+
+<!ENTITY regWiz.identityLabel "Henkilöllisyys">
+
+<!ENTITY regWiz.identityInstructions "Ole hyvä ja kirjoita nimesi,
+  yhdistyksesi, ja sähköposti osoitteesi.">
+
+<!ENTITY regWiz.nameLabel  "Nimi:">
+<!ENTITY regWiz.orgLabel   "Yhdistys:">
+<!ENTITY regWiz.emailLabel "Sähköposti:">
+<!ENTITY regWiz.uidLabel   "&appName; Käyttäjänimi:">
+
+<!ENTITY regWiz.accountLabel "Käyttäjä tili">
+
+<!ENTITY regWiz.accountInstructions "Ole hyvä ja valitse käyttäjänimi ja salasana sinun &appName; tilillesi.">
+
+<!ENTITY regWiz.usernameLabel      "Käyttäjänimi:">
+<!ENTITY regWiz.passwordLabel      "Salasana:">
+<!ENTITY regWiz.passwordAgainLabel "Laita salasanasi uudelleen:">
+
+<!ENTITY regWiz.noteUsername "Käyttäjänimesi tulee olla vähintään 3 kirjainta pituudeltaan, ja saa sisältää vain kirjaimia ja numeroita.">
+
+<!ENTITY regWiz.notePassword "Salasanasi tulee olla vähintää 5 kirjainta pitkä.">
+
+<!ENTITY regWiz.noteCaseSensitive "&appName; tilin käyttäjänimi ja salasana ovat asia kohtaisia.">
+
+<!ENTITY regWiz.checkLabel "Tilin tietojen tarkastus">
+
+<!ENTITY regWiz.confirmLabel "Hyväksy asetukset">
+
+<!ENTITY regWiz.confirmIntro "Olet kirjoittanut seuraavasti:">
+
+<!ENTITY regWiz.clickFinish "Jos olet tyytyväinen arvoihin, paina
+    'Valmis' nappia lähettääksesi rekisteröintisi.">
+<!ENTITY regWiz.clickNext "Jos olet tyytyväinen arvoihin, paina
+    'Seuraava' nappia lähettääksesi rekisteröintisi.">
+
+<!ENTITY report.sample "Näyte raportti">
+<!ENTITY report.script "Käsikirjoitus raportti">
+<!ENTITY report.allBreakdown "Erittely">
+
+<!ENTITY report.titleBy "Tekijä">
+<!ENTITY report.titleBasedOn "Perustuu">
+<!ENTITY report.titleRights "Tekijänoikeus">
+
+<!ENTITY scene.label      "Kohtaus">
+<!ENTITY scenes.label     "Kohtaukset">
+<!ENTITY script.label     "Käsikirjoitus">
+
+<!-- Breakdown categories -->
+<!ENTITY bdc.addlabour    "Lisätyövoima">
+<!ENTITY bdc.animals      "Eläimet">
+<!ENTITY bdc.handler      "Eläinten käsittelijä">
+<!ENTITY bdc.camera       "Kamera">
+<!ENTITY bdc.cast         "Näyttelijät">
+<!ENTITY bdc.cgi          "CGI">
+<!ENTITY bdc.construction "Rakentaminen">
+<!ENTITY bdc.electrics    "Elektroniikka">
+<!ENTITY bdc.extras       "Extrat">
+<!ENTITY bdc.greenery     "Kasvisto">
+<!ENTITY bdc.hair         "Hiukset">
+<!ENTITY bdc.lights       "Valaistus">
+<!ENTITY bdc.livestock    "Karja">
+<!ENTITY bdc.location     "Sijainti">
+<!ENTITY bdc.makeup       "Meikki">
+<!ENTITY bdc.mechfx       "Mekaaniset tehosteet">
+<!ENTITY bdc.misc         "Sekalaiset">
+<!ENTITY bdc.music        "Musiikki">
+<!ENTITY bdc.opticalfx    "Visuaaliset tehosteet">
+<!ENTITY bdc.painting     "Maalaus">
+<!ENTITY bdc.prodnotes    "Tuotanto muistio">
+<!ENTITY bdc.props        "Lavasteet">
+<!ENTITY bdc.security     "Turvallisuus">
+<!ENTITY bdc.set          "Kuvauspaikka">
+<!ENTITY bdc.setdressing  "Kuvauspaikan muokkaus">
+<!ENTITY bdc.sound        "Äänet">
+<!ENTITY bdc.soundfx      "Ääni tehosteet">
+<!ENTITY bdc.equip        "Erityis varusteet">
+<!ENTITY bdc.specialfx    "Erikoistehosteet">
+<!ENTITY bdc.storyboard   "Kuvakäsikirjoitus">
+<!ENTITY bdc.stunts       "Stuntit">
+<!ENTITY bdc.vehicles     "Ajoneuvot">
+<!ENTITY bdc.wardrobe     "Vaatekaappi">
+<!ENTITY bdc.weapons      "Aseet">
+
+<!ENTITY splash.welcomePrefix "tervetuloa Celtx - ohjelmaan v.">
+<!ENTITY splash.projects      "PROJEKTIT">
+<!ENTITY splash.webServices   "WEB PALVELUT">
+<!ENTITY splash.help          "OHJE">
+<!ENTITY splash.discussion    "KESKUSTELU">
+
+<!ENTITY splash.newProject      "Aloita uusi projekti">
+<!ENTITY splash.openProject     "Avaa olemassa oleva projekti">
+<!ENTITY splash.helpAccount     "Luo käyttäjätili">
+<!ENTITY splash.downloadProject "Lataa projekti">
+<!ENTITY splash.projectCentral  "Projektikeskus">
+<!ENTITY splash.walkthru        "3-Minuutin ohjeistus">
+<!ENTITY splash.guide           "Celtx käyttäjän opas">
+<!ENTITY splash.forums          "Celtx keskustelualue">
+<!ENTITY splash.featureTour     "Ominaisuus kierros">
+
+<!ENTITY authDialog.title       "Celtx todistus">
+<!ENTITY authDialog.description
+  "Tämä toiminto vaati sinun kirjautumista sinun Celtx tilillesi">
+
+<!ENTITY list.label "Lista...">
+
+<!ENTITY pdfDownloadDialog.title "Muunnetaan > PDF">
+<!ENTITY downloadingPDF.label    "Muunnetaan > PDF...">
+
+<!ENTITY add.label    "Lisää">
+<!ENTITY remove.label "Poista">
+
+<!ENTITY mediaBox.tooltip "Vedä hiirelläsi media tiedostot tänne.">
+<!ENTITY imageSearch.tooltip "Etsi kuvia lisätäksesi niitä.">
+
+<!-- Spellcheck -->
+
+<!ENTITY spellCheckCmd.label "Oikeinkirjoitus">
+
+<!ENTITY addToUserDictionaryButton.accessKey "d">
+<!ENTITY addToUserDictionaryButton.label "Lisää sana">
+<!ENTITY checkwordButton.accessKey "k">
+<!ENTITY checkwordButton.label "Tarkista sana">
+<!ENTITY closeButton.accessKey "C">
+<!ENTITY closeButton.label "Sulje">
+<!ENTITY editUserDictionaryButton.accessKey "E">
+<!ENTITY editUserDictionaryButton.label "Muokkaa...">
+<!ENTITY ignoreAllButton.accessKey "n">
+<!ENTITY ignoreAllButton.label "Ohita kaikki">
+<!ENTITY ignoreButton.accessKey "I">
+<!ENTITY ignoreButton.label "Ohita">
+<!ENTITY languagePopup.accessKey "L">
+<!ENTITY languagePopup.label "Kieli:">
+<!ENTITY misspelledWord.label "Väärinkirjoitettu sana:">
+<!ENTITY moreDictionaries.label "Lataa lisää">
+<!ENTITY recheckButton.accessKey "P">
+<!ENTITY recheckButton.label "Uudelleen tarkista sivu">
+<!ENTITY replaceAllButton.accessKey "A">
+<!ENTITY replaceAllButton.label "Korvaa kaikki">
+<!ENTITY replaceButton.accessKey "R">
+<!ENTITY replaceButton.label "Korvaa">
+<!ENTITY sendButton.accessKey "S">
+<!ENTITY sendButton.label "Lähetä">
+<!ENTITY stopButton.accessKey "t">
+<!ENTITY stopButton.label "Pysäytä">
+<!ENTITY suggestions.accessKey "u">
+<!ENTITY suggestions.label "Ehdotukset:">
+<!ENTITY userDictionary.label "Henkilökohtainen sanakirja:">
+<!ENTITY windowTitle.label "Tarkista oikeinkirjoitus">
+<!ENTITY wordEditField.accessKey "w">
+<!ENTITY wordEditField.label "Korvaa:">
+
+<!-- Find and Replace -->
+
+<!ENTITY findCmd.label "Etsi">
+<!ENTITY replaceCmd.label "Korvaa">
+<!ENTITY findReplaceCmd.label "Etsi ja korvaa...">
+<!ENTITY findNextCmd.label    "Etsi seuraava">
+<!ENTITY findPrevCmd.label    "Etsi edellinen">
+
+<!ENTITY replaceDialog.title "Etsi ja korvaa">
+<!ENTITY findField.label "Etsi teksti:">
+<!ENTITY findField.accesskey "n">
+<!ENTITY replaceField.label "Korvaa:">
+<!ENTITY replaceField.accesskey "e">
+<!ENTITY caseSensitiveCheckbox.label "Huomioi kirjainkoko">
+<!ENTITY caseSensitiveCheckbox.accesskey "c">
+<!ENTITY wrapCheckbox.label "Kierrätys">
+<!ENTITY wrapCheckbox.accesskey "W">
+<!ENTITY backwardsCheckbox.label "Etsi takaperin">
+<!ENTITY backwardsCheckbox.accesskey "b">
+<!ENTITY findNextButton.label "Etsi seuraava">
+<!ENTITY findNextButton.accesskey "F">
+<!ENTITY replaceButton.label "Korvaa">
+<!ENTITY replaceButton.accesskey "R">
+<!ENTITY replaceAndFindButton.label "Korvaa ja etsi">
+<!ENTITY replaceAndFindButton.accesskey "d">
+<!ENTITY replaceAllButton.label "Korvaa kaikki">
+<!ENTITY replaceAllButton.accesskey "A">
+<!ENTITY notFoundWarning.label "Kyseistä tekstiä ei löytynyt.">
+
+<!ENTITY regWiz.newOrExistingLabel
+  "Luo uusi tili tai käytä olemassa olevaa tiliä:">
+<!ENTITY regWiz.createNewAccountLabel
+  "Luo uusi tili.">
+<!ENTITY regWiz.useExistingAccountLabel
+  "Käytä olemassa olevaa tiliä.">
+<!ENTITY regWiz.loginSuccessfulLabel
+  "Kiitos, nyt olet kirjautunut ohjelmaan: &appName;.">
+
+<!ENTITY propertiesTab.label "Ominaisuudet">
+<!ENTITY author.label "Tekijä">
+<!ENTITY projSource.label "Perustuu">
+<!ENTITY copyright.label "Tekijänoikeus">
+<!ENTITY contactInfo.label "Yhteystiedot">
+<!ENTITY printSceneNumbers.label "Tulosta Kohtaus numerot:">
+
+<!ENTITY none "Ei mikään">
+<!ENTITY left "Vasen">
+<!ENTITY right "Oikea">
+<!ENTITY both "Molemmat">
+
+<!ENTITY splashScreen.label "Tervetulosivu">
+
+<!ENTITY generatePDF.label "Luo PDF...">
+<!ENTITY publishMode.label "Julkaisu tila">
+
+<!ENTITY addMedia.label "Lisää mediaa...">
+<!ENTITY removeMedia.label "Poista mediaa">
+
+<!ENTITY bold.label "Lihavoitu">
+<!ENTITY italic.label "Kursivoitu">
+<!ENTITY underline.label "Alleviivattu">
+
+<!ENTITY styleDialog.title "Pohjusta asetukset">
+<!ENTITY styleSettings.label "Pohjusta asetukset...">
+<!ENTITY template.label "Valmis pohja">
+
+<!ENTITY saveAsCmd.label "Tallenna nimellä...">
+<!ENTITY saveAsCmd.accessKey "A">
+<!ENTITY saveAsCmd.toolbarLabel "Tallenna nimellä">
+
+<!ENTITY mediaViewer.title "Median Esikatselu">
+
+<!ENTITY browseCmd.label "Selaa...">
+<!ENTITY tagItemCmd.label "Tuntomerkki">
+<!ENTITY delItemCmd.label "Poista">
+<!ENTITY chooseProjsDir.label "Valitse mihin haluat tallentaa projektisi:">
+<!ENTITY createProjsDir.label "&appName; tarvitsee paikan tallentaakseen projektisi ennen kuin niitä voidaan tallentaa. Ole hyvä ja luo hakemisto mihin &appName; tulisi tallentaa projektisi:">
+<!ENTITY createCmd.label "Luo...">
+<!ENTITY invalidFilename.label "Tiedostonimi ei ole kelvollinen.">
+
+<!ENTITY breakdownCmd.label "Erittely">
+
+<!ENTITY sidebar.label "Sivupalkki">
+
+<!ENTITY moveDownCmd.label "Siirrä alas">
+<!ENTITY moveUpCmd.label   "Siirrä ylös">
+
+<!ENTITY department.label "Lokero">
+<!ENTITY item.label "Kirjaus">
+
+<!ENTITY category.label "Kategoria">
+<!ENTITY database.label "Tietokanta">
+<!ENTITY research.label "Internet tutkimus">
+<!ENTITY schedule.label "Aikataulu">
+<!ENTITY characters.label "Hahmot">
+<!ENTITY sceneDetails.label "Kohtauksen yksityiskohdat">
+
+<!ENTITY recycleCmd.label "Lähetä muistilehtiölle">
+
+<!-- Breakdown View -->
+<!ENTITY breakdownReport.label "Erittely Raportti">
+
+<!ENTITY fullName.label "Koko nimi">
+
+<!ENTITY sceneBreakdown.label "Kohtauksen erittely">
+<!ENTITY sceneBreakdownWithDesc.label "Kohtauksen erittely selostuksen kanssa">
+<!ENTITY allUppercase.label "ALL">
+<!ENTITY displayMedia.label "Näytä media">
+
+<!-- *** LOCALISE ME *** -->
+<!ENTITY locationField.label "Sijainti:">
+<!ENTITY saveDirCheckbox.label "Save here by default">
+

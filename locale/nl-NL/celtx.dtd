@@ -1,0 +1,478 @@
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ *
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ *
+ * The Original Code is Celtx Script Manager.
+ *
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ *
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ *
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!ENTITY appName "Celtx">
+
+<!ENTITY celtxWindow.titleModifier "celtx">
+<!ENTITY celtxWindow.titleMenuSeparator " - ">
+
+<!ENTITY reportsMenu.label "Rapporten">
+<!ENTITY reportsMenu.accessKey "R">
+
+<!ENTITY resMenu.label "Hulpbronnen">
+<!ENTITY resMenu.accessKey "u">
+
+<!ENTITY helpMenu.label "Help">
+<!ENTITY helpMenu.accessKey "H">
+
+<!ENTITY helpSupportCmd.label "Online Ondersteuning">
+<!ENTITY helpSupportCmd.accessKey "O">
+
+<!ENTITY helpReportBugCmd.label "Meld een Fout">
+<!ENTITY helpReportBugCmd.accessKey "M">
+
+<!ENTITY helpAboutCmd.label "Over &appName;">
+<!ENTITY helpAboutCmd.accessKey "v">
+
+<!ENTITY celtxAccountCmd.label "&appName; Account...">
+<!ENTITY celtxAccountCmd.accessKey "C">
+
+<!ENTITY openProjCmd.label "Open Project...">
+
+<!ENTITY newProjCmd.label "Nieuw Project...">
+
+<!ENTITY copyProjCmd.label "Kopieer Project...">
+
+<!ENTITY saveProjCmd.label "Opslaan">
+
+<!ENTITY downloadProjCmd.label "Download Project...">
+<!ENTITY downloadProjCmd.toolbarLabel "Downloaden">
+<!ENTITY downloadProjCmd.accessKey "D">
+
+<!ENTITY publishProjCmd.label "Publiceer Project...">
+<!ENTITY publishProjCmd.toolbarLabel "Publiceren">
+<!ENTITY publishProjCmd.accessKey "u">
+<!ENTITY uploadProjCmd.label "Publiceer Project...">
+<!ENTITY uploadProjCmd.toolbarLabel "Publiceren">
+<!ENTITY uploadProjCmd.accessKey "u">
+
+<!ENTITY importCmd.label "Importeer Script...">
+<!ENTITY importCmd.accessKey "I">
+<!ENTITY importCmd.toolbarLabel "Importeren">
+
+<!ENTITY exportScriptCmd.label "Exporteer Script...">
+<!ENTITY exportScriptCmd.accessKey "E">
+<!ENTITY exportScriptCmd.toolbarLabel "Exporteren">
+
+<!ENTITY insertNoteCmd.label "Notitie Invoegen...">
+<!ENTITY insertNoteCmd.toolbarLabel "Notitie">
+
+<!ENTITY insertSceneCmd.label "Scene Invoegen...">
+<!ENTITY insertSceneCmd.toolbarLabel "Scene">
+
+<!ENTITY delResCmd.label "Verwijderen">
+<!ENTITY gotoResCmd.label "Ga Naar">
+
+<!ENTITY showResCmd.toolbarLabel "Laat Zien">
+
+<!ENTITY removeMarkupCmd.label "Verbergen">
+
+<!ENTITY newMarkup.label "Nieuw...">
+
+<!ENTITY openProj.title "Open Project">
+
+<!ENTITY resources.label "Hulpbronnen">
+
+<!ENTITY options.label "Opties">
+
+<!ENTITY projects.label "Projecten">
+<!ENTITY title.label "Titel">
+<!ENTITY description.label "Omschrijving">
+<!ENTITY created.label "Gemaakt">
+
+<!ENTITY objViewOverviewTab.label "Overzicht">
+<!ENTITY objViewMediaTab.label "Media">
+
+<!ENTITY insertScene.title     "Scene Invoegen">
+<!ENTITY insertScene.caption   "Scene invoegen">
+<!ENTITY insertScene.after     "Na huidige scene">
+<!ENTITY insertScene.before    "Voor huidige scene">
+<!ENTITY insertScene.beginning "Aan begin van script">
+<!ENTITY insertScene.end       "Aan eind van script">
+
+<!ENTITY projDialog.title      "Projecteigenschappen">
+
+<!ENTITY noteDialog.title      "Notitie Bewerken">
+<!ENTITY note.label            "Notitie">
+
+<!ENTITY untitled.label "(naamloos)">
+
+<!ENTITY regDialog.title "&appName; Registratie">
+
+<!ENTITY getProjDialog.title   "Download Project">
+<!ENTITY getProjDialog.caption "Beschikbare Projecten">
+
+<!ENTITY nameCol.label     "Naam">
+<!ENTITY createdCol.label  "Gemaakt">
+<!ENTITY modifiedCol.label "Veranderd">
+<!ENTITY creatorCol.label  "Maker">
+
+<!ENTITY downloadDialog.title   "Project Downloaden">
+
+<!ENTITY publishDialog.title        "Project Publiceren">
+<!ENTITY uploadDialog.title         "Project Publiceren">
+<!ENTITY publishDialog.serverLabel  "Server">
+<!ENTITY publishDialog.publicLabel  "Publiek">
+<!ENTITY publishDialog.privateLabel "Privé">
+<!ENTITY publishDialog.sharedLabel  "Gedeeld door">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY publishDialog.userList     "User List">
+<!ENTITY publishDialog.findUsers    "Find Users">
+
+
+<!-- Formatting toolbar -->
+<!ENTITY formatAction.label  "Actie">
+<!ENTITY formatChar.label    "Karakter">
+<!ENTITY formatDialog.label  "Dialoog">
+<!ENTITY formatHeading.label "Kop">
+<!ENTITY formatParen.label   "Nadruk">
+<!ENTITY formatTrans.label   "Trans">
+<!ENTITY formatShot.label    "Shot">
+<!ENTITY formatText.label    "Tekst">
+
+
+<!-- Debugging -->
+<!ENTITY debugMenu.label "Debuggen">
+<!ENTITY debugMenu.accessKey "D">
+
+<!ENTITY dumpCmd.label "Dumpen">
+
+<!ENTITY wiz.clickNext "Klik op 'Volgende' om te beginnen.">
+<!ENTITY wiz.clickFinish "Klik op 'Klaar' om deze Wizard te voltooien.">
+
+
+<!-- Migration wizard -->
+<!ENTITY migWiz.title "&appName; Migratie Wizard">
+<!ENTITY migWiz.prevVersionDetected
+  "Er is een projectbestand van een vorige versie van &appName; gevonden.">
+
+<!ENTITY migWiz.aboutThis
+  "Met deze Wizard kunt u bestaande projecten importeren.">
+
+<!ENTITY migWiz.clickNext "&wiz.clickNext;">
+
+<!ENTITY migWiz.clickFinish "&wiz.clickFinish;">
+
+<!ENTITY migWiz.optionsLabel "Importeer Opties">
+
+<!ENTITY migWiz.chooseOption
+  "Kies een van de volgende opties, en klik op 'Volgende'.">
+
+<!ENTITY migWiz.optionImport
+  "Importeer projecten van de vorige versie van &appName;">
+
+<!ENTITY migWiz.optionNoImport "Niet importeren">
+
+<!ENTITY migWiz.migratingLabel "Projecten Migreren">
+
+<!ENTITY migWiz.doneLabel "Migratie Voltooid">
+
+
+<!ENTITY regWiz.title "&appName; Registratie Wizard">
+
+<!ENTITY regWiz.intro "Om van de online mogelijkheden van &appName; gebruik te kunnen
+  maken, moet u eerst een &appName; account registreren.">
+
+<!ENTITY regWiz.aboutThis "Deze Wizard zal de voor registratie benodigde gegevens
+  verzamelen.">
+
+<!ENTITY regWiz.identityLabel "Persoonsgegevens">
+
+<!ENTITY regWiz.identityInstructions "Vul a.u.b. uw naam, organizatie en email adres in.">
+
+<!ENTITY regWiz.nameLabel  "Naam:">
+<!ENTITY regWiz.orgLabel   "Organizatie:">
+<!ENTITY regWiz.emailLabel "Email:">
+<!ENTITY regWiz.uidLabel   "&appName; Gebruikersnaam:">
+
+<!ENTITY regWiz.accountLabel "Gebruikersaccount">
+
+<!ENTITY regWiz.accountInstructions "Kies a.u.b. een gebruikersnaam en wachtwoord voor uw
+  &appName; account.">
+
+<!ENTITY regWiz.usernameLabel      "Gebruikersnaam:">
+<!ENTITY regWiz.passwordLabel      "Wachtwoord:">
+<!ENTITY regWiz.passwordAgainLabel "Herhaal wachtwoord:">
+
+<!ENTITY regWiz.noteUsername "Uw gebruikersnaam moet uit ten minste 3 tekens bestaan, en
+  mag alleen letters en cijfers bevatten.">
+
+<!ENTITY regWiz.notePassword "Uw wachtwoord moet uit ten minste 5 tekens bestaan.">
+
+<!ENTITY regWiz.noteCaseSensitive "&appName; Account gebruikersnamen en wachtwoorden zijn
+    hoofdlettergevoelig.">
+
+<!ENTITY regWiz.checkLabel "Controle Account Informatie">
+
+<!ENTITY regWiz.confirmLabel "Bevestig Instellingen">
+
+<!ENTITY regWiz.confirmIntro "U heeft het volgende ingevuld:">
+
+<!ENTITY regWiz.clickFinish "Als u tevreden bent met deze waarden, klik dan op 'Volgende'
+    om uw registratie te verzenden.">
+<!ENTITY regWiz.clickNext "Als u tevreden bent met deze waarden, klik dan op 'Volgende'
+    om uw registratie te verzenden.">
+
+<!ENTITY report.sample "Voorbeeldrapport">
+<!ENTITY report.script "Scriptrapport">
+<!ENTITY report.allBreakdown "Totaaloverzicht">
+
+<!ENTITY script.label     "Script">
+<!ENTITY scene.label      "Scene">
+<!ENTITY scenes.label     "Scenes">
+
+<!-- Breakdown categories -->
+<!ENTITY bdc.addlabour    "Bijkomende Arbeid">
+<!ENTITY bdc.animals      "Dieren">
+<!ENTITY bdc.handler      "Dierentrainer">
+<!ENTITY bdc.camera       "Camera">
+<!ENTITY bdc.cast         "Cast">
+<!ENTITY bdc.cgi          "CGI">
+<!ENTITY bdc.construction "Bouw">
+<!ENTITY bdc.electrics    "Electriciteit">
+<!ENTITY bdc.extras       "Figuranten">
+<!ENTITY bdc.greenery     "Planten">
+<!ENTITY bdc.hair         "Haar">
+<!ENTITY bdc.lights       "Lichten">
+<!ENTITY bdc.livestock    "Vee">
+<!ENTITY bdc.location     "Locatie">
+<!ENTITY bdc.makeup       "Make-up">
+<!ENTITY bdc.mechfx       "Mechanische Effecten">
+<!ENTITY bdc.misc         "Diversen">
+<!ENTITY bdc.music        "Muziek">
+<!ENTITY bdc.opticalfx    "Optische Effecten">
+<!ENTITY bdc.painting     "Schilderij">
+<!ENTITY bdc.prodnotes    "Productie Aantekeningen">
+<!ENTITY bdc.props        "Rekwisieten">
+<!ENTITY bdc.security     "Beveiliging">
+<!ENTITY bdc.set          "Set">
+<!ENTITY bdc.setdressing  "Setversiering">
+<!ENTITY bdc.sound        "Geluid">
+<!ENTITY bdc.soundfx      "Geluidseffecten">
+<!ENTITY bdc.equip        "Speciaal Materiaal">
+<!ENTITY bdc.specialfx    "Special Effects">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY bdc.storyboard   "Storyboard">
+<!ENTITY bdc.stunts       "Stunts">
+<!ENTITY bdc.vehicles     "Voertuigen">
+<!ENTITY bdc.wardrobe     "Garderobe">
+<!ENTITY bdc.weapons      "Wapens">
+
+<!ENTITY splash.welcomePrefix "welkom bij celtx v.">
+<!ENTITY splash.projects      "PROJECTEN">
+<!ENTITY splash.webServices   "WEB SERVICES">
+<!ENTITY splash.help          "HELP">
+<!ENTITY splash.discussion    "DISCUSSIE">
+
+<!ENTITY splash.newProject      "Start een Nieuw Project">
+<!ENTITY splash.openProject     "Open een Bestaand Project">
+<!ENTITY splash.helpAccount     "Creëer een Account">
+<!ENTITY splash.downloadProject "Download een Project">
+<!ENTITY splash.projectCentral  "Project Central">
+<!ENTITY splash.walkthru        "3-Minute Walk-thru">
+<!ENTITY splash.guide           "Celtx Gebruikershandleiding">
+<!ENTITY splash.forums          "Celtx Forums">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY splash.featureTour     "Feature Tour">
+
+<!ENTITY authDialog.title       "Celtx Authenticatie">
+<!ENTITY authDialog.description
+  "Deze actie vereist dat u zich inlogt op uw Celtx Account">
+
+<!ENTITY list.label "Lijst...">
+
+<!ENTITY pdfDownloadDialog.title "Omzetten naar PDF">
+<!ENTITY downloadingPDF.label    "Omzetten naar PDF...">
+
+<!ENTITY add.label    "Toevoegen">
+<!ENTITY remove.label "Verwijderen">
+
+<!ENTITY mediaBox.tooltip "Sleep mediabestanden hiernaartoe.">
+<!ENTITY imageSearch.tooltip "Zoek naar afbeeldingen om te gebruiken.">
+
+<!-- Spellcheck -->
+
+<!ENTITY spellCheckCmd.label "Spellingscontrole">
+
+<!ENTITY addToUserDictionaryButton.accessKey "v">
+<!ENTITY addToUserDictionaryButton.label "Woord Toevoegen">
+<!ENTITY checkwordButton.accessKey "C">
+<!ENTITY checkwordButton.label "Woord Controleren">
+<!ENTITY closeButton.accessKey "S">
+<!ENTITY closeButton.label "Sluiten">
+<!ENTITY editUserDictionaryButton.accessKey "w">
+<!ENTITY editUserDictionaryButton.label "Bewerken...">
+<!ENTITY ignoreAllButton.accessKey "A">
+<!ENTITY ignoreAllButton.label "Negeer Alles">
+<!ENTITY ignoreButton.accessKey "N">
+<!ENTITY ignoreButton.label "Negeren">
+<!ENTITY languagePopup.accessKey "T">
+<!ENTITY languagePopup.label "Taal:">
+<!ENTITY misspelledWord.label "Fout gespeld woord:">
+<!ENTITY moreDictionaries.label "Download Meer">
+<!ENTITY recheckButton.accessKey "P">
+<!ENTITY recheckButton.label "Pagina Opnieuw Controleren">
+<!ENTITY replaceAllButton.accessKey "l">
+<!ENTITY replaceAllButton.label "Vervang Alles">
+<!ENTITY replaceButton.accessKey "e">
+<!ENTITY replaceButton.label "Vervangen">
+<!ENTITY sendButton.accessKey "z">
+<!ENTITY sendButton.label "Verzenden">
+<!ENTITY stopButton.accessKey "p">
+<!ENTITY stopButton.label "Stoppen">
+<!ENTITY suggestions.accessKey "u">
+<!ENTITY suggestions.label "Suggesties:">
+<!ENTITY userDictionary.label "Persoonlijk Woordenboek:">
+<!ENTITY windowTitle.label "Controleer Spelling">
+<!ENTITY wordEditField.accessKey "d">
+<!ENTITY wordEditField.label "Vervang door:">
+
+<!-- Find and Replace -->
+
+<!ENTITY findCmd.label "Zoeken">
+<!ENTITY replaceCmd.label "Vervangen">
+<!ENTITY findReplaceCmd.label "Zoeken en Vervangen...">
+<!ENTITY findNextCmd.label    "Volgende zoeken">
+<!ENTITY findPrevCmd.label    "Vorige zoeken">
+
+<!ENTITY replaceDialog.title "Zoeken en Vervangen">
+<!ENTITY findField.label "Zoeken naar:">
+<!ENTITY findField.accesskey "Z">
+<!ENTITY replaceField.label "Vervangen door:">
+<!ENTITY replaceField.accesskey "d">
+<!ENTITY caseSensitiveCheckbox.label "Identieke hoofdletters/kleine letters">
+<!ENTITY caseSensitiveCheckbox.accesskey "I">
+<!ENTITY wrapCheckbox.label "Heel woord">
+<!ENTITY wrapCheckbox.accesskey "w">
+<!ENTITY backwardsCheckbox.label "Achterwaards zoeken">
+<!ENTITY backwardsCheckbox.accesskey "A">
+<!ENTITY findNextButton.label "Volgende zoeken">
+<!ENTITY findNextButton.accesskey "o">
+<!ENTITY replaceButton.label "Vervangen">
+<!ENTITY replaceButton.accesskey "V">
+<!ENTITY replaceAndFindButton.label "Vervangen en Zoeken">
+<!ENTITY replaceAndFindButton.accesskey "r">
+<!ENTITY replaceAllButton.label "Alles Vervangen">
+<!ENTITY replaceAllButton.accesskey "A">
+<!ENTITY notFoundWarning.label "De ingevoerde tekst is niet gevonden.">
+
+<!ENTITY regWiz.newOrExistingLabel
+  "Maak een nieuwe account of gebruik een bestaande:">
+<!ENTITY regWiz.createNewAccountLabel
+  "Maak een nieuwe account.">
+<!ENTITY regWiz.useExistingAccountLabel
+  "Gebruik een bestaande account.">
+<!ENTITY regWiz.loginSuccessfulLabel
+  "Dank u, u bent nu aangemeld bij &appName;.">
+
+<!ENTITY propertiesTab.label "Eigenschappen">
+<!ENTITY author.label "Auteur">
+<!ENTITY projSource.label "Gebaseerd op">
+<!ENTITY copyright.label "Copyright">
+<!ENTITY contactInfo.label "Contact informatie">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY printSceneNumbers.label "Print scenes:">
+
+<!ENTITY none "Geen">
+<!ENTITY left "Links">
+<!ENTITY right "Rechts">
+<!ENTITY both "Beide">
+
+<!-- *** LOCALISE ME *** -->
+<!ENTITY splashScreen.label "Splash Screen">
+
+<!ENTITY generatePDF.label "Maak PDF...">
+<!ENTITY publishMode.label "Publiceermodus">
+
+<!ENTITY addMedia.label "Media Toevoegen...">
+<!ENTITY removeMedia.label "Media Verwijderen">
+
+<!ENTITY report.titleBy "door">
+<!ENTITY report.titleBasedOn "Gebaseerd op">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY report.titleRights "Copyright">
+
+<!ENTITY titlePage "Voorblad">
+
+<!ENTITY bold.label "Vet">
+<!ENTITY italic.label "Cursief">
+<!ENTITY underline.label "Onderstreept">
+
+<!ENTITY styleDialog.title "Format Instellingen">
+<!ENTITY styleSettings.label "Format Instellingen...">
+<!ENTITY template.label "Template">
+
+<!ENTITY saveAsCmd.label "Opslaan Als...">
+<!ENTITY saveAsCmd.accessKey "l">
+<!ENTITY saveAsCmd.toolbarLabel "Opslaan Als">
+
+<!ENTITY mediaViewer.title "Media Bekijken">
+
+<!ENTITY browseCmd.label "Bladeren...">
+<!ENTITY tagItemCmd.label "Aanmerken">
+<!ENTITY delItemCmd.label "Verwijderen">
+<!ENTITY chooseProjsDir.label "Kies waar u de projecten op wilt slaan:">
+<!ENTITY createProjsDir.label "&appName; heeft een plaats voor de projecten nodig voor het ze op kan slaan. Maak een map waar &appName; de projecten op moet slaan:">
+<!ENTITY createCmd.label "Maak...">
+<!ENTITY invalidFilename.label "De gegeven naam is geen geldige bestandsnaam.">
+
+<!ENTITY breakdownCmd.label "Breakdown">
+
+<!ENTITY sidebar.label "Zijbalk">
+
+<!ENTITY moveDownCmd.label "Verplaats naar Beneden">
+<!ENTITY moveUpCmd.label   "Verplaats naar Boven">
+
+<!ENTITY department.label "Afdeling">
+<!ENTITY item.label "Item">
+
+<!-- *** LOCALISE ME *** -->
+<!ENTITY category.label "Category">
+<!ENTITY database.label "Database">
+<!ENTITY research.label "Web Research">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY schedule.label "Schedule">
+<!ENTITY characters.label "Characters">
+<!ENTITY sceneDetails.label "Scene Details">
+
+<!ENTITY recycleCmd.label "Send to Scratchpad">
+
+<!-- Breakdown View -->
+<!ENTITY breakdownReport.label "Breakdown Report">
+
+<!ENTITY fullName.label "Full Name">
+
+<!ENTITY sceneBreakdown.label "Scene Breakdown">
+<!ENTITY sceneBreakdownWithDesc.label "Scene Breakdown with Descriptions">
+<!ENTITY allUppercase.label "ALL">
+<!ENTITY displayMedia.label "Display Media">
+
+<!-- *** LOCALISE ME *** -->
+<!ENTITY locationField.label "Locatie:">
+<!ENTITY saveDirCheckbox.label "Save here by default">
+

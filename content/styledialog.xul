@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<?xml-stylesheet href="chrome://celtx/content/celtx.css" type="text/css"?> 
+
+<!DOCTYPE dialog [
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<!-- TODO: i18n -->
+
+<dialog xmlns='http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul'
+        id='style-settings-dialog'
+        title='&styleDialog.title;'
+        width='400'
+        height='400'
+        buttons='accept,cancel'
+        ondialogaccept='accepted()'
+        ondialogcancel='canceled()'
+        onload='loaded()'>
+
+  <script type='application/x-javascript'
+          src='chrome://celtx/content/util.js' />
+  <script type='application/x-javascript'
+          src='chrome://celtx/content/rdfmodel.js' />
+  <script type='application/x-javascript'
+          src='chrome://celtx/content/scriptstyle.js' />
+  <script type='application/x-javascript'
+          src='chrome://celtx/content/styledialog.js' />
+
+  <stringbundleset>
+    <stringbundle id='celtx-bundle'
+                  src='chrome://celtx/locale/celtx.properties' />
+  </stringbundleset>
+
+  <broadcasterset id='format-broadcastset'>
+    <broadcaster id='format-selected' disabled='true' />
+    <broadcaster id='format-editable' disabled='true' />
+  </broadcasterset>
+
+  <vbox pack='start'>
+    <label value='&template.label;' />
+    <hbox>
+      <listbox id='template-list' flex='1' rows='5' onselect='styleChanged()' >
+        <listhead>
+          <!-- *** LOCALISE ME *** -->
+          <listheader label='Name' flex='1' />
+          <!-- *** LOCALISE ME *** -->
+          <listheader label='Status' flex='1' />
+        </listhead>
+        <listcols>
+          <listcol flex='1' />
+          <listcol />
+        </listcols>
+      </listbox>
+      <vbox pack='start'>
+        <!-- *** LOCALISE ME *** -->
+        <button label='New Template' oncommand='createNewStyle()' />
+        <!-- *** LOCALISE ME *** -->
+        <button label='Rename Template' oncommand='renameStyle()'
+                observes='format-editable' />
+        <!-- *** LOCALISE ME *** -->
+        <button label='Remove Template' oncommand='deleteStyle()'
+                observes='format-editable' />
+      </vbox>
+    </hbox>
+    <separator class='groove' />
+    <!-- *** LOCALISE ME *** -->
+    <label class='header' value='Margins' />
+    <separator height='5' />
+    <grid flex='1'>
+      <columns>
+        <column />
+        <column flex='1' />
+        <column flex='1' />
+      </columns>
+      <rows>
+        <row>
+          <label />
+          <!-- *** LOCALISE ME *** -->
+          <label value='Left' />
+          <!-- *** LOCALISE ME *** -->
+          <label value='Right' />
+        </row>
+        <row collapsed='true'>
+          <!-- *** LOCALISE ME *** -->
+          <label value='Default:' />
+          <textbox id='defaultMarginLeft' onchange='validate()' flex='1' />
+          <textbox id='defaultMarginRight' onchange='validate()' flex='1' />
+        </row>
+        <row>
+          <!-- *** LOCALISE ME *** -->
+          <label value='Scene Heading:' />
+          <textbox id='sceneheadingMarginLeft' onchange='validate()' flex='1' />
+          <textbox id='sceneheadingMarginRight' onchange='validate()'
+            flex='1' />
+        </row>
+        <row>
+          <!-- *** LOCALISE ME *** -->
+          <label value='Action:' />
+          <textbox id='actionMarginLeft' onchange='validate()' flex='1' />
+          <textbox id='actionMarginRight' onchange='validate()' flex='1' />
+        </row>
+        <row>
+          <!-- *** LOCALISE ME *** -->
+          <label value='Character:' />
+          <textbox id='characterMarginLeft' onchange='validate()' flex='1' />
+          <textbox id='characterMarginRight' onchange='validate()' flex='1' />
+        </row>
+        <row>
+          <!-- *** LOCALISE ME *** -->
+          <label value='Parenthetical:' />
+          <textbox id='parentheticalMarginLeft' onchange='validate()'
+            flex='1' />
+          <textbox id='parentheticalMarginRight' onchange='validate()'
+            flex='1' />
+        </row>
+        <row>
+          <!-- *** LOCALISE ME *** -->
+          <label value='Dialog:' />
+          <textbox id='dialogMarginLeft' onchange='validate()' flex='1' />
+          <textbox id='dialogMarginRight' onchange='validate()' flex='1' />
+        </row>
+        <row>
+          <!-- *** LOCALISE ME *** -->
+          <label value='Transition:' />
+          <textbox id='transitionMarginLeft' onchange='validate()' flex='1' />
+          <textbox id='transitionMarginRight' onchange='validate()' flex='1' />
+        </row>
+        <row>
+          <!-- *** LOCALISE ME *** -->
+          <label value='Shot:' />
+          <textbox id='shotMarginLeft' onchange='validate()' flex='1' />
+          <textbox id='shotMarginRight' onchange='validate()' flex='1' />
+        </row>
+      </rows>
+    </grid>
+  </vbox>
+
+</dialog>
+

@@ -1,0 +1,89 @@
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!DOCTYPE stylesheet [
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	        version="1.0">
+
+<xsl:output method="html" version="4.0"/>
+
+<xsl:variable name="lcase">abcdefghijklmnopqrstuvwxyz</xsl:variable>
+<xsl:variable name="ucase">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
+
+<xsl:template match="html">
+  <html>
+    <head>
+      <title><xsl:value-of select="head/title"/></title>
+      <link rel="stylesheet" type="text/css"
+            href="chrome://celtx/content/indexcards.css"/>
+    </head>
+    <body>
+      <xsl:apply-templates select="/html/body/div"/>
+    </body>
+  </html>
+</xsl:template>
+
+<xsl:template match="div">
+  <div class="index-card">
+    <xsl:number value="position()" format="1 - "/>
+    <xsl:apply-templates select="p"/>
+  </div>
+  <xsl:if test="position() mod 2 = 0">
+    <br/>
+  </xsl:if>
+  <xsl:if test="position() mod 8 = 0">
+    <br class="pagebreak"/>
+  </xsl:if>
+</xsl:template>
+
+<xsl:template match="p[@class='sceneheading']">
+  <xsl:value-of select="string(.)"/>
+  <hr/>
+</xsl:template>
+
+<xsl:template match="p[@class='character']">
+  <xsl:value-of select="translate(string(.), $lcase, $ucase)"/>
+  <xsl:text>: </xsl:text>
+</xsl:template>
+
+<xsl:template match="p[@class='parenthetical']">
+  <xsl:value-of select="string(.)"/>
+  <xsl:text> </xsl:text>
+</xsl:template>
+
+<xsl:template match="p">
+  <xsl:value-of select="string(.)"/>
+  <br/><br/>
+</xsl:template>
+
+</xsl:stylesheet>
+

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE stylesheet [
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+%browserDTD;
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="1.0">
+
+  <xsl:output method="html" version="4.0"/>
+
+  <xsl:param name="show-description">0</xsl:param>
+
+  <xsl:template match="/breakdown">
+    <html>
+      <head>
+        <title>&breakdownReport.label;</title>
+        <link rel="stylesheet"
+              type="text/css"
+              href="chrome://celtx/content/breakdown.css"/>
+      </head>
+      <body>
+        <div>
+          <h2 style="float: left;">
+            <xsl:value-of select="/breakdown/@title"/>
+          </h2>
+          <p style="text-align: right; padding-top: 19px; margin-bottom: 0px;">
+            <xsl:value-of select="/breakdown/@date"/>
+          </p>
+        </div>
+        <br style="clear: both;"/>
+        <xsl:apply-templates select="scene"/>
+      </body>
+    </html>
+  </xsl:template>
+
+  <xsl:template match="scene">
+    <div class="container">
+      <div class="scene">
+        <xsl:value-of select="@ordinal"/>
+        -
+        <span class="bold">
+          <xsl:value-of select="@title"/>
+        </span>
+        <xsl:if test="$show-description = 1">
+          ::
+          <xsl:value-of select="@description"/>
+        </xsl:if>
+      </div>
+      <div class="contents">
+        <xsl:apply-templates select="department"/>
+        <br style="clear: both;"/>
+      </div>
+    </div>
+  </xsl:template>
+
+  <xsl:template match="department">
+    <div class="list">
+      <span class="head">
+        <xsl:value-of select="@title"/>
+      </span>
+      <ul>
+        <xsl:apply-templates select="item"/>
+      </ul>
+    </div>
+  </xsl:template>
+
+  <xsl:template match="item">
+    <div class="media-item">
+      <li>
+        <xsl:value-of select="@title"/>
+      </li>
+      <xsl:if test="$show-description = 1">
+        <xsl:if test="@description != ''">
+          <ul class="desc">
+            <li>
+              <xsl:value-of select="@description"/>
+            </li>
+          </ul>
+        </xsl:if>
+      </xsl:if>
+      <xsl:choose>
+        <xsl:when test="count(image) = 0">
+          <div class="media-img"><br/></div>
+          <br style="clear:both"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:apply-templates select="image"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </div>
+  </xsl:template>
+
+  <xsl:template match="image">
+    <div class="media-img">
+      <img>
+        <xsl:attribute name="src">
+          <xsl:value-of select="@src"/>
+        </xsl:attribute>
+      </img>
+    </div>
+    <br style="clear:both"/>
+  </xsl:template>
+
+</xsl:stylesheet>
+

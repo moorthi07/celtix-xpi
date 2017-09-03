@@ -1,0 +1,129 @@
+<html>
+<head>
+<title>Characters</title>
+<style>
+body {
+margin: 20px;
+font-family: helvetica, arial, verdana;
+font-size: 12px;
+}
+textarea {
+height:100px;
+width: 90%;
+font-family: helvetica, arial, verdana;
+font-size: 12px;
+padding: 1px;
+}
+p {
+float: left;
+width: 50%;
+}
+br {
+clear: both;
+}
+
+
+
+.container {
+margin-bottom: 15px;
+}
+
+.scene {
+  background-color: lightblue;
+  border: 1px solid blue;
+  padding: 5px 2px 5px 10px;
+  font-weight: normal;
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-topright: 6px;
+}
+
+.contents {
+  border: 1px solid blue;
+  border-top: 0px;
+  background-color: #FFFFFF;
+  -moz-border-radius-bottomleft: 6px;
+  -moz-border-radius-bottomright: 6px;
+  padding: 8px 6px 8px 24px;
+}
+</style>
+</head>
+<body>
+<form>
+
+<div class="container">
+<div class="scene"><span style="font-weight:bold;">Descrizione fisica dettagliata </span></div>
+<div class="contents">
+<p>Et&agrave; :<br />
+<input type="text" name="age" style="width:90%;"/></p>
+<p>Segni particolari :<br />
+<input type="text" name="dist_feat" style="width:90%;"/></p>
+<br />
+<p>Capelli :<br />
+<input type="text" name="hair" style="width:90%;"/></p>
+<p>Occhi :<br />
+<input type="text" name="eyes" style="width:90%;"/></p>
+<br />
+<p>Altezza :<br />
+<input type="text" name="height" style="width:90%;"/></p>
+<p>Peso :<br />
+<input type="text" name="weight" style="width:90%;"/></p>
+<br />
+</div>
+</div>
+
+<div class="container">
+<div class="scene"><span style="font-weight:bold;">Tratti del personaggio </span></div>
+<div class="contents">
+<p>Elenca tre tratti distintivi del personaggio :<br />
+<input type="text" name="trait1" style="width:90%;margin-bottom:10px;"/></textarea><br /><input type="text" name="trait2" style="width:90%;margin-bottom:10px;"/></textarea><br /><input type="text" name="trait3" style="width:90%;margin-bottom:10px;"/></textarea></p>
+<p>Qual &egrave; la principale funzione di questo personaggio ?<br />
+<select name="princ_func">
+<option>protagonista</option>
+<option>antagonista</option>
+<option>best friend</option>
+<option>migliore amico</option>
+<option>confidente</option>
+<option>partner</option>
+<option>catalizzatore</option>
+<option>mentore</option>
+<option>spalla comica</option>
+<option>altro</option>
+</select></p>
+<br />
+</div>
+</div>
+
+<div class="container">
+<div class="scene"><span style="font-weight:bold;">Motivazioni</span></div>
+<div class="contents">
+<p>Qual &egrave; la missione di questo personaggio ?<br />
+<textarea type="text" name="goal" /></textarea></p>
+<p>Qual &egrave; il piano per raggiungere questo obiettivo ?<br />
+<textarea type="text" name="ach_goalmotivation2" /></textarea></p>
+<br />
+</div>
+</div>
+
+<div class="container">
+<div class="scene"><span style="font-weight:bold;">Passato del personaggio </span></div>
+<div class="contents">
+<p>Passato familiare :<br />
+<textarea type="text" name="fam_back" /></textarea></p>
+<p>Abitudini e Vizi :<br />
+<textarea type="text" name="upbring" /></textarea></p>
+<br />
+<p>Educazione :<br />
+<textarea type="text" name="education" /></textarea></p>
+<p>Personalit&agrave; :<br />
+<textarea type="text" name="person" /></textarea></p>
+<p>Gusti :<br />
+<textarea type="text" name="likes" /></textarea></p>
+<p>Desideri :<br />
+<textarea type="text" name="dislikes" style="align:bottom;"/></textarea></p>
+<br />
+</div>
+</div>
+</form>
+</body>
+
+</html>

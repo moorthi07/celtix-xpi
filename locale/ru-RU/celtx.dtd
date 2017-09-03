@@ -1,0 +1,469 @@
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!ENTITY appName "Celtx">
+
+<!ENTITY celtxWindow.titleModifier "celtx">
+<!ENTITY celtxWindow.titleMenuSeparator " - ">
+
+<!ENTITY reportsMenu.label "Репорты">
+<!ENTITY reportsMenu.accessKey "Р">
+
+<!ENTITY resMenu.label "Ресурсы">
+<!ENTITY resMenu.accessKey "с">
+
+<!ENTITY helpMenu.label "Справка">
+<!ENTITY helpMenu.accessKey "С">
+
+<!ENTITY helpSupportCmd.label "Поддержка онлайн">
+<!ENTITY helpSupportCmd.accessKey "П">
+
+<!ENTITY helpReportBugCmd.label "Сообщить ошибку">
+<!ENTITY helpReportBugCmd.accessKey "С">
+
+<!ENTITY helpAboutCmd.label "О &appName;">
+<!ENTITY helpAboutCmd.accessKey "A">
+
+<!ENTITY celtxAccountCmd.label "&appName; Счёт...">
+<!ENTITY celtxAccountCmd.accessKey "С">
+
+<!ENTITY openProjCmd.label "Открыть Проект...">
+
+<!ENTITY newProjCmd.label "Новый Проект...">
+
+<!ENTITY copyProjCmd.label "Скопировать Проект...">
+
+<!ENTITY saveProjCmd.label "Сохранить">
+
+<!ENTITY downloadProjCmd.label "Загрузить Проект...">
+<!ENTITY downloadProjCmd.toolbarLabel "Загрузить">
+<!ENTITY downloadProjCmd.accessKey "З">
+
+<!ENTITY publishProjCmd.label "Опубликовать Проект...">
+<!ENTITY publishProjCmd.toolbarLabel "Опубликовать">
+<!ENTITY publishProjCmd.accessKey "О">
+<!ENTITY uploadProjCmd.label "Опубликовать Проект...">
+<!ENTITY uploadProjCmd.toolbarLabel "Опубликовать">
+<!ENTITY uploadProjCmd.accessKey "О">
+
+<!ENTITY importCmd.label "Импортировать Сценарий...">
+<!ENTITY importCmd.accessKey "И">
+<!ENTITY importCmd.toolbarLabel "Импортировать">
+
+<!ENTITY exportScriptCmd.label "Экспортировать Сценарий...">
+<!ENTITY exportScriptCmd.accessKey "Э">
+<!ENTITY exportScriptCmd.toolbarLabel "Экспортировать">
+
+<!ENTITY saveAsCmd.label "Сохранить Как...">
+<!ENTITY saveAsCmd.accessKey "К">
+<!ENTITY saveAsCmd.toolbarLabel "Сохранить Как">
+
+<!ENTITY insertNoteCmd.label "Внести Примечание...">
+<!ENTITY insertNoteCmd.toolbarLabel "Примечание">
+
+<!ENTITY insertSceneCmd.label "Внести сцену...">
+<!ENTITY insertSceneCmd.toolbarLabel "Сцену">
+
+<!ENTITY titlePage "Заглавная Страница">
+
+<!ENTITY delResCmd.label "Удалить">
+<!ENTITY gotoResCmd.label "Перейти">
+
+<!ENTITY showResCmd.toolbarLabel "Поакзать">
+
+<!ENTITY removeMarkupCmd.label "Удалить">
+
+<!ENTITY newMarkup.label "Новое...">
+
+<!ENTITY openProj.title "Открыть Проект">
+
+<!ENTITY resources.label "Ресурсы">
+
+<!ENTITY options.label "Дополнительное">
+
+<!ENTITY projects.label "Проекты">
+<!ENTITY title.label "Заглавие">
+<!ENTITY description.label "Описание">
+<!ENTITY created.label "Создано">
+
+<!ENTITY objViewOverviewTab.label "Overview">
+<!ENTITY objViewMediaTab.label "Аудио/Видео">
+
+<!ENTITY insertScene.title     "Внести Сцену">
+<!ENTITY insertScene.caption   "Внести сцену">
+<!ENTITY insertScene.after     "После этой сцены">
+<!ENTITY insertScene.before    "До этой сцены">
+<!ENTITY insertScene.beginning "В начале сценария">
+<!ENTITY insertScene.end       "В аонце сценария">
+
+<!ENTITY projDialog.title      "Свойства Проекта">
+
+<!ENTITY noteDialog.title      "Исправить Примечание">
+<!ENTITY note.label            "Примечание">
+
+<!ENTITY untitled.label "(без заглавия)">
+
+<!ENTITY regDialog.title "&appName; Регистрация">
+
+<!ENTITY getProjDialog.title   "Загрузить Проект">
+<!ENTITY getProjDialog.caption "Доступные Проекты">
+
+<!ENTITY nameCol.label     "Имя">
+<!ENTITY createdCol.label  "Создано">
+<!ENTITY modifiedCol.label "Изменённый">
+<!ENTITY creatorCol.label  "Автор">
+
+<!ENTITY downloadDialog.title   "Проект Загружается">
+
+<!ENTITY publishDialog.title        "Опубликовать Проект">
+<!ENTITY uploadDialog.title         "Опубликовать Проект">
+<!ENTITY publishDialog.serverLabel  "Сервер">
+<!ENTITY publishDialog.publicLabel  "Публичный">
+<!ENTITY publishDialog.privateLabel "Личный">
+<!ENTITY publishDialog.sharedLabel  "Поделиться с:">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY publishDialog.userList     "User List">
+<!ENTITY publishDialog.findUsers    "Find Users">
+
+
+<!-- Formatting toolbar -->
+<!ENTITY formatAction.label  "Действие">
+<!ENTITY formatChar.label    "Действующее Лицо">
+<!ENTITY formatDialog.label  "Диалог">
+<!ENTITY formatHeading.label "Заглавие">
+<!ENTITY formatParen.label   "(^)">
+<!ENTITY formatTrans.label   "Переход">
+<!ENTITY formatShot.label    "Кадр">
+<!ENTITY formatText.label    "Текст">
+
+
+<!-- Debugging -->
+<!ENTITY debugMenu.label "Debug">
+<!ENTITY debugMenu.accessKey "D">
+
+<!ENTITY dumpCmd.label "Dump">
+
+<!ENTITY wiz.clickNext "Нажмите 'Далее' чтобы продолжить.">
+<!ENTITY wiz.clickFinish "Нажмите 'Готово' чтобы завершить Мастер.">
+
+
+<!-- Migration wizard -->
+<!ENTITY migWiz.title "&appName; Обновить Мастер">
+<!ENTITY migWiz.prevVersionDetected
+  "Найден проект из предыдущей версии программы.">
+
+<!ENTITY migWiz.aboutThis
+  "Существующие проекты могут быть импортированы с помощью Мастера.">
+
+<!ENTITY migWiz.clickNext "&wiz.clickNext;">
+
+<!ENTITY migWiz.clickFinish "&wiz.clickFinish;">
+
+<!ENTITY migWiz.optionsLabel "Выбор Импортировки">
+
+<!ENTITY migWiz.chooseOption
+  "Пожалуйста выберите один из следующих вариантов и нажмите 'Далее'.">
+
+<!ENTITY migWiz.optionImport
+  "Импортировать проект из предыдущей версии программы">
+
+<!ENTITY migWiz.optionNoImport "Не импортировать">
+
+<!ENTITY migWiz.migratingLabel "Проекты импортируются">
+
+<!ENTITY migWiz.doneLabel "Импортировка завершена">
+
+
+<!ENTITY regWiz.title "Мастер Регистрации &appName;">
+
+<!ENTITY regWiz.intro "Для доступа к материалу онлайн вам необходимо зарегестрироваться в &appName;.">
+
+<!ENTITY regWiz.aboutThis "Мастеру нужна ваша информация для регистрации.">
+
+<!ENTITY regWiz.identityLabel "Идентификация Личности">
+
+<!ENTITY regWiz.identityInstructions "Пожалуйста внесите ваше имя, название вашей организации и адрес электронной почты.">
+
+<!ENTITY regWiz.nameLabel  "Имя:">
+<!ENTITY regWiz.orgLabel   "Организация:">
+<!ENTITY regWiz.emailLabel "Электронная почта:">
+<!ENTITY regWiz.uidLabel   "Имя Пользователя:">
+
+<!ENTITY regWiz.accountLabel "Счёт Пользователя">
+
+<!ENTITY regWiz.accountInstructions "Пожалуйста выберите имя пользователя и пароль для установления вашего Счёта Пользователя в &appName;.">
+
+<!ENTITY regWiz.usernameLabel      "Имя Пользователя:">
+<!ENTITY regWiz.passwordLabel      "Пароль:">
+<!ENTITY regWiz.passwordAgainLabel "Введите пароль повторно:">
+
+<!ENTITY regWiz.noteUsername "Ваше Имя Пользователя должно содержать не менее трёх знаков и может включать в себя только буквы и цифры.">
+
+<!ENTITY regWiz.notePassword "Ваше Имя пользователя не может быть меньше пяти знаков.">
+
+<!ENTITY regWiz.noteCaseSensitive "&appName; Счёт Пользователя и Пароль чувствительные к регистру.">
+
+<!ENTITY regWiz.checkLabel "Проверка Информации Счёта">
+
+<!ENTITY regWiz.confirmLabel "Подтвердить Параметры Настройки">
+
+<!ENTITY regWiz.confirmIntro "Вы внесли следущее:">
+
+<!ENTITY regWiz.clickFinish "Если ви удовлетворены этими данными, нажмите 'Готово' для регистрации.">
+<!ENTITY regWiz.clickNext "Если ви удовлетворены этими данными, нажмите 'Далее' для регистрации.">
+
+<!-- Not used -->
+<!ENTITY report.sample "Sample Report">
+<!ENTITY report.script "Script Report">
+<!ENTITY report.allBreakdown "All Breakdown">
+
+<!ENTITY report.titleBy "&nbsp;">
+<!ENTITY report.titleBasedOn "Основано на"> 
+<!ENTITY report.titleRights "Авторское право">
+
+<!ENTITY scene.label      "Сцена">
+<!ENTITY scenes.label     "Сцены">
+<!ENTITY script.label     "Сценарий">
+
+<!-- Breakdown categories -->
+<!ENTITY bdc.addlabour    "Дополнительные Ресурсы">
+<!ENTITY bdc.animals      "Животные">
+<!ENTITY bdc.handler      "Укротитель Животных"> 
+<!ENTITY bdc.camera       "Камера">
+<!ENTITY bdc.cast         "Состав Исполнителей">
+<!ENTITY bdc.cgi          "CGI">
+<!ENTITY bdc.construction "Постройки">
+<!ENTITY bdc.electrics    "Электроника">
+<!ENTITY bdc.extras       "Актёры массовки">
+<!ENTITY bdc.greenery     "Растения">
+<!ENTITY bdc.hair         "Причёски">
+<!ENTITY bdc.lights       "Освещение">
+<!ENTITY bdc.livestock    "Домашний Скот">
+<!ENTITY bdc.location     "Место съёмок">
+<!ENTITY bdc.makeup       "Макияж">
+<!ENTITY bdc.mechfx       "Механические Эффекты">
+<!ENTITY bdc.misc         "Различное">
+<!ENTITY bdc.music        "Музыка">
+<!ENTITY bdc.opticalfx    "Оптические  Эффекты">
+<!ENTITY bdc.painting     "Малярные Работы">
+<!ENTITY bdc.prodnotes    "Примечания Продюсера">
+<!ENTITY bdc.props        "Предметы Реквизита">
+<!ENTITY bdc.security     "Охрана">
+<!ENTITY bdc.set          "Съёмочная площадка">
+<!ENTITY bdc.setdressing  "Оформление Съёмочной Площадки">
+<!ENTITY bdc.sound        "Звук">
+<!ENTITY bdc.soundfx      "Звуковые Эффекты">
+<!ENTITY bdc.equip        "Специализированное Оборудование">
+<!ENTITY bdc.specialfx    "Спецэффецты">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY bdc.storyboard   "Storyboard">
+<!ENTITY bdc.stunts       "Трюки и Каскадёры">
+<!ENTITY bdc.vehicles     "Транспорт">
+<!ENTITY bdc.wardrobe     "Костюмы">
+<!ENTITY bdc.weapons      "Оружие">
+
+
+<!ENTITY splash.welcomePrefix "добро пожаловать в celtx v.">
+<!ENTITY splash.projects      "ПРОЕКТ">
+<!ENTITY splash.webServices   "WEB-УСЛУГИ">
+<!ENTITY splash.help          "ПОМОЩЬ">
+<!ENTITY splash.discussion    "ОБСУЖДЕНИЕ">
+
+<!ENTITY splash.newProject      "Начать Новый Проект">
+<!ENTITY splash.openProject     "Открыть Существующий Проект">
+<!ENTITY splash.helpAccount     "Регистрация">
+<!ENTITY splash.downloadProject "Загрузить Проект">
+<!ENTITY splash.projectCentral  "Project Central">
+<!ENTITY splash.walkthru        "&appName; Тур в Три Минуты">
+<!ENTITY splash.guide           "&appName; Гид Пользователя">
+<!ENTITY splash.forums          "&appName; Доска Объявлений">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY splash.featureTour     "Feature Tour">
+
+<!ENTITY authDialog.title       "Установление Личности">
+<!ENTITY authDialog.description
+  "Для данного действия необходимо войти в сервер">
+
+<!ENTITY list.label "Показать...">
+
+<!ENTITY pdfDownloadDialog.title "Трансформируем в формат PDF">
+<!ENTITY downloadingPDF.label    "Трансформируем в формат PDF...">
+
+<!ENTITY add.label    "Добавить">
+<!ENTITY remove.label "Удалить">
+
+<!ENTITY mediaBox.tooltip "Отбуксировать Аудио/Видео файлы.">
+<!ENTITY imageSearch.tooltip "Поиск картинок для отбуксировки.">
+
+<!-- Spellcheck -->
+
+<!ENTITY spellCheckCmd.label "Правописание">
+
+<!ENTITY addToUserDictionaryButton.accessKey "Д">
+<!ENTITY addToUserDictionaryButton.label "Добавить Слово">
+<!ENTITY checkwordButton.accessKey "С">
+<!ENTITY checkwordButton.label "Проверить Слово">
+<!ENTITY closeButton.accessKey "к">
+<!ENTITY closeButton.label "Закрыть">
+<!ENTITY editUserDictionaryButton.accessKey "Р">
+<!ENTITY editUserDictionaryButton.label "Исправить...">
+<!ENTITY ignoreAllButton.accessKey "В">
+<!ENTITY ignoreAllButton.label "Проигнорировать Всё">
+<!ENTITY ignoreButton.accessKey "П">
+<!ENTITY ignoreButton.label "Проигнорировать">
+<!ENTITY languagePopup.accessKey "L">
+<!ENTITY languagePopup.label "Language:">
+<!ENTITY misspelledWord.label "Misspelled word:">
+<!ENTITY moreDictionaries.label "Загрузить Дополнительное">
+<!ENTITY recheckButton.accessKey "P">
+<!ENTITY recheckButton.label "Перепроверить">
+<!ENTITY replaceAllButton.accessKey "а">
+<!ENTITY replaceAllButton.label "Заменить Всё">
+<!ENTITY replaceButton.accessKey "З">
+<!ENTITY replaceButton.label "Заменить">
+<!ENTITY sendButton.accessKey "О">
+<!ENTITY sendButton.label "Отправить">
+<!ENTITY stopButton.accessKey "т">
+<!ENTITY stopButton.label "Стоп">
+<!ENTITY suggestions.accessKey "е">
+<!ENTITY suggestions.label "Предложения:">
+<!ENTITY userDictionary.label "Личный Словарь:">
+<!ENTITY windowTitle.label "Проверить Правописание">
+<!ENTITY wordEditField.accessKey "н">
+<!ENTITY wordEditField.label "Заменить на:">
+
+<!-- Find and Replace -->
+
+<!ENTITY findCmd.label "Найти">
+<!ENTITY replaceCmd.label "Заменить">
+<!ENTITY findReplaceCmd.label "Найти и Заменить...">
+<!ENTITY findNextCmd.label    "Найти Следующее">
+<!ENTITY findPrevCmd.label    "Найти Предыдущее">
+
+<!ENTITY replaceDialog.title "Найти и Заменить">
+<!ENTITY findField.label "Найти текст:">
+<!ENTITY findField.accesskey "т">
+<!ENTITY replaceField.label "Заменить на:">
+<!ENTITY replaceField.accesskey "а">
+<!ENTITY caseSensitiveCheckbox.label "С учетом регистра">
+<!ENTITY caseSensitiveCheckbox.accesskey "с">
+<!ENTITY wrapCheckbox.label "Wrap around">
+<!ENTITY wrapCheckbox.accesskey "W">
+<!ENTITY backwardsCheckbox.label "Search backwards">
+<!ENTITY backwardsCheckbox.accesskey "b">
+<!ENTITY findNextButton.label "Найти Следующее">
+<!ENTITY findNextButton.accesskey "Н">
+<!ENTITY replaceButton.label "Заменить">
+<!ENTITY replaceButton.accesskey "З">
+<!ENTITY replaceAndFindButton.label "Заменить и Найти">
+<!ENTITY replaceAndFindButton.accesskey "м">
+<!ENTITY replaceAllButton.label "Заменить Всё">
+<!ENTITY replaceAllButton.accesskey "В">
+<!ENTITY notFoundWarning.label "Текст не найден.">
+
+<!ENTITY regWiz.newOrExistingLabel
+  "Создать новый счёт или использовать существующий:">
+<!ENTITY regWiz.createNewAccountLabel
+  "Создать новый счёт.">
+<!ENTITY regWiz.useExistingAccountLabel
+  "Использовать существующий счёт.">
+<!ENTITY regWiz.loginSuccessfulLabel
+  "Спасибо, теперь вы зарегестрированы в &appName;.">
+
+<!ENTITY propertiesTab.label "Свойства">
+<!ENTITY author.label "Автор">
+<!ENTITY projSource.label "Основано на">
+<!ENTITY copyright.label "Авторское Право">
+<!ENTITY contactInfo.label "Контактные Данные">
+<!ENTITY printSceneNumbers.label "Распечатать номера сцен:">
+
+<!ENTITY none "Без номеров">
+<!ENTITY left "Слева">
+<!ENTITY right "Справа">
+<!ENTITY both "С двух сторон">
+
+<!ENTITY splashScreen.label "Экран-Заставка">
+
+<!ENTITY generatePDF.label "Сформировать в PDF...">
+<!ENTITY publishMode.label "Метод Публикации">
+
+<!ENTITY addMedia.label "Добавить...">
+<!ENTITY removeMedia.label "Удалить">
+
+<!ENTITY bold.label "Жирный">
+<!ENTITY italic.label "Курсив">
+<!ENTITY underline.label "Подчеркнуть">
+
+<!ENTITY styleDialog.title "Format Settings">
+<!ENTITY styleSettings.label "Format Settings...">
+<!ENTITY template.label "Template">
+
+<!ENTITY mediaViewer.title "Аудио/Видео">
+
+<!ENTITY browseCmd.label "Просмотреть...">
+<!ENTITY tagItemCmd.label "Отметить">
+<!ENTITY delItemCmd.label "Удалить">
+<!ENTITY chooseProjsDir.label "Выберите где  сохранить ваши проекты:">
+<!ENTITY createProjsDir.label "&appName; нужно место для сохранения проектов. Пожалуйста, создайте каталог в котором &appName; будет сохранять ваши проекты:">
+<!ENTITY createCmd.label "Создать...">
+<!ENTITY invalidFilename.label "Данное имя не валидно для этого файла.">
+
+<!ENTITY breakdownCmd.label "Разбивка Сценария">
+
+<!ENTITY sidebar.label "Боковое Поле">
+
+<!ENTITY moveDownCmd.label "Вниз">
+<!ENTITY moveUpCmd.label   "Вверх">
+
+<!ENTITY department.label "Отдел">
+<!ENTITY item.label "Элемент">
+
+<!-- *** LOCALISE ME *** -->
+<!ENTITY category.label "Category">
+<!ENTITY database.label "Database">
+<!ENTITY research.label "Web Research">
+<!ENTITY schedule.label "Расписание">
+<!ENTITY characters.label "Characters">
+<!ENTITY sceneDetails.label "Scene Details">
+
+<!ENTITY recycleCmd.label "Recycle">
+
+<!-- Breakdown View -->
+<!ENTITY breakdownReport.label "Breakdown Report">
+
+<!ENTITY fullName.label "Full Name">
+
+<!ENTITY sceneBreakdown.label "Scene Breakdown">
+<!ENTITY sceneBreakdownWithDesc.label "Scene Breakdown with Descriptions">
+<!ENTITY allUppercase.label "ВСЁ">
+<!ENTITY displayMedia.label "Display Media">
+
+<!-- *** LOCALISE ME *** -->
+<!ENTITY locationField.label "Место съёмок:">
+<!ENTITY saveDirCheckbox.label "Save here by default">
+

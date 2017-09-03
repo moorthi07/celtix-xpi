@@ -1,0 +1,462 @@
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!ENTITY appName "Celtx">
+
+<!ENTITY celtxWindow.titleModifier "celtx">
+<!ENTITY celtxWindow.titleMenuSeparator " - ">
+
+<!ENTITY reportsMenu.label "Rapports">
+<!ENTITY reportsMenu.accessKey "R">
+
+<!ENTITY resMenu.label "Ressources">
+<!ENTITY resMenu.accessKey "s">
+
+<!ENTITY helpMenu.label "Aide">
+<!ENTITY helpMenu.accessKey "A">
+
+<!ENTITY helpSupportCmd.label "Aide en ligne">
+<!ENTITY helpSupportCmd.accessKey "O">
+
+<!ENTITY helpReportBugCmd.label "Rapportez un bug">
+<!ENTITY helpReportBugCmd.accessKey "R">
+
+<!ENTITY helpAboutCmd.label "A propos de &appName;">
+<!ENTITY helpAboutCmd.accessKey "A">
+
+<!ENTITY celtxAccountCmd.label "Votre compte &appName;...">
+<!ENTITY celtxAccountCmd.accessKey "C">
+
+<!ENTITY openProjCmd.label "Ouvrir un projet...">
+
+<!ENTITY newProjCmd.label "Nouveau projet...">
+
+<!ENTITY copyProjCmd.label "Copier le projet...">
+
+<!ENTITY saveProjCmd.label "Sauvegarder">
+
+<!ENTITY downloadProjCmd.label "Télécharger un projet...">
+<!ENTITY downloadProjCmd.toolbarLabel "Télécharger">
+<!ENTITY downloadProjCmd.accessKey "T">
+
+<!ENTITY publishProjCmd.label "Publier le projet...">
+<!ENTITY publishProjCmd.toolbarLabel " Publier ">
+<!ENTITY publishProjCmd.accessKey "u">
+<!ENTITY uploadProjCmd.label "Publier le projet...">
+<!ENTITY uploadProjCmd.toolbarLabel " Publier ">
+<!ENTITY uploadProjCmd.accessKey "u">
+
+<!ENTITY importCmd.label "Importer un scénario...">
+<!ENTITY importCmd.accessKey "I">
+<!ENTITY importCmd.toolbarLabel "Importer">
+
+<!ENTITY exportScriptCmd.label "Exporter le scénario...">
+<!ENTITY exportScriptCmd.accessKey "E">
+<!ENTITY exportScriptCmd.toolbarLabel "Exporter">
+
+<!ENTITY insertNoteCmd.label "Insérer une note...">
+<!ENTITY insertNoteCmd.toolbarLabel "Note">
+
+<!ENTITY insertSceneCmd.label "Insérer une scène...">
+<!ENTITY insertSceneCmd.toolbarLabel "Scène">
+
+<!ENTITY delResCmd.label "Supprimer">
+<!ENTITY gotoResCmd.label "Afficher">
+
+<!ENTITY showResCmd.toolbarLabel "Afficher">
+
+<!ENTITY removeMarkupCmd.label "Supprimer">
+
+<!ENTITY newMarkup.label "Nouveau...">
+
+<!ENTITY openProj.title "Ouvrir un projet">
+
+<!ENTITY resources.label "Ressources">
+
+<!ENTITY options.label "Options">
+
+<!ENTITY projects.label "Projets">
+<!ENTITY title.label "Titre ">
+<!ENTITY description.label "Description ">
+<!ENTITY created.label "Créé ">
+
+<!ENTITY objViewOverviewTab.label "Items">
+<!ENTITY objViewMediaTab.label "Multimédia">
+
+<!ENTITY insertScene.title     "Insérer une scène">
+<!ENTITY insertScene.caption   "Insérer la scène">
+<!ENTITY insertScene.after     "Après cette scène">
+<!ENTITY insertScene.before    "Avant cette scène">
+<!ENTITY insertScene.beginning "Au début du scénario">
+<!ENTITY insertScene.end       "A la fin du scénario">
+
+<!ENTITY projDialog.title      "Propriétés du projet">
+
+<!ENTITY noteDialog.title      "Modifier la note">
+<!ENTITY note.label            "Note">
+
+<!ENTITY untitled.label "(sans titre)">
+
+<!ENTITY regDialog.title "Enregistrement pour &appName;">
+
+<!ENTITY getProjDialog.title   "Télécharger un projet">
+<!ENTITY getProjDialog.caption "Projets disponibles">
+
+<!ENTITY nameCol.label     "Nom">
+<!ENTITY createdCol.label  "Créé">
+<!ENTITY modifiedCol.label "Modifié">
+<!ENTITY creatorCol.label  "Créateur">
+
+<!ENTITY downloadDialog.title   "Chargement du projet">
+
+<!ENTITY publishDialog.title        "Publier le projet">
+<!ENTITY uploadDialog.title         "Publier le projet">
+<!ENTITY publishDialog.serverLabel  "Serveur">
+<!ENTITY publishDialog.publicLabel  "Public">
+<!ENTITY publishDialog.privateLabel "Privé">
+<!ENTITY publishDialog.sharedLabel  "Partagé par">
+<!ENTITY publishDialog.userList     "Liste d'utilisateurs">
+<!ENTITY publishDialog.findUsers    "Chercher des utilisateurs">
+
+
+<!-- Formatting toolbar -->
+<!ENTITY formatAction.label  "Action">
+<!ENTITY formatChar.label    "Rôle">
+<!ENTITY formatDialog.label  "Dialogue">
+<!ENTITY formatHeading.label "En-tête">
+<!ENTITY formatParen.label   "(indication)">
+<!ENTITY formatTrans.label   "Transition">
+<!ENTITY formatShot.label    "Angle">
+<!ENTITY formatText.label    "Texte">
+
+
+<!-- Debugging -->
+<!ENTITY debugMenu.label "Corriger">
+<!ENTITY debugMenu.accessKey "D">
+
+<!ENTITY dumpCmd.label "Vider">
+
+<!ENTITY wiz.clickNext "Appuyez sur 'Suivant' pour commencer.">
+<!ENTITY wiz.clickFinish "Appuyez sur 'Terminer' pour congédier l'Assistant.">
+
+
+<!-- Migration wizard -->
+<!ENTITY migWiz.title "Assistant de migration &appName;">
+<!ENTITY migWiz.prevVersionDetected
+  "&appName; a trouvé un fichier de projet dans une version antérieure du logiciel.">
+
+<!ENTITY migWiz.aboutThis
+  "L'Assistant vous permet d'importer vos autres projets.">
+
+<!ENTITY migWiz.clickNext "&wiz.clickNext;">
+
+<!ENTITY migWiz.clickFinish "&wiz.clickFinish;">
+
+<!ENTITY migWiz.optionsLabel "Options d'importation">
+
+<!ENTITY migWiz.chooseOption
+  "Choisissez l'une des options suivantes et cliquez 'Suivant'.">
+
+<!ENTITY migWiz.optionImport
+  "Importer des projets d'une version antérieure de &appName;">
+
+<!ENTITY migWiz.optionNoImport "Ne rien importer">
+
+<!ENTITY migWiz.migratingLabel "Projets en cours de migration">
+
+<!ENTITY migWiz.doneLabel "Migration terminée.">
+
+
+<!ENTITY regWiz.title "Assistant d'enregistrement de &appName;">
+
+<!ENTITY regWiz.intro "Pour obtenir l'accès aux services en ligne de &appName;, vous devez d'abord vous enregistrer et vous créer un compte &appName;.">
+
+<!ENTITY regWiz.aboutThis "L'Assistant rassemble les informations nécessaires à l'enregistrement.">
+
+<!ENTITY regWiz.identityLabel "Identité">
+
+<!ENTITY regWiz.identityInstructions "Veuillez saisir votre nom, le nom de votre organisation, et votre adresse de messagerie électronique.">
+
+<!ENTITY regWiz.nameLabel  "Nom :">
+<!ENTITY regWiz.orgLabel   "Organisation :">
+<!ENTITY regWiz.emailLabel "Mél :">
+<!ENTITY regWiz.uidLabel   "Nom de compte &appName; :">
+
+<!ENTITY regWiz.accountLabel "Compte">
+
+<!ENTITY regWiz.accountInstructions "Veuillez choisir un nom de compte et un mot de passe pour votre compte &appName;.">
+
+<!ENTITY regWiz.usernameLabel      "Nom de compte :">
+<!ENTITY regWiz.passwordLabel      "Mot de passe :">
+<!ENTITY regWiz.passwordAgainLabel "Confirmation :">
+
+<!ENTITY regWiz.noteUsername "Le nom de compte doit faire au moins 3 caractères et contenir seulement des lettres et des chiffres.">
+
+<!ENTITY regWiz.notePassword "Le mot de passe doit faire au moins 5 caractères.">
+
+<!ENTITY regWiz.noteCaseSensitive "Les nom de compte et mot de passe pour &appName; sont sensibles àÂ la casse (minuscule/majuscule).">
+
+<!ENTITY regWiz.checkLabel "Contrôle des informations du compte">
+
+<!ENTITY regWiz.confirmLabel "Confirmation des paramètres du compte">
+
+<!ENTITY regWiz.confirmIntro "Vous devez saisir les informations suivantes :">
+
+<!ENTITY regWiz.clickFinish "Veuillez vérifier ces valeurs et appuyer sur 'Terminer' pour envoyer votre enregistrement.">
+<!ENTITY regWiz.clickNext "Veuillez vérifier ces valeurs et appuyer sur 'Suivant' pour envoyer votre enregistrement.">
+
+<!ENTITY report.sample "Imprimer l'extrait">
+<!ENTITY report.script "Imprimer le scénario">
+<!ENTITY report.allBreakdown "Dépouillement global">
+
+<!ENTITY script.label     "Scénario">
+<!ENTITY scene.label      "Scène">
+<!ENTITY scenes.label     "Scènes">
+
+<!-- Breakdown categories -->
+<!ENTITY bdc.addlabour    "Main d'œuvre supp.">
+<!ENTITY bdc.animals      "Animaux">
+<!ENTITY bdc.handler      "Dresseur">
+<!ENTITY bdc.camera       "Caméra">
+<!ENTITY bdc.cast         "Interprètes">
+<!ENTITY bdc.cgi          "Effets numériques">
+<!ENTITY bdc.construction "Construction">
+<!ENTITY bdc.electrics    "Electricité">
+<!ENTITY bdc.extras       "Figurants">
+<!ENTITY bdc.greenery     "Jardinerie">
+<!ENTITY bdc.hair         "Coiffure">
+<!ENTITY bdc.lights       "Lumière">
+<!ENTITY bdc.livestock    "Bétail">
+<!ENTITY bdc.location     "Lieu de tournage">
+<!ENTITY bdc.makeup       "Maquillage">
+<!ENTITY bdc.mechfx       "Effets mécaniques">
+<!ENTITY bdc.misc         "Divers">
+<!ENTITY bdc.music        "Musique">
+<!ENTITY bdc.opticalfx    "Effets optiques">
+<!ENTITY bdc.painting     "Peinture">
+<!ENTITY bdc.prodnotes    "Notes de production">
+<!ENTITY bdc.props        "Accessoires">
+<!ENTITY bdc.security     "Securité">
+<!ENTITY bdc.set          "Plateau">
+<!ENTITY bdc.setdressing  "Décoration">
+<!ENTITY bdc.sound        "Bruitage">
+<!ENTITY bdc.soundfx      "Effets acoustiques">
+<!ENTITY bdc.equip        "Equipement spécial">
+<!ENTITY bdc.specialfx    "Effets spéciaux">
+<!ENTITY bdc.storyboard   "Scénarimage">
+<!ENTITY bdc.stunts       "Cascades">
+<!ENTITY bdc.vehicles     "Véhicules">
+<!ENTITY bdc.wardrobe     "Costumes">
+<!ENTITY bdc.weapons      "Armes">
+
+<!ENTITY splash.welcomePrefix "Bienvenue sur Celtx v.">
+<!ENTITY splash.projects      "PROJETS">
+<!ENTITY splash.webServices   "SERVICES WEB">
+<!ENTITY splash.help          "AIDE">
+<!ENTITY splash.discussion    "DISCUSSION">
+
+<!ENTITY splash.newProject      "Démarrer un nouveau projet">
+<!ENTITY splash.openProject     "Ouvrir un projet">
+<!ENTITY splash.helpAccount     "Créer un compte">
+<!ENTITY splash.downloadProject "Télécharger un projet">
+<!ENTITY splash.projectCentral  "Project Central">
+<!ENTITY splash.walkthru        "Tutorial">
+<!ENTITY splash.guide           "Consignes de Celtx">
+<!ENTITY splash.forums          "Forums Celtx">
+<!ENTITY splash.featureTour     "Visite guidée">
+
+<!ENTITY authDialog.title       "Authentification Celtx">
+<!ENTITY authDialog.description
+  "Cette action exige que vous vous connectiez à votre compte Celtx">
+
+<!ENTITY list.label "Liste...">
+
+<!ENTITY pdfDownloadDialog.title "Convertir en PDF">
+<!ENTITY downloadingPDF.label    "Conversion PDF...">
+
+<!ENTITY add.label    "Ajouter">
+<!ENTITY remove.label "Supprimer">
+
+<!ENTITY mediaBox.tooltip "Glissez et déposez les fichiers média ici.">
+<!ENTITY imageSearch.tooltip "Trouvez des images à télécharger.">
+
+<!-- Spellcheck -->
+
+<!ENTITY spellCheckCmd.label "Orthographe">
+
+<!ENTITY addToUserDictionaryButton.accessKey "A">
+<!ENTITY addToUserDictionaryButton.label "Ajouter un mot">
+<!ENTITY checkwordButton.accessKey "f">
+<!ENTITY checkwordButton.label "Vérifier le mot">
+<!ENTITY closeButton.accessKey "F">
+<!ENTITY closeButton.label "Fermer">
+<!ENTITY editUserDictionaryButton.accessKey "M">
+<!ENTITY editUserDictionaryButton.label "Modifier">
+<!ENTITY ignoreAllButton.accessKey "n">
+<!ENTITY ignoreAllButton.label "Ignorer tout">
+<!ENTITY ignoreButton.accessKey "I">
+<!ENTITY ignoreButton.label "Ignorer">
+<!ENTITY languagePopup.accessKey "u">
+<!ENTITY languagePopup.label "Langue :">
+<!ENTITY misspelledWord.label "Mot mal orthographié :">
+<!ENTITY moreDictionaries.label "Télécharger plus">
+<!ENTITY recheckButton.accessKey "v">
+<!ENTITY recheckButton.label "Revérifier">
+<!ENTITY replaceAllButton.accessKey "T">
+<!ENTITY replaceAllButton.label "Tout remplacer">
+<!ENTITY replaceButton.accessKey "R">
+<!ENTITY replaceButton.label "Remplacer">
+<!ENTITY sendButton.accessKey "E">
+<!ENTITY sendButton.label "Envoyer">
+<!ENTITY stopButton.accessKey "e">
+<!ENTITY stopButton.label "Arrêter">
+<!ENTITY suggestions.accessKey "g">
+<!ENTITY suggestions.label "Suggestions :">
+<!ENTITY userDictionary.label "Dictionnaire personnel :">
+<!ENTITY windowTitle.label "Vérification de l'orthographe">
+<!ENTITY wordEditField.accessKey "c">
+<!ENTITY wordEditField.label "Remplacer par :">
+
+<!-- Find and Replace -->
+
+<!ENTITY findCmd.label "Rechercher">
+<!ENTITY replaceCmd.label "Remplacer">
+<!ENTITY findReplaceCmd.label "Rechercher et Remplacer...">
+<!ENTITY findNextCmd.label    "Occurence suivante">
+<!ENTITY findPrevCmd.label    "Occurence précédente">
+
+<!ENTITY replaceDialog.title "Rechercher et Remplacer">
+<!ENTITY findField.label "Rechercher le texte :">
+<!ENTITY findField.accesskey "n">
+<!ENTITY replaceField.label "Remplacer par :">
+<!ENTITY replaceField.accesskey "e">
+<!ENTITY caseSensitiveCheckbox.label "Respecter la casse">
+<!ENTITY caseSensitiveCheckbox.accesskey "c">
+<!ENTITY wrapCheckbox.label "Mot entier">
+<!ENTITY wrapCheckbox.accesskey "W">
+<!ENTITY backwardsCheckbox.label "Rechercher vers le haut">
+<!ENTITY backwardsCheckbox.accesskey "b">
+<!ENTITY findNextButton.label "Occurence suivante">
+<!ENTITY findNextButton.accesskey "F">
+<!ENTITY replaceButton.label "Remplacer">
+<!ENTITY replaceButton.accesskey "R">
+<!ENTITY replaceAndFindButton.label "Remplacer et Rechercher">
+<!ENTITY replaceAndFindButton.accesskey "d">
+<!ENTITY replaceAllButton.label "Remplacer tout">
+<!ENTITY replaceAllButton.accesskey "A">
+<!ENTITY notFoundWarning.label "Pas d'occurence trouvée.">
+
+<!ENTITY regWiz.newOrExistingLabel
+  "Créer un nouveau compte ou utiliser un compte existant :">
+<!ENTITY regWiz.createNewAccountLabel
+  "Créer un nouveau compte.">
+<!ENTITY regWiz.useExistingAccountLabel
+  "Utiliser un compte existant.">
+<!ENTITY regWiz.loginSuccessfulLabel
+  "Merci, vous êtes maintenant enregistré sur &appName;.">
+
+<!ENTITY propertiesTab.label "Propriétés">
+<!ENTITY author.label "Auteur ">
+<!ENTITY projSource.label "d'après ">
+<!ENTITY copyright.label "Copyright ">
+<!ENTITY contactInfo.label "Contact ">
+<!ENTITY printSceneNumbers.label "Imprimer les numéros des scènes :">
+
+<!ENTITY none "Aucun">
+<!ENTITY left "Gauche">
+<!ENTITY right "Droite">
+<!ENTITY both "Les deux">
+
+<!ENTITY splashScreen.label "Ecran d'accueil">
+
+<!ENTITY generatePDF.label "Générer un PDF...">
+<!ENTITY publishMode.label "Mode de publication">
+
+<!ENTITY addMedia.label "Ajouter un média...">
+<!ENTITY removeMedia.label "Enlever un média">
+
+<!ENTITY report.titleBy "De">
+<!ENTITY report.titleBasedOn "d'après">
+<!ENTITY report.titleRights "Copyright">
+
+<!ENTITY titlePage "Page de garde">
+
+<!ENTITY bold.label "Gras">
+<!ENTITY italic.label "Italique">
+<!ENTITY underline.label "Souligné">
+
+<!ENTITY styleDialog.title "Mise en forme">
+<!ENTITY styleSettings.label "Formats...">
+<!ENTITY template.label "Modèle">
+
+<!ENTITY saveAsCmd.label "Enregistrer sous...">
+<!ENTITY saveAsCmd.accessKey "A">
+<!ENTITY saveAsCmd.toolbarLabel "Enregistrer sous">
+
+<!ENTITY mediaViewer.title "Visionneuse">
+
+<!ENTITY browseCmd.label "Parcourir...">
+<!ENTITY tagItemCmd.label "Marquer">
+<!ENTITY delItemCmd.label "Supprimer">
+<!ENTITY chooseProjsDir.label "Où voulez-vous enregistrer vos projets ?">
+<!ENTITY createProjsDir.label "&appName; vous demande une petite place où accéder à vos projets puis les y enregistrer. Merci de créer ce répertoire où &appName; devra sauvegarder vos projets :">
+<!ENTITY createCmd.label "Créer...">
+<!ENTITY invalidFilename.label "Le nom de baptême n'est pas un nom de fichier valide.">
+
+<!ENTITY breakdownCmd.label "Dépouillement">
+
+<!ENTITY sidebar.label "Séquencier">
+
+<!ENTITY moveDownCmd.label "Descendre">
+<!ENTITY moveUpCmd.label   "Monter">
+
+<!ENTITY department.label "Départment">
+<!ENTITY item.label "Elément">
+
+<!ENTITY category.label "Catégorie">
+<!ENTITY database.label "Base de données">
+<!ENTITY research.label "Recherche Web">
+<!ENTITY schedule.label "Plan de travail">
+<!ENTITY characters.label "Personnages">
+<!ENTITY sceneDetails.label "Détails de la scène">
+
+<!ENTITY recycleCmd.label "Envoyer vers le classeur">
+
+<!-- Breakdown View -->
+<!ENTITY breakdownReport.label "Rapport de dépouillement">
+
+<!ENTITY fullName.label "Nom complet">
+
+<!ENTITY sceneBreakdown.label "Déroulé des scènes">
+<!ENTITY sceneBreakdownWithDesc.label "Déroulé des scènes avec description">
+<!ENTITY allUppercase.label "TOUS">
+<!ENTITY displayMedia.label "Afficher Médias">
+
+<!ENTITY locationField.label "Lieu:">
+<!ENTITY saveDirCheckbox.label "Sauvegarder ici par défaut">
+

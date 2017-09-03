@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<rdf:RDF xmlns:note="http://www.w3.org/2000/10/annotation-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:cx="http://celtx.com/NS/v1/"
+         xmlns:NC="http://home.netscape.com/NC-rdf#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+  <rdf:Description rdf:about="http://celtx.com/NS/v1/Report">
+    <rdfs:label>Report</rdfs:label>
+    <rdfs:comment>A report for viewing or printing</rdfs:comment>
+  </rdf:Description>
+
+  <rdf:Seq rdf:about="http://celtx.com/reports">
+    <rdf:li>
+      <rdf:Description rdf:about="http://celtx.com/report/sample"
+		       dc:title="Sample Report"
+                       cx:style="sample.xml"
+                       cx:appliesTo="project"/>
+    </rdf:li>
+    <rdf:li>
+      <rdf:Description rdf:about="http://celtx.com/report/script"
+		       dc:title="Script Report"
+                       cx:style="script.xml"
+                       cx:appliesTo="script"/>
+    </rdf:li>
+  </rdf:Seq>
+
+</rdf:RDF>

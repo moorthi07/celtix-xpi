@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	        version="1.0">
+
+  <xsl:output method="html"/>
+
+  <xsl:key name="scene-key"
+           match="div[@id='scenes']/ul"
+           use="@uri"/>
+  <xsl:key name="scene-desc-key"
+           match="div[@id='scene-descriptions']/ul"
+           use="@uri"/>
+
+  <xsl:template match="link[@href='chrome://celtx/content/script.css']">
+    <link rel="stylesheet" type="text/css"
+          href="chrome://celtx-platform/content/USLetter-Normal.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="chrome://celtx/content/editor.css"/>
+  </xsl:template>
+
+  <xsl:template match="div[@id='scenes']">
+    <!-- Scene item map, ignore -->
+  </xsl:template>
+
+  <xsl:template match="div[@id='scene-descriptions']">
+    <!-- Scene description map, ignore -->
+  </xsl:template>
+
+  <xsl:template match="div">
+    <xsl:apply-templates/>
+  </xsl:template>
+
+  <xsl:template match="p[@class='sceneheading']">
+    <xsl:copy>
+      <xsl:apply-templates select="@*"/>
+      <xsl:attribute name="id">
+        <xsl:value-of select="generate-id()"/>
+      </xsl:attribute>
+      <xsl:attribute name="description">
+        <xsl:call-template name="scene-description">
+          <xsl:with-param name="scene" select=".."/>
+        </xsl:call-template>
+      </xsl:attribute>
+      <xsl:apply-templates/>
+    </xsl:copy>
+    <xsl:call-template name="additional-items">
+      <xsl:with-param name="scene" select=".."/>
+    </xsl:call-template>
+  </xsl:template>
+
+  <xsl:template match="span[@class='char']">
+    <xsl:copy>
+      <xsl:apply-templates select="@*"/>
+      <xsl:attribute name="class">cast</xsl:attribute>
+      <xsl:apply-templates/>
+    </xsl:copy>
+  </xsl:template>
+
+  <xsl:template match="span[@class='set']">
+    <xsl:copy>
+      <xsl:apply-templates select="@*"/>
+      <xsl:attribute name="class">setdressing</xsl:attribute>
+      <xsl:apply-templates/>
+    </xsl:copy>
+  </xsl:template>
+
+  <xsl:template match="span[@class='extra']">
+    <xsl:copy>
+      <xsl:apply-templates select="@*"/>
+      <xsl:attribute name="class">extras</xsl:attribute>
+      <xsl:apply-templates/>
+    </xsl:copy>
+  </xsl:template>
+
+  <xsl:template match="span[@class='prop']">
+    <xsl:copy>
+      <xsl:apply-templates select="@*"/>
+      <xsl:attribute name="class">props</xsl:attribute>
+      <xsl:apply-templates/>
+    </xsl:copy>
+  </xsl:template>
+
+  <!-- Identity transform -->
+  <xsl:template match="node()|@*">
+    <xsl:copy>
+      <xsl:apply-templates select="@*"/>
+      <xsl:apply-templates/>
+    </xsl:copy>
+  </xsl:template>
+
+  <!-- Additional items associated with the scene but not marked up in script -->
+  <xsl:template name="additional-items">
+    <xsl:param name="scene"/>
+    <xsl:variable name="refs" select="$scene//span[@ref]"/>
+    <xsl:variable name="items"
+                  select="key('scene-key', $scene/@ref)/li[not(. = $refs/@ref)]"/>
+    <xsl:if test="count($items) != 0">
+      <p>
+        <xsl:for-each select="$items">
+          <xsl:if test="position() &gt; 1">
+            <xsl:text> </xsl:text>
+          </xsl:if>
+          <span token="true" ref="{.}"/>
+        </xsl:for-each>
+      </p>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template name="scene-description">
+    <xsl:param name="scene"/>
+    <xsl:variable name="desc"
+                  select="key('scene-desc-key', $scene/@ref)/li"/>
+    <xsl:value-of select="$desc"/>
+  </xsl:template>
+
+</xsl:stylesheet>

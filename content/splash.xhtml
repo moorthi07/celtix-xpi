@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" [
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2005 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+    <title>celtx</title>
+    <link rel="stylesheet" type="text/css" href="splash.css"/>
+  </head>
+
+  <body>
+
+    <div class="cont1">
+
+      <div class="welcome">
+        <p>&splash.welcomePrefix;<span id="version"></span></p>
+      </div>
+
+      <div id="projects">
+        <div class="tab">
+          <span class="shadow">&splash.projects;<span
+          class="text">&splash.projects;</span></span>
+        </div>
+        <div class="body">
+          <div cmd="cmd-new-project">&splash.newProject;</div>
+          <div cmd="cmd-open-project">&splash.openProject;</div>
+        </div>
+      </div>    
+
+      <div id="ws">
+        <div class="tab">
+          <span class="shadow">&splash.webServices;<span
+          class="text">&splash.webServices;</span></span>
+        </div>
+        <div class="body">
+          <div cmd="cmd-help-account">&splash.helpAccount;</div>
+          <div cmd="cmd-download-project">&splash.downloadProject;</div>
+          <div cmd="cmd-goto-projcentral">&splash.projectCentral;</div>
+        </div>
+      </div>
+
+      <div id="help">
+        <div class="tab">
+          <span class="shadow">&splash.help;<span
+          class="text">&splash.help;</span></span>
+        </div>
+        <div class="body">
+          <div cmd="cmd-goto-walkthru">&splash.featureTour;</div>
+          <div cmd="cmd-goto-guide">&splash.guide;</div>
+          <div cmd="cmd-goto-forums">&splash.forums;</div>
+        </div>
+      </div>
+    
+    </div>
+
+    <div id="aux" class="cont2">
+
+      <div id="forum">
+        <div class="tab">
+          <span class="shadow">&splash.discussion;<span
+          class="text">&splash.discussion;</span></span>
+        </div>
+        <div class="body">
+          <iframe src="http://www.celtx.com/notifier/topics_anywhere.html"
+                  width="178px" height="395px" scrolling="no" frameborder="0">
+          </iframe>
+
+        </div>
+      </div>
+
+    </div>
+
+  </body>
+
+</html>

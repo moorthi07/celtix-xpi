@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:cx="http://celtx.com/NS/v1/">
+
+  <rdf:Description rdf:about="http://celtx.com/NS/v1/Script">
+    <rdfs:label>Script</rdfs:label>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://celtx.com/NS/v1/ScriptMarkup">
+    <cx:markup rdf:resource="http://celtx.com/NS/v1/Character"/>
+    <cx:markup rdf:resource="http://celtx.com/NS/v1/Extra"/>
+    <cx:markup rdf:resource="http://celtx.com/NS/v1/Prop"/>
+    <cx:markup rdf:resource="http://celtx.com/NS/v1/SetDecoration"/>
+    <cx:markup rdf:resource="http://celtx.com/NS/v1/Wardrobe"/>
+    <cx:markup rdf:resource="http://celtx.com/NS/v1/Camera"/>
+    <cx:markup rdf:resource="http://celtx.com/NS/v1/Lights"/>
+    <cx:markup rdf:resource="http://celtx.com/NS/v1/Sound"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://celtx.com/NS/v1/Character">
+    <rdfs:label>Character</rdfs:label>
+    <cx:plural>Characters</cx:plural>
+    <cx:element>char</cx:element>
+  </rdf:Description>  
+
+  <rdf:Description rdf:about="http://celtx.com/NS/v1/Extra">
+    <rdfs:label>Extra</rdfs:label>
+    <cx:plural>Extras</cx:plural>
+    <cx:element>extra</cx:element>
+  </rdf:Description>  
+
+  <rdf:Description rdf:about="http://celtx.com/NS/v1/Prop">
+    <rdfs:label>Prop</rdfs:label>
+    <cx:plural>Props</cx:plural>
+    <cx:element>prop</cx:element>
+  </rdf:Description>  
+
+  <rdf:Description rdf:about="http://celtx.com/NS/v1/Location">
+    <rdfs:label>Location</rdfs:label>
+    <cx:plural>Locations</cx:plural>
+    <cx:element>location</cx:element>
+  </rdf:Description>  
+
+  <rdf:Description rdf:about="http://celtx.com/NS/v1/Wardrobe">
+    <rdfs:label>Wardrobe</rdfs:label>
+    <cx:plural>Wardrobe</cx:plural>
+    <cx:element>wardrobe</cx:element>
+  </rdf:Description>  
+
+  <rdf:Description rdf:about="http://celtx.com/NS/v1/SetDecoration">
+    <rdfs:label>Set</rdfs:label>
+    <cx:plural>Set Decoration</cx:plural>
+    <cx:element>set</cx:element>
+  </rdf:Description>  
+
+  <rdf:Description rdf:about="http://celtx.com/NS/v1/Camera">
+    <rdfs:label>Camera</rdfs:label>
+    <cx:plural>Camera</cx:plural>
+    <cx:element>camera</cx:element>
+  </rdf:Description>  
+
+  <rdf:Description rdf:about="http://celtx.com/NS/v1/Lights">
+    <rdfs:label>Lights</rdfs:label>
+    <cx:plural>Lights</cx:plural>
+    <cx:element>lights</cx:element>
+  </rdf:Description>  
+
+  <rdf:Description rdf:about="http://celtx.com/NS/v1/Sound">
+    <rdfs:label>Sound</rdfs:label>
+    <cx:plural>sounds</cx:plural>
+    <cx:element>sound</cx:element>
+  </rdf:Description>  
+
+  <rdf:Description rdf:about="http://celtx.com/NS/v1/Scene">
+    <rdfs:label>Scene</rdfs:label>
+    <cx:plural>Scenes</cx:plural>
+    <cx:element>scene</cx:element>
+  </rdf:Description>  
+
+  <rdf:Description rdf:about="http://celtx.com/NS/v1/Scenes">
+    <rdfs:label>Scenes</rdfs:label>
+    <cx:element>scenes</cx:element>
+  </rdf:Description>  
+
+</rdf:RDF>

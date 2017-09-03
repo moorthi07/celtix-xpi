@@ -1,0 +1,474 @@
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!ENTITY appName "Celtx">
+
+<!ENTITY celtxWindow.titleModifier "celtx">
+<!ENTITY celtxWindow.titleMenuSeparator " - ">
+
+<!ENTITY reportsMenu.label "Raporlar">
+<!ENTITY reportsMenu.accessKey "R">
+
+<!ENTITY resMenu.label "Kaynak">
+<!ENTITY resMenu.accessKey "K">
+
+<!ENTITY helpMenu.label "Yardým">
+<!ENTITY helpMenu.accessKey "Y">
+
+<!ENTITY helpSupportCmd.label "Online Destek">
+<!ENTITY helpSupportCmd.accessKey "O">
+
+<!ENTITY helpReportBugCmd.label "Hata Rapor Et">
+<!ENTITY helpReportBugCmd.accessKey "H">
+
+<!ENTITY helpAboutCmd.label "&appName; Hakkýnda">
+<!ENTITY helpAboutCmd.accessKey "a">
+
+<!ENTITY celtxAccountCmd.label "&appName; Hesabý...">
+<!ENTITY celtxAccountCmd.accessKey "e">
+
+<!ENTITY openProjCmd.label "Proje Aç...">
+
+<!ENTITY newProjCmd.label "Yeni Proje...">
+
+<!ENTITY copyProjCmd.label "Projeyi Kopyala...">
+
+<!ENTITY saveProjCmd.label "Sakla">
+
+<!ENTITY downloadProjCmd.label "Proje Download et...">
+<!ENTITY downloadProjCmd.toolbarLabel "Download">
+<!ENTITY downloadProjCmd.accessKey "D">
+
+<!ENTITY publishProjCmd.label "Proje Yayýnla...">
+<!ENTITY publishProjCmd.toolbarLabel "Yayýnla">
+<!ENTITY publishProjCmd.accessKey "n">
+<!ENTITY uploadProjCmd.label "Proje Yayýnla...">
+<!ENTITY uploadProjCmd.toolbarLabel "Yayýnla">
+<!ENTITY uploadProjCmd.accessKey "n">
+
+<!ENTITY importCmd.label "Dizinden Senaryo Getirt">
+<!ENTITY importCmd.accessKey "G">
+<!ENTITY importCmd.toolbarLabel "Getirt">
+
+<!ENTITY exportScriptCmd.label "Dizine Senaryo Aktar">
+<!ENTITY exportScriptCmd.accessKey "i">
+<!ENTITY exportScriptCmd.toolbarLabel "Aktar">
+
+<!ENTITY saveAsCmd.label "Farklý Kaydet...">
+<!ENTITY saveAsCmd.accessKey "F">
+<!ENTITY saveAsCmd.toolbarLabel "Farklý Kaydet">
+
+<!ENTITY insertNoteCmd.label "Not ekle...">
+<!ENTITY insertNoteCmd.toolbarLabel "Not">
+
+<!ENTITY insertSceneCmd.label "Sahne ekle...">
+<!ENTITY insertSceneCmd.toolbarLabel "Sahne">
+
+<!ENTITY titlePage "Kapak Sayfasý">
+
+<!ENTITY delResCmd.label "Çýkar">
+<!ENTITY gotoResCmd.label "Git">
+
+<!ENTITY showResCmd.toolbarLabel "Göster">
+
+<!ENTITY removeMarkupCmd.label "Çýkar">
+
+<!ENTITY newMarkup.label "Yeni...">
+
+<!ENTITY openProj.title "Proje Aç">
+
+<!ENTITY resources.label "Kaynaklar">
+
+<!ENTITY options.label "Seçenekler">
+
+<!ENTITY projects.label "Projeler">
+<!ENTITY title.label "Baþlýk">
+<!ENTITY description.label "Taným">
+<!ENTITY created.label "Oluþturma">
+
+<!ENTITY objViewOverviewTab.label "Genel Bilgi">
+<!ENTITY objViewMediaTab.label "Medya Dosyalarý">
+
+<!ENTITY insertScene.title     "Sahne Ekle">
+<!ENTITY insertScene.caption   "Sahne ekle">
+<!ENTITY insertScene.after     "Þimdiki sahneden sonraya">
+<!ENTITY insertScene.before    "Þimdiki sahneden önceye">
+<!ENTITY insertScene.beginning "Senaryonun baþýna">
+<!ENTITY insertScene.end       "Senaryonun sonuna">
+
+<!ENTITY projDialog.title      "Proje Özellikleri">
+
+<!ENTITY noteDialog.title      "Notu deðiþtir">
+<!ENTITY note.label            "Not">
+
+<!ENTITY untitled.label "(isimsiz)">
+
+<!ENTITY regDialog.title "&appName; Kayýt Ýþlemi">
+
+<!ENTITY getProjDialog.title   "Proje Download Et">
+<!ENTITY getProjDialog.caption "Kullanýlabilir Projeler">
+
+<!ENTITY nameCol.label     "Ýsim">
+<!ENTITY createdCol.label  "Oluþturulma">
+<!ENTITY modifiedCol.label "Deðiþtirilme">
+<!ENTITY creatorCol.label  "Oluþturan">
+
+<!ENTITY downloadDialog.title   "Proje Download Ediliyor">
+
+<!ENTITY publishDialog.title        "Proje Yayýnla">
+<!ENTITY uploadDialog.title         "Proje Yayýnla">
+<!ENTITY publishDialog.serverLabel  "Sunucu">
+<!ENTITY publishDialog.publicLabel  "Umumi">
+<!ENTITY publishDialog.privateLabel "Hususi">
+<!ENTITY publishDialog.sharedLabel  "Bu kullanýcýlarla paylaþ">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY publishDialog.userList     "User List">
+<!ENTITY publishDialog.findUsers    "Find Users">
+
+
+<!-- Formatting toolbar -->
+<!ENTITY formatAction.label  "Devinim">
+<!ENTITY formatChar.label    "Karakter">
+<!ENTITY formatDialog.label  "Dialog">
+<!ENTITY formatHeading.label "Sahne Baþlýðý">
+<!ENTITY formatParen.label   "Açýklama">
+<!ENTITY formatTrans.label   "Geçiþ">
+<!ENTITY formatShot.label    "Shot">
+<!ENTITY formatText.label    "Metin">
+
+
+<!-- Debugging -->
+<!ENTITY debugMenu.label "Sorun Gider">
+<!ENTITY debugMenu.accessKey "S">
+
+<!ENTITY dumpCmd.label "Dump">
+
+<!ENTITY wiz.clickNext "Baþlamak için 'Ýleri' tuþuna týklayýn.">
+<!ENTITY wiz.clickFinish "Bu Sihirbazý tamamlamak için 'Son' tuþuna týklayýn.">
+
+
+<!-- Migration wizard -->
+<!ENTITY migWiz.title "&appName; Migration Wizard">
+<!ENTITY migWiz.prevVersionDetected
+  "&appName;, programýn daha eski bir versiyonunda yaratýlmýþ bir proje dosyasý buldu.">
+
+<!ENTITY migWiz.aboutThis
+  "Bu sihirbaz, mevcut bütün projeleri getirtmenize yardýmcý olacak.">
+
+<!ENTITY migWiz.clickNext "&wiz.clickNext;">
+
+<!ENTITY migWiz.clickFinish "&wiz.clickFinish;">
+
+<!ENTITY migWiz.optionsLabel "Getirtme Seçenekleri">
+
+<!ENTITY migWiz.chooseOption
+  "Lütfen bu seçeneklerden birini seçip, 'Ýleri' tuþuna týklayýn.">
+
+<!ENTITY migWiz.optionImport
+  "Import projects from the previous version of &appName;'in daha önceki versiyonlarýnda yaratýlan projeleri getir.">
+
+<!ENTITY migWiz.optionNoImport "Getirtme">
+
+<!ENTITY migWiz.migratingLabel "Migrating Projects">
+
+<!ENTITY migWiz.doneLabel "Migration Done">
+
+
+<!ENTITY regWiz.title "&appName; Registration Wizard">
+
+<!ENTITY regWiz.intro "&appName;'in internet üzerindeki servislerinden yararlanabilmek
+  için öncelikle bir &appName; hesabýyla kayýt yaptýrmanýz gerekmektedir.">
+
+<!ENTITY regWiz.aboutThis "Bu Sihirbaz sizden kayýt için gerekli bilgileri isteyecektir.">
+
+<!ENTITY regWiz.identityLabel "Kimlik">
+
+<!ENTITY regWiz.identityInstructions "Lütfen adýnýzý, baðlý olduðunuz organizasyonu ve
+  e-posta adresinizi girin.">
+
+<!ENTITY regWiz.nameLabel  "Ad:">
+<!ENTITY regWiz.orgLabel   "Organizasyon:">
+<!ENTITY regWiz.emailLabel "E-posta:">
+<!ENTITY regWiz.uidLabel   "&appName; Kullanýcý ismi:">
+
+<!ENTITY regWiz.accountLabel "Kullanýcý Hesabý">
+
+<!ENTITY regWiz.accountInstructions "Lütfen &appName; hesabýnýz için bir kullanýcý ismi ve
+  þifre seçiniz.">
+
+<!ENTITY regWiz.usernameLabel      "Kullanýcý ismi:">
+<!ENTITY regWiz.passwordLabel      "Þifre:">
+<!ENTITY regWiz.passwordAgainLabel "Þifre (Tekrar):">
+
+<!ENTITY regWiz.noteUsername "Kullanýcý isminiz en az 3 karakter uzunluðunda olmalý
+  ve sadece rakam ve harf içermelidir.">
+
+<!ENTITY regWiz.notePassword "Þifreniz en az 5 karakter uzunluðunda olmalýdýr.">
+
+<!ENTITY regWiz.noteCaseSensitive "&appName; hesabý kullanýcý isimleri ve þifreleri
+    büyük harflere duyarlýdýr.">
+
+<!ENTITY regWiz.checkLabel "Hesap Bilgisi Denetle">
+
+<!ENTITY regWiz.confirmLabel "Ayarlarý Onayla">
+
+<!ENTITY regWiz.confirmIntro "Bu bilgileri girdiniz:">
+
+<!ENTITY regWiz.clickFinish "Bu deðerlerden memnunsanýz, 'Son' tuþuna týklayarak kaydýnýzý gönderin.">
+<!ENTITY regWiz.clickNext "Bu deðerlerden memnunsanýz, 'Ýleri' tuþuna týklayarak kaydýnýzý gönderin.">
+
+<!ENTITY report.sample "Örnek Rapor">
+<!ENTITY report.script "Senaryo Raporu">
+<!ENTITY report.allBreakdown "Bütün Ayrýntýlar">
+
+<!ENTITY report.titleBy "Yazan">
+<!ENTITY report.titleBasedOn "Based on">
+<!ENTITY report.titleRights "Telif Hakký">
+
+<!ENTITY scene.label      "Sahne">
+<!ENTITY scenes.label     "Shaneler">
+<!ENTITY script.label     "Senaryo">
+
+<!-- Breakdown categories -->
+<!ENTITY bdc.addlabour    "Ek iþ gücü">
+<!ENTITY bdc.animals      "Hayvan">
+<!ENTITY bdc.handler      "Hayvan Eðitmenleri">
+<!ENTITY bdc.camera       "Kamera">
+<!ENTITY bdc.cast         "Oyuncular">
+<!ENTITY bdc.cgi          "Bilgisayar Destekli Görüntü">
+<!ENTITY bdc.construction "Ýnþaat">
+<!ENTITY bdc.electrics    "Elektrik">
+<!ENTITY bdc.extras       "Figüranlar">
+<!ENTITY bdc.greenery     "Yeþillik">
+<!ENTITY bdc.hair         "Saç">
+<!ENTITY bdc.lights       "Iþýklar">
+<!ENTITY bdc.livestock    "Mal">
+<!ENTITY bdc.location     "Mekan">
+<!ENTITY bdc.makeup       "Makyaj">
+<!ENTITY bdc.mechfx       "Mekanik Efektler">
+<!ENTITY bdc.misc         "Diðer">
+<!ENTITY bdc.music        "Muzik">
+<!ENTITY bdc.opticalfx    "Görsel Efektler">
+<!ENTITY bdc.painting     "Resimler">
+<!ENTITY bdc.prodnotes    "Yapým Notlarý">
+<!ENTITY bdc.props        "Araç gereç">
+<!ENTITY bdc.security     "GÜvenlik">
+<!ENTITY bdc.set          "Set">
+<!ENTITY bdc.setdressing  "Dekor">
+<!ENTITY bdc.sound        "Ses">
+<!ENTITY bdc.soundfx      "Ses Efektleri">
+<!ENTITY bdc.equip        "Özel ekipman">
+<!ENTITY bdc.specialfx    "Özel Efektler">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY bdc.storyboard   "Storyboard">
+<!ENTITY bdc.stunts       "Dublörler">
+<!ENTITY bdc.vehicles     "Araçlar">
+<!ENTITY bdc.wardrobe     "Kostüm">
+<!ENTITY bdc.weapons      "Silahlar">
+
+
+<!ENTITY splash.welcomePrefix "Hoþgeldiniz. Celtx v.">
+<!ENTITY splash.projects      "PROJELER">
+<!ENTITY splash.webServices   "WEB HÝZMETLERÝ">
+<!ENTITY splash.help          "YARDIM">
+<!ENTITY splash.discussion    "TARTIÞMA">
+
+<!ENTITY splash.newProject      "Yeni Proje Yarat">
+<!ENTITY splash.openProject     "Varolan Bir Projeyi Aç">
+<!ENTITY splash.helpAccount     "Yeni Hesap Yarat">
+<!ENTITY splash.downloadProject "Proje Download Et">
+<!ENTITY splash.projectCentral  "Proje Merkezi">
+<!ENTITY splash.walkthru        "3 Dakikada Celtx">
+<!ENTITY splash.guide           "Celtx Kullanýcý Rehberi">
+<!ENTITY splash.forums          "Celtx Forumlarý">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY splash.featureTour     "Feature Tour">
+
+<!ENTITY authDialog.title       "Celtx Belgeleme">
+<!ENTITY authDialog.description
+  "Bu iþlem Celtx Hesabýnýzý açmanýzý gerektirir.">
+
+<!ENTITY list.label "Liste...">
+
+<!ENTITY pdfDownloadDialog.title "PDF'e dönüþtürülüyor...">
+<!ENTITY downloadingPDF.label    "PDF'e dönüþtürülüyor...">
+
+<!ENTITY add.label    "Ekle">
+<!ENTITY remove.label "Çýkar">
+
+<!ENTITY mediaBox.tooltip "Medya dosyalarýný sürükleyip, buraya býrakýn.">
+<!ENTITY imageSearch.tooltip "Sürükleyip býrakmak için resim">
+
+<!-- Spellcheck -->
+
+<!ENTITY spellCheckCmd.label "Ýmla denetimi">
+
+<!ENTITY addToUserDictionaryButton.accessKey "l">
+<!ENTITY addToUserDictionaryButton.label "Kelime Ekle">
+<!ENTITY checkwordButton.accessKey "D">
+<!ENTITY checkwordButton.label "Kelimeyi Denetle">
+<!ENTITY closeButton.accessKey "p">
+<!ENTITY closeButton.label "Kapat">
+<!ENTITY editUserDictionaryButton.accessKey "ð">
+<!ENTITY editUserDictionaryButton.label "Deðiþtir...">
+<!ENTITY ignoreAllButton.accessKey "ü">
+<!ENTITY ignoreAllButton.label "Tümünü Yoksay">
+<!ENTITY ignoreButton.accessKey "k">
+<!ENTITY ignoreButton.label "Yoksay">
+<!ENTITY languagePopup.accessKey "L">
+<!ENTITY languagePopup.label "Lisan:">
+<!ENTITY misspelledWord.label "Yanlýþ yazýlan kelimeler:">
+<!ENTITY moreDictionaries.label "Yeni Sözlük Download Et">
+<!ENTITY recheckButton.accessKey "t">
+<!ENTITY recheckButton.label "Sayfayý Tekrar Denetle">
+<!ENTITY replaceAllButton.accessKey "þ">
+<!ENTITY replaceAllButton.label "Tümünü Deðiþtir">
+<!ENTITY replaceButton.accessKey "e">
+<!ENTITY replaceButton.label "Deðiþtir">
+<!ENTITY sendButton.accessKey "ö">
+<!ENTITY sendButton.label "Gönder">
+<!ENTITY stopButton.accessKey "u">
+<!ENTITY stopButton.label "Durdur">
+<!ENTITY suggestions.accessKey "r">
+<!ENTITY suggestions.label "Öneriler:">
+<!ENTITY userDictionary.label "Þahsi sözlük:">
+<!ENTITY windowTitle.label "Ýmlayý Denetle">
+<!ENTITY wordEditField.accessKey "w">
+<!ENTITY wordEditField.label "Bununla deðiþtir:">
+
+<!-- Find and Replace -->
+
+<!ENTITY findCmd.label "Bul">
+<!ENTITY replaceCmd.label "Deðiþtir">
+<!ENTITY findReplaceCmd.label "Bul ve Deðiþtir...">
+<!ENTITY findNextCmd.label    "Sonraki">
+<!ENTITY findPrevCmd.label    "Önceki">
+
+<!ENTITY replaceDialog.title "Bul ve Deðiþtir">
+<!ENTITY findField.label "Aranan:">
+<!ENTITY findField.accesskey "n">
+<!ENTITY replaceField.label "Yeni Deðer:">
+<!ENTITY replaceField.accesskey "e">
+<!ENTITY caseSensitiveCheckbox.label "Büyük küçük harf eþleþtir">
+<!ENTITY caseSensitiveCheckbox.accesskey "ç">
+<!ENTITY wrapCheckbox.label "Wrap around">
+<!ENTITY wrapCheckbox.accesskey "W">
+<!ENTITY backwardsCheckbox.label "Geriye Doðru Ara">
+<!ENTITY backwardsCheckbox.accesskey "ð">
+<!ENTITY findNextButton.label "Sonrakini Bul">
+<!ENTITY findNextButton.accesskey "S">
+<!ENTITY replaceButton.label "Deðiþtir">
+<!ENTITY replaceButton.accesskey "ð">
+<!ENTITY replaceAndFindButton.label "Deðiþtir ve Bul">
+<!ENTITY replaceAndFindButton.accesskey "v">
+<!ENTITY replaceAllButton.label "Tümünü Deðiþtir">
+<!ENTITY replaceAllButton.accesskey "ü">
+<!ENTITY notFoundWarning.label "Girdiðiniz metin bulunamadý.">
+
+<!ENTITY regWiz.newOrExistingLabel
+  "Yeni bir hesap yaratýn yada varolan bir hesabý kullanýn:">
+<!ENTITY regWiz.createNewAccountLabel
+  "Yeni bir hesap yarat">
+<!ENTITY regWiz.useExistingAccountLabel
+  "Varolan bir hesabý kullan">
+<!ENTITY regWiz.loginSuccessfulLabel
+  "Teþekkürler, þu an &appName;'e girmiþ bulunuyorsunuz.">
+
+<!ENTITY propertiesTab.label "Özellikler">
+<!ENTITY author.label "Yazan">
+<!ENTITY projSource.label "Esin Kaynaðý">
+<!ENTITY copyright.label "Telif Hakký">
+<!ENTITY contactInfo.label "Ýletiþim Bilgileri">
+<!ENTITY printSceneNumbers.label "Sahne numaralarýný yazdýr:">
+
+<!ENTITY none "(Hiç)">
+<!ENTITY left "Solda">
+<!ENTITY right "Saðda">
+<!ENTITY both "Solda ve Saðda">
+
+<!ENTITY splashScreen.label "Splash Screen">
+
+<!ENTITY generatePDF.label "PDF Yarat...">
+<!ENTITY publishMode.label "Yayýn Modu">
+
+<!ENTITY addMedia.label "Medya öðresi ekle...">
+<!ENTITY removeMedia.label "Medya öðresi kaldýr">
+
+<!ENTITY bold.label "Kalýn">
+<!ENTITY italic.label "Ýtalik">
+<!ENTITY underline.label "Altçizgi">
+
+<!ENTITY styleDialog.title "Format Settings">
+<!ENTITY styleSettings.label "Format Settings...">
+<!ENTITY template.label "Þablon">
+
+<!ENTITY mediaViewer.title "Medya Görüntüleyici">
+
+<!ENTITY browseCmd.label "Gözat">
+<!ENTITY tagItemCmd.label "Tag">
+<!ENTITY delItemCmd.label "Sil">
+<!ENTITY chooseProjsDir.label "Projelerinizi saklamak istediðiniz yeri seçin:">
+<!ENTITY createProjsDir.label "&appName;, projelerinizi saklamadan önce, onlarý tutabileceði bir yere ihtiyaç duymaktadýr. Lütfen, projelerinizin &appName; tarafýndan tutulmasýný istediðiniz bir dizin yaratýn:">
+<!ENTITY createCmd.label "Oluþtur...">
+<!ENTITY invalidFilename.label "Verilen isim geçerli bir dosya ismi deðil.">
+
+<!ENTITY breakdownCmd.label "Ayrýntýlý Döküm">
+
+<!ENTITY sidebar.label "Sidebar">
+
+<!ENTITY moveDownCmd.label "Aþaðýya Taþý">
+<!ENTITY moveUpCmd.label   "Yukarýya Taþý">
+
+<!ENTITY department.label "Departman">
+<!ENTITY item.label "Öðe">
+
+<!-- *** LOCALISE ME *** -->
+<!ENTITY category.label "Category">
+<!ENTITY database.label "Database">
+<!ENTITY research.label "Web Research">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY schedule.label "Schedule">
+<!ENTITY characters.label "Characters">
+<!ENTITY sceneDetails.label "Scene Details">
+
+<!ENTITY recycleCmd.label "Send to Scratchpad">
+
+<!-- Breakdown View -->
+<!ENTITY breakdownReport.label "Breakdown Report">
+
+<!ENTITY fullName.label "Full Name">
+
+<!ENTITY sceneBreakdown.label "Scene Breakdown">
+<!ENTITY sceneBreakdownWithDesc.label "Scene Breakdown with Descriptions">
+<!ENTITY allUppercase.label "ALL">
+<!ENTITY displayMedia.label "Display Media">
+
+<!-- *** LOCALISE ME *** -->
+<!ENTITY locationField.label "Mekan:">
+<!ENTITY saveDirCheckbox.label "Save here by default">
+

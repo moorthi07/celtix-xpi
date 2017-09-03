@@ -1,0 +1,60 @@
+<style type="text/css">
+body { 
+  font-family: monospace;
+  background-color: white;
+  margin-left: 2em;
+  margin-bottom: 6em;
+  width: 36em;
+}
+
+div.scene { 
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-right: 1em;
+  padding-left: 1em;
+  margin-bottom: 1em;
+}
+
+p.sceneheading { 
+  font-weight: bold;
+  margin-top: 0em;
+  margin-bottom: 0em;
+  text-transform: uppercase;
+}
+
+p.action { 
+  margin-top: 1em;
+}
+
+p.character { 
+  margin-top: 1em;
+  margin-bottom: 0em;
+  padding-left: 11em;
+  text-transform: uppercase;
+}
+
+p.parenthetical { 
+  margin-top: 0em;
+  margin-bottom: 0em;
+  padding-left: 7em;
+  padding-right: 8em;
+}
+
+p.dialog { 
+  margin-top: 0em;
+  padding-left: 5em;
+  padding-right: 6em;
+}
+
+p.shot { 
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+
+p.transition { 
+  margin-top: 1em;
+  margin-bottom: 0em;
+  text-align: right;
+  text-transform: uppercase;
+}
+</style>

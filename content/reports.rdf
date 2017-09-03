@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2005 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!DOCTYPE RDF [
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<rdf:RDF xmlns:note="http://www.w3.org/2000/10/annotation-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:cx="http://celtx.com/NS/v1/"
+         xmlns:NC="http://home.netscape.com/NC-rdf#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+  <rdf:Seq rdf:about="http://celtx.com/reports">
+    <rdf:li>
+      <rdf:Description rdf:about="http://celtx.com/report/sample"
+		       dc:title="&report.allBreakdown;"
+                       cx:style="sample.xml"
+                       cx:appliesTo="project"/>
+    </rdf:li>
+    <rdf:li>
+      <rdf:Description rdf:about="http://celtx.com/report/character"
+		       dc:title="&characters.label;"
+                       cx:style="character.xml"
+                       cx:appliesTo="project"/>
+    </rdf:li>
+    <rdf:li>
+      <rdf:Description rdf:about="http://celtx.com/report/extra"
+		       dc:title="&extras.label;"
+                       cx:style="extra.xml"
+                       cx:appliesTo="project"/>
+    </rdf:li>
+    <rdf:li>
+      <rdf:Description rdf:about="http://celtx.com/report/props"
+		       dc:title="&props.label;"
+                       cx:style="props.xml"
+                       cx:appliesTo="project"/>
+    </rdf:li>
+    <rdf:li>
+      <rdf:Description rdf:about="http://celtx.com/report/setdec"
+		       dc:title="&setdecor.label;"
+                       cx:style="setdec.xml"
+                       cx:appliesTo="project"/>
+    </rdf:li>
+    <rdf:li>
+      <rdf:Description rdf:about="http://celtx.com/report/wardrobe"
+		       dc:title="&wardrobe.label;"
+                       cx:style="wardrobe.xml"
+                       cx:appliesTo="project"/>
+    </rdf:li>
+    <rdf:li>
+      <rdf:Description rdf:about="http://celtx.com/report/camera"
+		       dc:title="&camera.label;"
+                       cx:style="camera.xml"
+                       cx:appliesTo="project"/>
+    </rdf:li>
+    <rdf:li>
+      <rdf:Description rdf:about="http://celtx.com/report/lights"
+		       dc:title="&lights.label;"
+                       cx:style="lights.xml"
+                       cx:appliesTo="project"/>
+    </rdf:li>
+    <rdf:li>
+      <rdf:Description rdf:about="http://celtx.com/report/sound"
+		       dc:title="&sound.label;"
+                       cx:style="sound.xml"
+                       cx:appliesTo="project"/>
+    </rdf:li>
+  </rdf:Seq>
+
+</rdf:RDF>
+

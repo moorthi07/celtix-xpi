@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!-- Necessary for toolbar modes -->
+<?xml-stylesheet href="chrome://browser/skin/" type="text/css"?>
+
+<?xml-stylesheet href="chrome://celtx/content/celtx.css" type="text/css"?>
+
+<?xul-overlay href="chrome://celtx/content/project-toolbar.xul"?>
+
+<!DOCTYPE window [
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+%browserDTD;
+<!ENTITY % toolbarDTD SYSTEM "chrome://global/locale/customizeToolbar.dtd" >
+%toolbarDTD;
+<!ENTITY % brandDTD SYSTEM "chrome://global/locale/brand.dtd" >
+%brandDTD;
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+<!ENTITY % calendarDTD SYSTEM "chrome://calendar/locale/calendar.dtd" >
+%calendarDTD;
+<!ENTITY % calendarMenuOverlayDTD
+  SYSTEM "chrome://calendar/locale/menuOverlay.dtd" >
+%calendarMenuOverlayDTD;
+]>
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        id="celtx-splash"
+        windowtype="celtx:splash"
+        title="&appName;"
+        persist="width height screenX screenY sizemode"
+        onclose="return app.canClose()"
+        onload="loaded()"
+        onunload="unloaded()">
+
+  <script type="application/x-javascript">
+    var defaultCalendarFileName = "&calendar.file.default.name;";
+  </script>
+
+#include scripts.inc
+#include sets.inc
+
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/celtx.js"/>
+
+  <toolbox id="main-toolbox">
+#include menubar.inc
+  </toolbox>
+  <toolbox id="project-toolbox" orient="horizontal">
+    <toolbar id="celtx:project-toolbar" flex="1"/>
+  </toolbox>
+
+  <iframe id="splash-frame" flex="1" type="content"
+          src="splash.xhtml"/>
+
+</window>
+

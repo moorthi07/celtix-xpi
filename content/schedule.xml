@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!DOCTYPE bindings [
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+%browserDTD;
+<!ENTITY % bindingsDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%bindingsDTD;
+]>
+
+<bindings id="schedule-bindings"
+          xmlns="http://www.mozilla.org/xbl"
+          xmlns:xbl="http://www.mozilla.org/xbl"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+          xmlns:html="http://www.w3.org/1999/xhtml">
+
+  <!-- =====[ Schedule Placeholder ]===== -->
+
+  <!-- Navigation Panel -->
+  <binding id="schedule-panel">
+    <content>
+      <xul:vbox flex="1"/>
+    </content>
+  </binding>
+
+  <!-- Main Panel -->
+  <binding id="schedule-view"
+           extends="chrome://celtx/content/docview.xml#document-view">
+
+    <content>
+      <xul:vbox flex="1">
+        <xul:browser anonid="browser" src="about:blank"
+                     type="content" flex="1"/>
+      </xul:vbox>
+    </content>
+
+    <implementation>
+      <property name="allowSidebar" readonly="true" onget="return false"/>
+      <constructor>
+<![CDATA[
+]]>
+      </constructor>
+      <method name="open">
+        <parameter name="project"/>
+        <parameter name="doc"/>
+        <body>
+<![CDATA[
+  this._editor = document.getAnonymousElementByAttribute(this, "anonid",
+    "browser");
+  this._controller = new ScheduleController(this);
+  this._project = project;
+  this._document = doc;
+  this.controller.open();
+]]>
+        </body>
+      </method>
+      <method name="focus">
+        <body>
+<![CDATA[
+  // Insert at 0 to capture cmd-print before the generic controller
+  window.controllers.insertControllerAt(0, this.controller);
+  this.editor.setAttribute("type", "content-primary");
+  var calview = document.getElementById("calendar-view");
+  calview.focus();
+  this.controller.focus();
+  document.getElementById("calendar-deck").selectedIndex = 1;
+]]>
+        </body>
+      </method>
+      <method name="blur">
+        <body>
+<![CDATA[
+  if (this.inPrintPreview)
+    PrintUtils.exitPrintPreview();
+  // this._focusedElement = document.commandDispatcher.focusedElement;
+  this.editor.setAttribute("type", "content");
+  this.controller.blur();
+  window.controllers.removeController(this.controller);
+  document.getElementById("calendar-deck").selectedIndex = 0;
+]]>
+        </body>
+      </method>
+      <method name="close">
+        <body>
+<![CDATA[
+  this.controller.close();
+  return true;
+]]>
+        </body>
+      </method>
+      <method name="save">
+        <body>
+<![CDATA[
+]]>
+        </body>
+      </method>
+    </implementation>
+  </binding>
+
+</bindings>
+

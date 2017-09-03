@@ -1,0 +1,154 @@
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+
+html {
+  background-color: silver;
+}
+
+body {
+  font-family: monospace;
+  font-size: 10pt;
+  min-width: 666px;
+  text-align: center;
+  margin: 0;
+}
+
+#titlepage-title, #titlepage-author {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+#titlepage-source {
+  text-align: center;
+}
+
+textarea {
+  border: 1px black dotted;
+}
+
+.container {
+width: 666px;
+margin: 0px auto;
+text-align: left;
+/* height: 62em; */
+}
+
+.page {
+background-color:white;
+border: 1px solid;
+padding: 4em;
+height: 44em;
+}
+
+div.titleblock {
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 6em;
+}
+
+div.title {
+  margin-bottom: 1em;
+}
+
+div.byline {
+  margin-bottom: 1em;
+}
+
+div.author {
+}
+
+div.source {
+  margin-top: 4em;
+}
+
+.bottomblock{
+margin-top: 8em;
+}
+
+textarea.rights {
+  float: left;
+}
+
+textarea.contact {
+  float: right;
+  text-align: right;
+}
+
+@media print {
+  body {
+    font-size: 12pt;
+    margin-left:-0.5in;
+  }
+
+  .page {
+    border: none !important;
+    height: 0;
+  }
+
+  input {
+    border: none;
+  }
+  /*
+  div.titleblock {
+  margin-top:0.8in;
+  }
+  */
+  
+  textarea {
+    border: none;
+    font-size: 12pt;
+  }
+
+  div.byline {
+    padding-left: 3ex;
+  }
+  
+  #titlepage-rights  {
+  margin-top:0;
+  font-size: 12pt;
+  padding: 0;
+  width: 2.5in;
+  height: 1.2in;
+  
+
+  }
+  
+  #titlepage-contact {
+  font-size: 12pt;
+  margin-top:0;
+  text-align:right;
+  padding: 0;
+  width: 2.5in;
+  height: 1.2in;
+  
+  }
+  /*
+  div.bottomblock {
+  margin-top: 3in;
+  }
+  */
+  
+} 

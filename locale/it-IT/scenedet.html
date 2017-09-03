@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>Scene Details</title>
+<style>
+body {
+margin: 20px;
+font-family: helvetica, arial, verdana;
+font-size: 12px;
+}
+textarea {
+height:100px;
+width: 90%;
+font-family: helvetica, arial, verdana;
+font-size: 12px;
+padding: 1px;
+}
+p {
+float: left;
+width: 50%;
+}
+br {
+clear: both;
+}
+
+input {
+width:90%;
+}
+
+.container {
+margin-bottom: 15px;
+}
+
+.scene {
+  background-color: lightgreen;
+  border: 1px solid green;
+  padding: 5px 2px 5px 10px;
+  font-weight: normal;
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-topright: 6px;
+}
+
+.contents {
+  border: 1px solid green;
+  border-top: 0px;
+  background-color: #FFFFFF;
+  -moz-border-radius-bottomleft: 6px;
+  -moz-border-radius-bottomright: 6px;
+  padding: 5px 0px 8px 20px;
+}
+</style>
+</head>
+<body>
+<form>
+
+<div class="container">
+<div class="scene"><span style="font-weight:bold;">Dettagli della scena </span></div>
+<div class="contents">
+<p>Qual &egrave; l'evento centrale nella scena ?<br />
+<textarea type="text" name="scene-event"></textarea></p>
+<p>Come questo influenza tutta la sceneggiatura ?<br />
+<textarea type="text" name="scene-plot"></textarea></p>
+<br />
+<p>Quali personaggi sono nella scena ?<br />
+<textarea type="text" name="scene-char"></textarea></p>
+<p>Qual e la configurazione della scena ?<br />
+<textarea type="text" name="scene-set"></textarea></p>
+<br />
+<p>Quando questa scena viene girata ?<br />
+<textarea type="text" name="scene-when"></textarea></p>
+<p>Qual e l'umore della scena ?<br />
+<textarea type="text" name="scene-mood"></textarea></p>
+
+<br />
+</div>
+</div>
+
+<div class="container">
+<div class="scene"><span style="font-weight:bold;">Protagonista/Antagonista</span></div>
+<div class="contents">
+<p>Chi &egrave; il protagonista della scena ?<br />
+<input type="text" name="protagonist" /></p>
+<p>Chi &egrave; l'antagonista della scena ?<br />
+<input type="text" name="antagonist" /></p>
+<br />
+<p>Qual &egrave; lo scopo del protagonista in questa scena ?<br />
+<textarea type="text" name="pro_goal"></textarea></p>
+<p>Qual &egrave; lo scopo del antagonista in questa scena ?<br />
+<textarea type="text" name="an_goal"></textarea></p>
+<br />
+<p>Come il protagonista raggiunge il proprio scopo ?<br />
+<textarea type="text" name="pro_achieve"></textarea></p>
+<p>Come l'antagonista raggiunge il proprio scopo ?<br />
+<textarea type="text" name="an_achieve"></textarea></p>
+<br />
+</div>
+</div>
+
+
+</form>
+</body>
+</html>

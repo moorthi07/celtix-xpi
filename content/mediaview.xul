@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<?xml-stylesheet href="chrome://celtx/content/celtx.css" type="text/css"?>
+<?xul-overlay href="chrome://celtx/content/menuoverlay.xul"?>
+
+<!DOCTYPE window [
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<window
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  title="&mediaViewer.title;"
+  id="media-view"
+  onload="loaded()">
+
+  <script type="application/x-javascript"
+          src="chrome://global/content/globalOverlay.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/util.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/mediaview.js"/>
+
+  <stringbundleset>
+    <stringbundle id="celtx-bundle"
+                 src="chrome://celtx/locale/celtx.properties"/>
+  </stringbundleset>
+
+  <keyset id="file-keyset" />
+  <commandset id="file-command-set" />
+#ifdef XP_MACOSX
+  <keyset id="window-keyset" />
+  <commandset id="window-command-set" />
+#endif
+
+#ifdef XP_MACOSX
+  <toolbox>
+    <menubar>
+      <menu id="file-menu" />
+      <menu id="window-menu" />
+    </menubar>
+  </toolbox>
+#endif
+
+  <deck id='media-deck'>
+    <box>
+      <html:embed id='media-embed' flex='1'
+                  width='480' height='360'
+                  controller='TRUE' autoplay='true'
+                  uiMode='full' autoStart='1'/>
+    </box>
+    <box pack='center' align='center' flex='1'>
+      <image id='media-image' onload='window.sizeToContent()'/>
+    </box>
+  </deck>
+</window>
+

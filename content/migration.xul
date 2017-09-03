@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<?xml-stylesheet href="chrome://celtx/content/celtx.css" type="text/css"?> 
+
+<!DOCTYPE wizard [
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<wizard id="migration-wizard"
+        title="&migWiz.title;"
+        onload="loaded()"
+        onwizardcancel="return canceled();"
+        onwizardfinish="return finished();"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/util.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/rdfmodel.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/migration.js"/>
+
+  <stringbundleset>
+    <stringbundle id="celtx-bundle"
+                  src="chrome://celtx/locale/celtx.properties"/>
+  </stringbundleset>
+
+
+  <wizardpage label="&migWiz.title;"
+              onpageshow="showStart()">
+
+    <description>&migWiz.prevVersionDetected;</description>
+
+    <separator/>
+
+    <description>&migWiz.aboutThis;</description>
+
+    <separator/>
+
+    <description>&migWiz.clickNext;</description>
+
+  </wizardpage>
+
+
+  <wizardpage label="&migWiz.optionsLabel;"
+              onpageshow="showOptions()">
+
+    <description>&migWiz.chooseOption;</description>
+
+    <separator/>
+
+    <vbox>
+
+      <radiogroup id="import-options" onselect="optionSelected()">
+        <radio label="&migWiz.optionImport;"
+               value="1"/>
+        <radio label="&migWiz.optionNoImport;"
+               value="0"/>
+      </radiogroup>
+
+    </vbox>
+
+  </wizardpage>
+
+
+  <wizardpage label="&migWiz.migratingLabel;"
+              onpageshow="showMigrating()">
+
+    <vbox id="import-progress">
+      <description id="import-message" value=""/>
+      <progressmeter id="import-meter" mode="determined"/>
+    </vbox>
+
+  </wizardpage>
+
+
+  <wizardpage label="&migWiz.doneLabel;"
+              onpageshow="showDone()">
+
+    <description id="done-message"/>
+
+    <separator/>
+
+    <description>&migWiz.clickFinish;</description>
+
+  </wizardpage>
+
+</wizard>

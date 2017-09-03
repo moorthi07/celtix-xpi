@@ -1,0 +1,81 @@
+<html>
+
+  <head>
+    <style type="text/css">
+      body {
+       font-family: helvetica, arial, sans-serif;
+      }
+      span[cmd] {
+        color: blue;
+      }
+      span[cmd]:hover {
+        color: red;
+        cursor: pointer;
+      }
+      ul {
+        list-style: none;
+      }
+      #container {
+        margin: 25px;
+      }
+      #welcome {
+        padding-top: 0.5em;
+      }
+      .message, .warning {
+        font-weight: bold;
+        padding: 5px;
+        width: 50%;
+      }
+      .message {
+        background-color: lightgreen;
+        border: 2px solid green;
+      }
+      .warning {
+        background-color: yellow;
+        border: 2px solid red;
+      }
+      a {
+        color: black;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div id="container">
+
+      <div id="splash"><img src="chrome://celtx/content/splash.png"></div>
+
+      <div id="notification"></div>
+
+      <div id="welcome">Welcome to Celtx. Version <span id="version"></span>.</div>
+
+      <div id="links">
+
+        <p>Projects:</p>
+        <ul id="projects-list">
+          <li><span cmd="cmd-new-project">Start a new project</span></li>
+          <li><span cmd="cmd-open-project">Open an existing project</span></li>
+        </ul>
+
+        <p>Web Services:</p>
+        <ul id="services-list">
+          <li><span cmd="cmd-help-account">Create an account</span></li>
+          <li><span cmd="cmd-download-project">Download a project</span></li>
+          <li><span cmd="cmd-goto-projcentral">Project Central</span></li>
+        </ul>
+
+        <p>Help:</p>
+        <ul id="help-list">
+          <li><span cmd="cmd-goto-walkthru">3 Minute Walkthru</span></li>
+          <li><span cmd="cmd-goto-guide">Celtx User Guide</span></li>
+          <li><span cmd="cmd-goto-forums">Celtx Forums</span></li>
+        </ul>
+
+      </div>
+
+    </div>
+
+  </body>
+
+</html>

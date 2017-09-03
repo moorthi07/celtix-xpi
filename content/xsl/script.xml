@@ -1,0 +1,157 @@
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!DOCTYPE stylesheet [
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+%browserDTD;
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	        version="1.0">
+
+<xsl:output method="html" version="4.0"/>
+
+<xsl:param name="show-title-page">0</xsl:param>
+
+<xsl:template match="html">
+  <html>
+    <head>
+      <title>&script.label;</title>
+      <xsl:choose>
+        <xsl:when test="head/style != ''">
+          <link rel="stylesheet" type="text/css"
+                href="chrome://celtx/content/scriptdefaults.css"/>
+          <style type="text/css">
+            <xsl:value-of select="head/style" />
+          </style>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:apply-templates select="head/link"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </head>
+    <body class="report">
+      <xsl:if test="$show-title-page = 1">
+        <xsl:call-template name="title-page">
+          <xsl:with-param name="head" select="head"/>
+        </xsl:call-template>
+      </xsl:if>
+      <xsl:apply-templates select="/html/body/p"/>
+    </body>
+  </html>
+</xsl:template>
+
+<xsl:template match="link">
+  <link>
+    <xsl:for-each select="@*">
+      <xsl:copy/>
+    </xsl:for-each>
+  </link>
+</xsl:template>
+
+<xsl:template match="p[@class='sceneheading']">
+  <xsl:variable name="scene-num"
+                select="count(preceding-sibling::p[@class='sceneheading']) + 1"/>
+  <xsl:variable name="numbering"
+                select="/html/head/meta[@name='CX.sceneNumbering']/@content"/>
+
+  <xsl:if test="$numbering = 'left' or $numbering = 'both'">
+    <div class="scene-num-left">
+      <xsl:value-of select="$scene-num"/>
+    </div>
+  </xsl:if>
+
+  <xsl:if test="$numbering = 'right' or $numbering = 'both'">
+    <div class="scene-num-right">
+      <xsl:value-of select="$scene-num"/>
+    </div>
+  </xsl:if>
+
+  <p>
+    <xsl:for-each select="@*">
+      <xsl:copy/>
+    </xsl:for-each>
+    <xsl:apply-templates/>
+  </p>
+</xsl:template>
+
+<xsl:template match="p">
+  <p class="{@class}"><xsl:apply-templates/></p>
+</xsl:template>
+
+<xsl:template match="span[@class='note']">
+</xsl:template>
+
+<xsl:template match="span[@style!='']">
+  <span style="{@style}"><xsl:apply-templates/></span>
+</xsl:template>
+
+<xsl:template match="span">
+  <xsl:apply-templates/>
+</xsl:template>
+
+<xsl:template match="br">
+  <br/>
+</xsl:template>
+
+<xsl:template name="title-page">
+  <xsl:param name="head"/>
+  <xsl:if test="$head/title != ''">
+    <div class="title-page">
+      <div class="tp-title">
+        <xsl:value-of select="$head/title"/>
+      </div>
+      <xsl:if test="$head/meta[@name='Author']/@content != ''">
+        <div class="tp-by">&report.titleBy;</div>
+        <div class="tp-author">
+          <xsl:value-of select="$head/meta[@name='Author']/@content"/>
+        </div>
+      </xsl:if>
+      <xsl:if test="$head/meta[@name='DC.source']/@content != ''">
+        <div class="tp-source">
+          &report.titleBasedOn; <xsl:value-of select="$head/meta[@name='DC.source']/@content"/>
+        </div>
+      </xsl:if>
+      <xsl:if test="$head/meta[@name='DC.rights']/@content != ''">
+        <div class="tp-rights">
+          &report.titleRights; <xsl:value-of select="$head/meta[@name='DC.rights']/@content"/>
+        </div>
+      </xsl:if>
+      <xsl:if test="$head/meta[@name='CX.contact']/@content != ''">
+        <div class="tp-contact">
+          <xsl:value-of select="$head/meta[@name='CX.contact']/@content"/>
+        </div>
+      </xsl:if>
+    </div>
+  </xsl:if>
+</xsl:template>
+
+
+</xsl:stylesheet>

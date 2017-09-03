@@ -1,0 +1,2645 @@
+<?xml version="1.0"?>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!DOCTYPE bindings [
+<!ENTITY % bindingsDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%bindingsDTD;
+]>
+
+<bindings id="celtx-bindings"
+          xmlns="http://www.mozilla.org/xbl"
+          xmlns:xbl="http://www.mozilla.org/xbl"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+          xmlns:html="http://www.w3.org/1999/xhtml">
+
+  <binding id="script-editor">
+    <resources>
+      <!--
+      <stylesheet src="chrome://celtx/content/editor.css"/>
+      -->
+    </resources>
+
+    <content>
+      <xul:editor editortype="html"
+      xbl:inherits="type,context"
+		  id="content-frame"
+		  flex="1" tooltip="editor-tooltip"/>
+    </content>
+
+    <implementation>
+
+      <field name="editorElement"/>
+      <field name="popup"/>
+
+      <constructor>
+        this.nextStyle = {
+          action:        'action',
+          character:     'dialog',
+          parenthetical: 'dialog',
+          dialog:        'character',
+          sceneheading:  'action',
+          transition:    'sceneheading',
+          shot:          'sceneheading',
+          '':            'action'
+        };
+
+        this.tabStyle = {
+          sceneheading:  'action',
+          action:        'character',
+          character:     'dialog',
+          dialog:        'parenthetical',
+          parenthetical: 'transition',
+          transition:    'shot',
+          shot:          'sceneheading',
+          '':            'action'
+        };
+
+        this._initialized = false;
+        this._onClick = null;
+        this._onCtrlEnter = null;
+      </constructor>
+
+      <property name="pageRegex" readonly="true">
+        <getter>
+  return /(chrome:\/\/celtx-platform\/content\/)(\w+)-(\w+)(.*\.css)/;
+        </getter>
+      </property>
+
+      <property name="editor">
+        <getter>
+          var e;
+          try {
+            e = this.editorElement.getHTMLEditor(
+              this.editorElement.contentWindow);
+          } catch (ex) {
+            dump("can't get editor: " + ex + "\n");
+            e = null;
+          }
+          return e;
+        </getter>
+      </property>
+
+      <property name="scrollY">
+        <getter>
+          return this.editorElement.contentWindow.scrollY;
+        </getter>
+        <setter>
+          var cw = this.editorElement.contentWindow;
+          cw.scrollTo(cw.scrollX, val);
+          return val;
+        </setter>
+      </property>
+
+      <property name="zoomed">
+        <getter>
+          <![CDATA[
+const IHTMLLinkElement = Components.interfaces.nsIDOMHTMLLinkElement;
+var doc = this.editorElement.contentDocument;
+if (! doc)
+  return false;
+// On a match, re returns:
+// [ full string, prefix, page type, zoom level, suffix ]
+var re = new RegExp(this.pageRegex);
+var sheets = doc.styleSheets;
+for (var i = 0; i < sheets.length; ++i) {
+  var sheet = sheets[i];
+  var pageSettings = re.exec(sheet.href);
+  if (pageSettings)
+    return pageSettings[3] == "Large";
+}
+return false;
+          ]]>
+        </getter>
+        <setter>
+          <![CDATA[
+const IHTMLLinkElement = Components.interfaces.nsIDOMHTMLLinkElement;
+var zoomed = val;
+var doc = this.editorElement.contentDocument;
+if (! doc)
+  return false;
+// On a match, re returns:
+// [ full string, prefix, page type, zoom level, suffix ]
+var re = new RegExp(this.pageRegex);
+var sheets = doc.styleSheets;
+for (var i = 0; i < sheets.length; ++i) {
+  var sheet  = sheets[i];
+  var pageSettings = re.exec(sheet.href);
+  if (pageSettings) {
+    var link = sheet.ownerNode;
+    var scrollY = this.scrollY;
+    if (zoomed && pageSettings[3] == "Normal") {
+      var newLink = link.cloneNode(false).QueryInterface(IHTMLLinkElement);
+      newLink.href = pageSettings[1] + pageSettings[2] + "-Large"
+        + pageSettings[4];
+      link.parentNode.replaceChild(newLink, link);
+      this.scrollY = Math.ceil(scrollY * 4 / 3);
+      break;
+    }
+    else if (! zoomed && pageSettings[3] == "Large") {
+      var newLink = link.cloneNode(false).QueryInterface(IHTMLLinkElement);
+      newLink.href = pageSettings[1] + pageSettings[2] + "-Normal"
+        + pageSettings[4];
+      link.parentNode.replaceChild(newLink, link);
+      this.scrollY = Math.ceil(scrollY * 3 / 4);
+      break;
+    }
+  }
+}
+return zoomed;
+          ]]>
+        </setter>
+      </property>
+
+      <property name="pageHeight">
+        <getter>
+          <![CDATA[
+          const kLineHeight = isMac() ? 13 : 16;
+          const kLinesPerPage = 51;
+          var pixelsPerPage = kLineHeight * kLinesPerPage;
+          if (this.zoomed)
+            pixelsPerPage = pixelsPerPage * 4 / 3;
+          return pixelsPerPage;
+          ]]>
+        </getter>
+      </property>
+
+      <property name="pageCount">
+        <getter>
+          <![CDATA[
+          const CI = Components.interfaces;
+          const CC = Components.classes;
+
+          if (!this.editorElement.docShell ||
+            this.editorElement.docShell.busyFlags !=
+            CI.nsIDocShell.BUSY_FLAGS_NONE) {
+            return -1;
+          }
+
+          var height = this.editorElement.contentDocument.height;
+          numPages = Math.ceil(height / this.pageHeight);
+          return numPages;
+          ]]>
+        </getter>
+      </property>
+
+      <property name="scene">
+        <getter>
+        <![CDATA[
+          var node = this.editor.selection.focusNode;
+          var para = this.editor.getElementOrParentByTagName('p', node);
+          if (! para) return;
+          return this.sceneContaining(para);
+        ]]>
+        </getter>
+      </property>
+
+      <property name="sceneCount" readonly="true">
+        <getter>
+        <![CDATA[
+          var xpath = new XPathEvaluator();
+          var rv = xpath.evaluate('count(/html/body/p[@class="sceneheading"])',
+                                  this.editor.document,
+                                  null,
+                                  XPathResult.NUMBER_TYPE,
+                                  null);
+          return rv.numberValue;
+        ]]>
+        </getter>
+      </property>
+
+      <property name="currentBlock" readonly="true">
+        <getter>
+        <![CDATA[
+          var node = this.editor.selection.focusNode;
+          return this.editor.getElementOrParentByTagName('p', node);
+        ]]>
+        </getter>
+      </property>
+
+      <property name="documentIsBlank" readonly="true">
+        <getter>
+        <![CDATA[
+          var rv;
+          var xpath = new XPathEvaluator();
+
+          rv = xpath.evaluate('//p',
+                              this.editor.document,
+                              null,
+                              XPathResult.FIRST_ORDERED_NODE_TYPE,
+                              null);
+          if (rv.singleNodeValue) return false;
+
+          rv = xpath.evaluate('//text()[normalize-space(string()) != ""]',
+                              this.editor.document,
+                              null,
+                              XPathResult.FIRST_ORDERED_NODE_TYPE,
+                              null);
+          if (rv.singleNodeValue) return false;
+
+          return true;
+        ]]>
+        </getter>
+      </property>
+
+      <property name="inMarkup" readonly="true">
+        <getter>
+        <![CDATA[
+          var node = this.editor.selection.focusNode;
+          var span = this.editor.getElementOrParentByTagName('span', node);
+          return (span && span.hasAttribute('ref'));
+        ]]>
+        </getter>
+      </property>
+
+      <property name="currentMarkup" readonly="true">
+        <getter>
+        <![CDATA[
+          var node = this.editor.selection.focusNode;
+          var span = this.editor.getElementOrParentByTagName('span', node);
+          if (! span) return null;
+          return span.getAttribute('ref');
+        ]]>
+        </getter>
+      </property>
+
+      <property name="isTextSelected" readonly="true">
+        <getter>
+        <![CDATA[
+          var sel = this.editor.selection;
+          if (sel.isCollapsed) return false;
+          var node = this.editor.getSelectionContainer();
+          if (node && node.className == 'note') return false;
+          return true;
+        ]]>
+        </getter>
+      </property>
+
+      <property name="modificationCount" readonly="true"
+                onget="return this.editor.getModificationCount()"/>
+
+      <property name="documentModified" readonly="true"
+                onget="return this.editor.documentModified"/>
+
+      <property name="parenRegex" readonly="true"
+                onget="return /^\s*\(.*\)\s*$/"/>
+
+      <property name="doc" readonly="true"
+                onget="return this.editor.document"/>
+
+      <property name="documentCharacterSet" readonly="true"
+                onget="return this.editor.documentCharacterSet"/>
+
+      <property name="onClick"
+                onget="return this._onClick"
+                onset="this._onClick = val; return val;"/>
+
+      <!-- Wrappers -->
+      <property name="selection"
+                onget="return this.editor.selection"/>
+
+      <property name="title"
+                onget="return this.editorElement.contentDocument.title;"
+                onset="this.editor.setDocumentTitle(val); return val;"/>
+
+      <method name="init">
+        <body>
+          <![CDATA[
+          this.editorElement = document.getAnonymousNodes(this)[0];
+          this.editorElement.makeEditable('html', true);
+
+          this._initialized = true;
+          ]]>
+        </body>
+      </method>
+
+      <method name="load">
+        <parameter name="url"/>
+        <body>
+          <![CDATA[
+          const CI = Components.interfaces;
+
+          dump("editor.load: " + url + "\n");
+
+          // if (! this._initialized) this.init();
+
+          try {
+            var e = this.editorElement;
+	    e.webNavigation.loadURI(url, CI.nsIWebNavigation.LOAD_FLAGS_BYPASS_CACHE,
+                                    null, null, null);
+          }
+          catch (ex) {
+            dump("editor.load: " + ex + "\n");
+          }
+          ]]>
+        </body>
+      </method>
+
+      <method name="reload">
+        <body>
+          <![CDATA[
+          const CI = Components.interfaces;
+          try {
+            var e = this.editorElement;
+            e.webNavigation.reload(CI.nsIWebNavigation.LOAD_FLAGS_IS_REFRESH);
+          }
+          catch (ex) {
+            dump("editor.refresh: " + ex + "\n");
+          }
+          ]]>
+        </body>
+      </method>
+
+      <method name="unload">
+        <body>
+          <![CDATA[
+            this.load('about:blank');
+          ]]>
+        </body>
+      </method>
+
+      <method name="update">
+        <body>
+        <![CDATA[
+          var mgr = this.editorElement.commandManager;
+          mgr = mgr.QueryInterface(Components.interfaces.nsPICommandUpdater);
+          mgr.commandStatusChanged('cmd_bold');
+        ]]>
+        </body>
+      </method>
+
+      <method name="sceneContaining">
+        <parameter name="para"/>
+        <body>
+        <![CDATA[
+          if (! para) return;
+
+          try {
+            var xpath = new XPathEvaluator();
+            var str = "(self::p[@class='sceneheading']" + 
+                      "| preceding-sibling::p[@class='sceneheading'])[last()]";
+            var rv = xpath.evaluate(str, para, null,
+                                    XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+            return rv.singleNodeValue;
+          }
+          catch (ex) {
+            dump("sceneContaining: " + ex + "\n");
+          }
+        ]]>
+        </body>
+      </method>
+      
+      <method name="formatDefault">
+        <body>
+        <![CDATA[
+          // TODO: make dynamic - if no scenes make scene, else action?
+          this.editor.setParagraphFormat('p');
+          this.formatBlock(this.currentBlock, 'sceneheading');
+          return this.currentBlock;
+        ]]>
+        </body>
+      </method>
+
+      <method name="avoidBlankNodes">
+        <body>
+        <![CDATA[
+          var sel = this.editor.selection;
+          if (! sel.isCollapsed) return;
+
+          if (! (sel.focusNode.nodeType == Node.ELEMENT_NODE &&
+                 sel.focusNode.localName == 'BODY')) return;
+          
+          try {
+            var ed  = this.editor;
+            var rng = ed.selection.getRangeAt(0);
+            if (rng.startOffset == 0) return;
+            var nd  = ed.document.body.childNodes[rng.startOffset - 1];
+
+            if (nd.nodeType == Node.TEXT_NODE && nd.nodeValue.match(/\S+/)) return;
+
+            while (nd && ! ed.nodeIsBlock(nd)) nd = nd.previousSibling;
+            if (! nd) return;
+
+            var cn = nd.lastChild;
+            while (cn) {
+              if (cn.nodeType == Node.ELEMENT_NODE && cn.localName != 'BR') break;
+              if (cn.nodeType == Node.TEXT_NODE && cn.nodeValue.match(/\S+/)) break;
+              cn = cn.previousSibling;
+            }
+
+            if (cn) {
+              sel.removeAllRanges();
+              var nrng = ed.document.createRange();
+              nrng.selectNode(cn);
+              nrng.collapse(false);
+              sel.addRange(nrng);
+            }
+            else {
+              ed.insertNode(ed.document.createTextNode(''), nd, 0);
+            }
+ 
+            return this.currentBlock;
+          }
+          catch (ex) {
+            dump("avoidBlankNodes: " + ex + "\n");
+          }
+        ]]>
+        </body>
+      </method>
+
+      <method name="_load">
+        <parameter name="url"/>
+        <body>
+          try {
+            this.editorElement.webNavigation.loadURI(url,
+              Components.interfaces.nsIWebNavigation.LOAD_FLAGS_BYPASS_CACHE,
+              null, null, null);
+          }
+          catch (ex) {
+            dump("_load: " + ex + "\n");
+          }
+        </body>
+      </method>
+
+      <method name="insertText">
+        <parameter name="str"/>
+        <body>
+          try {
+            this.editor.insertHTML(str);
+          } catch (ex) { dump(ex + "\n"); }
+        </body>
+      </method>
+
+      <method name="deleteSelection">
+        <body>
+          try {
+            this.editor.deleteSelection(0);
+          } catch (ex) { dump(ex + "\n"); }
+        </body>
+      </method>
+
+      <method name="resetModificationCount">
+        <body>
+          this.editor.resetModificationCount();
+        </body>
+      </method>
+
+      <method name="mutateClipboard">
+        <body>
+        <![CDATA[
+          var clipboard = getClipboard();
+          var xferable = getTransferable();
+
+          xferable.addDataFlavor('text/html');
+          clipboard.getData(xferable, clipboard.kGlobalClipboard);
+          
+          var data = {};
+          var dataLen = {};
+          var trans = getTransferable();
+
+          xferable.getTransferData('text/html', data, dataLen);
+          trans.addDataFlavor('text/html');
+          trans.setTransferData('text/html', data.value, dataLen.value);
+
+
+          var uxferable = getTransferable();
+          uxferable.addDataFlavor('text/unicode');
+          clipboard.getData(uxferable, clipboard.kGlobalClipboard);
+          var udata = {};
+          var udataLen = {};
+          uxferable.getTransferData('text/unicode', udata, udataLen);
+          trans.addDataFlavor('text/unicode');
+          trans.setTransferData('text/unicode', udata.value, udataLen.value);
+
+          var cxtxt = 'celtx';
+          var str = createSupportsString(cxtxt);
+          trans.addDataFlavor('text/x-celtx');
+          trans.setTransferData('text/x-celtx', str, cxtxt.length * 2);
+
+          clipboard.setData(trans, null, clipboard.kGlobalClipboard);
+        ]]>
+        </body>
+      </method>
+
+      <method name="hasEditorFlavour">
+        <parameter name="clipboard"/>
+        <body>
+        <![CDATA[
+          var flavours = createSupportsArray();
+          flavours.AppendElement(createSupportsCString('text/x-celtx'));
+          return clipboard.hasDataMatchingFlavors(flavours,
+                                                  clipboard.kGlobalClipboard);
+        ]]>
+        </body>
+      </method>
+
+      <method name="copy">
+        <body>
+        <![CDATA[
+          try {
+            this.editor.copy();
+            this.mutateClipboard();
+          }
+          catch (ex) {
+            dump("copy: " + ex + "\n");
+          }
+        ]]>
+        </body>
+      </method>
+
+      <method name="cut">
+        <body>
+          try {
+            this.editor.cut();
+            this.mutateClipboard();
+          }
+          catch (ex) {
+            dump("cut: " + ex + "\n");
+          }
+        </body>
+      </method>
+
+      <method name="paste">
+        <body>
+        <![CDATA[
+          try {
+            var clipboard = getClipboard();
+
+            if (this.hasEditorFlavour(clipboard)) {
+              dump("text/x-celtx\n");
+              this.editor.paste(1);  // 1 == SELECTION_NORMAL
+            }
+            else {
+              this.editor.pasteNoFormatting(1);  // 1 == SELECTION_NORMAL
+            }
+
+          }
+          catch (ex) {
+            dump("paste: " + ex + "\n");
+          }
+        ]]>
+        </body>
+      </method>
+
+      <method name="scriptClicked">
+        <parameter name="event"/>
+        <body>
+          try {
+            if (this._onClick) this._onClick(event);
+          } catch (ex) { dump(ex); }
+        </body>
+      </method>
+
+      <method name="toggleStyle">
+        <parameter name="style"/>
+        <body>
+        <![CDATA[
+          // Adapted from ComposerCommands.js
+          try
+          {
+            var cmdParams = Components.classes[
+              "@mozilla.org/embedcomp/command-params;1"]
+              .createInstance(Components.interfaces.nsICommandParams);
+            var dispatcher = document.commandDispatcher;
+            var cmd = 'cmd_' + style;
+            var ctl = dispatcher.getControllerForCommand(cmd);
+            if (ctl && ctl.isCommandEnabled(cmd))
+            {
+              if (ctl instanceof Components.interfaces.nsICommandController)
+              {
+                ctl.doCommandWithParams(cmd, cmdParams);
+                if (cmdParams)
+                  ctl.getCommandStateWithParams(cmd, cmdParams);
+              }
+              else
+                ctl.doCommand(cmd);
+            }
+            else
+            {
+              if (ctl)
+                dump("*** toggleStyle: " + cmd + " not enabled\n");
+              else
+                dump("*** toggleStyle: No controller for " + cmd + "\n");
+            }
+          }
+          catch (ex)
+          {
+            dump("*** toggleStyle: " + ex + "\n");
+          }
+        ]]>
+        </body>
+      </method>
+
+      <method name="markup">
+        <parameter name="type"/>
+        <parameter name="ref"/>
+        <body>
+          this.editor.beginTransaction();
+          try {
+            if (this.editor.selection.isCollapsed) {
+              var elem = this.editor.createElementWithDefaults('span');
+              elem.className = type;
+              elem.setAttribute('ref', ref);
+              elem.setAttribute('token', true);
+              this.editor.insertElementAtSelection(elem, false);
+            }
+            else {
+              var as = getAtomService();
+              var atom = as.getAtom('span');
+              this.editor.setInlineProperty(atom, 'class', type);
+              this.editor.setInlineProperty(atom, 'ref', ref);
+            }
+          }
+          catch (ex) {
+            dump("markup: " + ex + "\n");
+          }
+          this.editor.endTransaction();
+        </body>
+      </method>
+
+      <method name="unmarkup">
+        <body>
+          // XXX maybe should specifically remove with removeInlineProperty
+          this.editor.removeAllInlineProperties();
+        </body>
+      </method>
+
+      <method name="removeReferences">
+        <parameter name="item"/>
+        <body>
+        <![CDATA[
+          var xpath = new XPathEvaluator();
+          var list  = [];
+          var xset, e;
+          var str = '//*[@ref="' + item + '"]';
+
+          try {
+            xset = xpath.evaluate(str, this.editor.document, null, 0, null);
+            while (e = xset.iterateNext()) list.push(e);
+            for (var i = 0; i < list.length; i++) {
+              this.editor.selectElement(list[i]);
+              // XXX maybe should specifically remove with removeInlineProperty 
+              this.editor.removeAllInlineProperties();
+            }
+          }
+          catch (ex) {
+            dump("removeReferences: " + ex + "\n");
+          }
+        ]]>
+        </body>
+      </method>
+
+      <method name="cleanup">
+        <body>
+        <![CDATA[
+          var xpath = new XPathEvaluator();
+          var list  = [];
+          var xset, e, pn;
+          var str = '//p[not(br) and not(span[@token]) ' +
+                    'and normalize-space(string(.)) = ""]';
+
+          try {
+            xset = xpath.evaluate(str, this.editor.document, null, 0, null);
+            while (e = xset.iterateNext()) list.push(e);
+            for (var i = 0; i < list.length; i++) {
+              dump(">>> editor cleanup: found an empty P\n");
+              pn = list[i].parentNode;
+              pn.removeChild(list[i]);
+            }
+          }
+          catch (ex) {
+            dump("cleanup: " + ex + "\n");
+          }
+        ]]>
+        </body>
+      </method>
+      
+
+      <!-- Currently unused -->
+      <method name="hasRefs">
+        <body>
+          try {
+            var as = getAtomService();
+            var atom = as.getAtom('span');
+            var hasFirst = { value: false };
+            var hasAny   = { value: false };
+            var hasAll   = { value: false };
+            this.editor.getInlineProperty(atom, 'ref', null, hasFirst, hasAny, hasAll);
+            dump(hasAny.value ? "has refs\n" : "no refs\n");
+          } catch (ex) { dump("hasRefs: " + ex + "\n"); }
+        </body>
+      </method>
+
+      <method name="debugDump">
+        <body>
+          try {
+            var str = this.editor.outputToString('text/html', 2);
+            dump("\n==================================================\n" +
+                 str +
+                 "\n==================================================\n");
+          } catch (ex) { dump("dump: " + ex + "\n"); }
+        </body>
+      </method>
+
+      <method name="handleTab">
+        <body>
+        <![CDATA[
+          try {
+            var blk = this.currentBlock;
+            if (! blk) return;
+
+            if (! this.tabStyle[blk.className]) return;
+
+            this.editor.beginTransaction();
+            this.formatBlock(blk, this.tabStyle[blk.className]);
+            this.editor.endTransaction();
+            this.update();
+          }
+          catch (ex) {
+            dump("handleTab: " + ex + "\n");
+          }
+        ]]>
+        </body>
+      </method>
+
+      <method name="previousBlock">
+        <parameter name="node"/>
+        <body>
+        <![CDATA[
+          while (node && node.previousSibling) {
+            node = node.previousSibling;
+            if (this.editor.nodeIsBlock(node)) return node;
+          }
+          return null;
+        ]]>
+        </body>
+      </method>
+
+      <method name="maybeScroll">
+        <body>
+        <![CDATA[
+          var node = this.editor.getSelectionContainer();
+          var win  = this.editorElement.contentWindow;
+          var doc  = this.editor.document;
+
+          var y  = doc.getBoxObjectFor(node).y;
+          var yo = win.pageYOffset;
+          var h  = win.innerHeight;
+          // dump("  h: " + h + ", y: " + y + ", yo: " + yo + "\n");
+          if (y >= yo + (h * 0.9)) {
+            // dump("  scrolling\n");
+            win.scrollTo(0, y - h / 2);
+          }
+        ]]>
+        </body>
+      </method>
+
+
+      <method name="handleEnter">
+        <body>
+        <![CDATA[
+          try {
+            var sel = this.editor.selection;
+            if (! sel.isCollapsed) {
+              sel.collapseToEnd();
+              return;
+            }
+
+            this.editor.beginTransaction();
+
+            var blk = this.currentBlock;
+            if (! blk) {
+              this.editor.setParagraphFormat('p');
+              blk = this.currentBlock;
+            }
+
+            if (this.atEndOfBlock(blk, sel)) {
+              this.insertBlockAfter(blk);
+            }
+            else if (this.atStartOfBlock(blk, sel)) {
+              this.insertBlockBefore(blk);
+            }
+            else {
+              this.splitBlock(blk, sel.getRangeAt(0));
+            }
+
+            this.editor.endTransaction();
+          }
+          catch (ex) {
+            dump("handleEnter: " + ex + "\n");
+          }
+
+          this.maybeScroll();
+        ]]>
+        </body>
+      </method>
+
+
+      <method name="atEndOfBlock">
+        <parameter name="block"/>
+        <parameter name="cursor"/>
+        <body>
+        <![CDATA[
+          var an = cursor.anchorNode;
+          var sib;
+
+          // The anchor node is almost always a text node, but in some cases
+          // can be a P or DIV element
+          if (an.nodeType == an.ELEMENT_NODE) {
+            if (cursor.anchorOffset == 0) return false;
+            if (cursor.anchorOffset == an.childNodes.length) return true;
+            var nd = an.childNodes[cursor.anchorOffset];
+            if (nd.nodeType == nd.ELEMENT_NODE && nd.localName == 'BR') {
+              // Clinging to end of BR
+              sib = nd.nextSibling;
+              while (sib) {
+                if (sib.nodeType == sib.TEXT_NODE && sib.nodeValue.match(/\S+/)) {
+                  // Text-node sibling with non-whitespace
+                  return false;
+                }
+                else if (sib.nodeType == sib.ELEMENT_NODE && sib.localName != 'BR') {
+                  // Non-empty element node
+                  return false;
+                }
+                sib = sib.nextSibling;
+              }
+              return true;
+            }
+            return false;
+          }
+
+          sib = an.parentNode == block ? an.nextSibling
+                                       : an.parentNode.nextSibling;
+          while (sib) {
+            if (sib.nodeType == sib.TEXT_NODE
+                && ! sib.nodeValue.match(/^\s*\)\s*$/)
+                && sib.nodeValue.match(/\S+/)) {
+              // Text-node sibling with non-whitespace
+              return false;
+            }
+            else if (sib.nodeType == sib.ELEMENT_NODE && sib.localName != 'BR') {
+              // Non-empty element node
+              return false;
+            }
+            sib = sib.nextSibling;
+          }
+
+          // We're in the last non-blank, non-single-closing paren text node
+          if (an.nodeValue.match(/\)\s*$/)) {
+            // Node has a trailing paren
+            var i = an.nodeValue.lastIndexOf(")");
+            if (cursor.anchorOffset == i) {
+              return true;
+            }
+          }
+
+          var str = an.nodeValue;
+          var len = str.length;
+          var off = cursor.anchorOffset;
+
+          if (len != off) {
+            var rem = str.substr(off);
+            if (rem.match(/^\s+$/)) return true;
+
+            // Otherwise ... we can't be at the end of our block if we're
+            // not at the end of our text node.
+            return false;
+          }
+
+          return true;
+        ]]>
+        </body>
+      </method>
+
+
+      <method name="atStartOfBlock">
+        <parameter name="block"/>
+        <parameter name="cursor"/>
+        <body>
+        <![CDATA[
+          var nd = cursor.anchorNode;
+          if (nd.nodeType == Node.ELEMENT_NODE) return cursor.anchorOffset == 0;
+          if (cursor.anchorOffset > 0) return false;
+          return (nd == block.firstChild ||
+                  (block.firstChild && nd == block.firstChild.firstChild));
+        ]]>
+        </body>
+      </method>
+
+
+      <method name="splitBlock">
+        <parameter name="block"/>
+        <parameter name="cursor"/>
+        <body>
+        <![CDATA[
+          try {
+            var doc    = this.editor.document;
+            var rng    = doc.createRange();
+            var offset = cursor.startOffset;
+            var rnode  = cursor.startContainer;
+            var lnode;
+
+            while (rnode != block.parentNode) {
+              lnode = { value: null };
+              this.editor.splitNode(rnode, offset, lnode);
+              rng.selectNode(rnode);
+              offset = rng.startOffset;
+              rnode  = rng.startContainer;
+            }
+
+            // Set cursor at beginning of right block
+            this.editor.insertNode(doc.createTextNode(''), block, 0);
+          }
+          catch (ex) {
+            dump("splitBlock: " + ex + "\n");
+          }
+        ]]>
+        </body>
+      </method>
+
+
+      <method name="insertBlockAfter">
+        <parameter name="block"/>
+        <body>
+        <![CDATA[
+          if (! block) return;
+          var style = this.determineNextStyle(block);
+          this.editor.setCaretAfterElement(block);
+          this.editor.setParagraphFormat('p');
+          var p = this.editor.getSelectionContainer();
+          // this.editor.setAttribute(p, 'class', style);
+          this.formatBlock(p, style);
+        ]]>
+        </body>
+      </method>
+
+      <method name="determineNextStyle">
+        <parameter name="block"/>
+        <body>
+        <![CDATA[
+          // KLUDGE
+          var fb = this.followingBlock(block);
+          if (fb && fb.className == 'dialog' && block.className == 'character') {
+            return 'parenthetical';
+          }
+          return this.nextStyle[block.className];
+        ]]>
+        </body>
+      </method>
+
+      <method name="followingBlock">
+        <parameter name="block"/>
+        <body>
+        <![CDATA[
+          var xpath = new XPathEvaluator();
+          var rv = xpath.evaluate('following-sibling::p[1]',
+                                  block,
+                                  null,
+                                  XPathResult.FIRST_ORDERED_NODE_TYPE,
+                                  null);
+          if (! rv.singleNodeValue) return;
+          var node = rv.singleNodeValue;
+          node = node.QueryInterface(Components.interfaces.nsIDOMHTMLElement);
+          return node;
+        ]]>
+        </body>
+      </method>
+
+      <method name="styleHint">
+        <body>
+        <![CDATA[
+          try {
+            var sel = this.editor.selection;
+            if (! sel.isCollapsed) return null;
+
+            var blk = this.currentBlock;
+            if (! blk) return null;
+
+            var hint = { tab: this.tabStyle[blk.className] };
+
+            if (this.atEndOfBlock(blk, sel)) {
+              style = this.determineNextStyle(blk);
+              if (style) hint.enter = style;
+            }
+
+            return hint;
+          }
+          catch (ex) {
+            dump("styleHint: " + ex + "\n");
+            return null;
+          }
+        ]]>
+        </body>
+      </method>
+
+      <method name="insertBlockBefore">
+        <parameter name="block"/>
+        <body>
+        <![CDATA[
+          if (! block) return;
+
+          var ed = this.editor;
+          try {
+            ed.setShouldTxnSetSelection(false);
+            var rng = ed.document.createRange();
+            rng.selectNode(block);
+            var p  = ed.createElementWithDefaults('P');
+            var br = ed.createElementWithDefaults('BR');
+            ed.insertNode(br, p, 0);
+            ed.setAttribute(p, 'class', block.className);
+            ed.insertNode(p, block.parentNode, rng.startOffset);
+          }
+          catch (ex) {
+            dump("insertBlockBefore: " + ex + "\n");
+          }
+          finally {
+            ed.setShouldTxnSetSelection(true);
+          }
+        ]]>
+        </body>
+      </method>
+
+
+      <method name="blockTypeOf">
+        <parameter name="node"/>
+        <body>
+        <![CDATA[
+          if (! node) return '';
+          return node.className ? node.className : '';
+        ]]>
+        </body>
+      </method>
+
+      <method name="format">
+        <parameter name="style"/>
+        <body>
+        <![CDATA[
+          this.editor.beginTransaction();
+          try {
+            var blk = this.currentBlock;
+            if (! blk) {
+              this.editor.setParagraphFormat('p');
+              blk = this.currentBlock;
+            }
+            this.formatBlock(blk, style);
+          }
+          catch (ex) {
+            dump("format: " + ex + "\n");
+          }
+          this.editor.endTransaction();
+          this.update();
+        ]]>
+        </body>
+      </method>
+
+      <method name="formatBlock">
+        <parameter name="block"/>
+        <parameter name="style"/>
+        <body>
+        <![CDATA[
+          if (! block) return;
+          this.preFormatHook(block, style);
+          if (style != '') {
+            this.editor.setAttribute(block, 'class', style);
+          }
+          else {
+            this.editor.removeAttribute(block, 'class');
+          }
+          this.postFormatHook(block, style);
+        ]]>
+        </body>
+      </method>
+
+
+      <method name="preFormatHook">
+        <parameter name="block"/>
+        <parameter name="style"/>
+        <body>
+        <![CDATA[
+          var fmt = block.getAttribute('class');
+          if (! fmt) return;
+          if (fmt == 'parenthetical') {
+            var s = stringify(block);
+            if (s.match(this.parenRegex)) this.deparenthesize(block);
+          }
+        ]]>
+        </body>
+      </method>
+
+
+      <method name="postFormatHook">
+        <parameter name="block"/>
+        <parameter name="style"/>
+        <body>
+        <![CDATA[
+          const TEXT_NODE = Components.interfaces.nsIDOMNode.TEXT_NODE;
+          switch (style) {
+            case "parenthetical":
+              var s = stringify(block);
+              if (! s.match(this.parenRegex)) this.parenthesize(block);
+            case "sceneheading":
+            case "action":
+            case "dialog":
+            case "shot":
+            case "":
+              var nodes = [ block ];
+              while (nodes.length > 0) {
+                var node = nodes.shift();
+                if (node.hasChildNodes) {
+                  for (var i = 0; i < node.childNodes.length; i++)
+                    nodes.push(node.childNodes[i]);
+                }
+                if (node.nodeType == TEXT_NODE) {
+                  if (node.nodeValue == node.nodeValue.toUpperCase())
+                    node.nodeValue = node.nodeValue.toLowerCase();
+                }
+              }
+              break;
+          }
+        ]]>
+        </body>
+      </method>
+
+
+      <method name="parenthesize">
+        <parameter name="block"/>
+        <body>
+        <![CDATA[
+          var ed  = this.editor;
+          var doc = this.editor.document;
+
+          // Find last non-ws node
+          var nd, i;
+          for (i = block.childNodes.length - 1; i >= 0; i--) {
+            nd = block.childNodes[i];
+            if (nd.nodeType == nd.TEXT_NODE && nd.nodeValue.match(/\S+/) ||
+                nd.nodeType == nd.ELEMENT_NODE && nd.localName != 'BR') break;
+          }
+
+          try {
+            if (i == -1) {
+              ed.insertNode(doc.createTextNode(""), block, 0);
+              i = 0;
+            }
+            ed.setShouldTxnSetSelection(false);
+            ed.insertNode(doc.createTextNode(")"), block, i + 1);
+            ed.insertNode(doc.createTextNode("("), block, 0);
+          }
+          catch (ex) {
+            dump("parenthesize: " + ex + "\n");
+          }
+          finally {
+            ed.setShouldTxnSetSelection(true);
+          }
+        ]]>
+        </body>
+      </method>
+
+
+      <method name="deparenthesize">
+        <parameter name="block"/>
+        <body>
+        <![CDATA[
+          var ed  = this.editor;
+          var doc = this.editor.document;
+
+          try {
+            ed.setShouldTxnSetSelection(false);
+
+            var nd, i, pnode;
+
+            // Leading paren
+            for (i = 0; i < block.childNodes.length; i++) {
+              nd = block.childNodes[i];
+              if (nd.nodeType == nd.TEXT_NODE && nd.nodeValue.match(/^\s*\(/)) {
+                pnode = { value: null };
+                ed.splitNode(nd, nd.nodeValue.indexOf("(") + 1, pnode);
+                if (pnode.value) ed.deleteNode(pnode.value);
+                break;
+              }
+            }
+
+            // Trailing paren
+            for (i = block.childNodes.length - 1; i >= 0; i--) {
+              nd = block.childNodes[i];
+              if (nd.nodeType == nd.TEXT_NODE && nd.nodeValue.match(/\)\s*$/)) {
+                pnode = { value: null };
+                ed.splitNode(nd, nd.nodeValue.lastIndexOf(")"), pnode);
+                if (pnode.value) ed.deleteNode(nd);
+                break;
+              }
+            }
+
+          }
+          catch (ex) {
+            dump("deparenthesize: " + ex + "\n");
+          }
+          finally {
+            ed.setShouldTxnSetSelection(true);
+          }
+        ]]>
+        </body>
+      </method>
+
+
+      <method name="replaceBlockContents">
+        <parameter name="block"/>
+        <parameter name="str"/>
+        <body>
+        <![CDATA[
+          if (! block) return;
+          
+          this.editor.beginTransaction();
+
+          var doc = this.editor.document;
+          while (block.hasChildNodes()) {
+            this.editor.deleteNode(block.lastChild);
+          }
+          this.editor.insertNode(doc.createTextNode(''), block, 0);
+          if (str != '') this.insertText(str);
+
+          this.editor.endTransaction();
+        ]]>
+        </body>
+      </method>
+
+      <method name="createScene">
+        <body>
+        <![CDATA[
+          var p  = this.editor.createElementWithDefaults('P');
+          var br = this.editor.createElementWithDefaults('BR');
+          this.editor.setAttribute(p, 'class', 'sceneheading');
+          this.editor.insertNode(br, p, 0);
+          return p;
+        ]]>
+        </body>
+      </method>
+
+      <method name="handleCtrlEnter">
+        <body>
+        <![CDATA[
+          var current = this.scene;
+          if (current) {
+            this.insertSceneAfter(current.id);
+          }
+          else {
+            this.appendScene();
+          }
+        ]]>
+        </body>
+      </method>
+
+      <method name="handleShiftEnter">
+        <body>
+        <![CDATA[
+          try {
+            var br = this.editor.createElementWithDefaults('br');
+            this.editor.insertElementAtSelection(br, false);
+          }
+          catch (ex) {
+            dump("handleShiftEnter: " + ex + "\n");
+          }
+        ]]>
+        </body>
+      </method>
+
+      <method name="insertSceneAfter">
+        <parameter name="id"/>
+        <body>
+        <![CDATA[
+          var ed    = this.editor;
+          var doc   = this.editor.document;
+          var scene = doc.getElementById(id);
+          if (! scene) return;
+
+          var xpath = new XPathEvaluator();
+          var rv = xpath.evaluate('following-sibling::p[@class="sceneheading"][1]',
+                                  scene,
+                                  null,
+                                  XPathResult.FIRST_ORDERED_NODE_TYPE,
+                                  null);
+
+          var pos;
+          if (rv.singleNodeValue) {
+            var rng = doc.createRange();
+            rng.selectNode(rv.singleNodeValue);
+            pos = rng.startOffset;
+          }
+          else {
+            pos = doc.body.childNodes.length;
+          }
+
+          this.insertSceneAt(pos);
+        ]]>
+        </body>
+      </method>
+
+      <method name="appendScene">
+        <body>
+        <![CDATA[
+          var body = this.editor.document.body;
+          this.insertSceneAt(body.childNodes.length);
+        ]]>
+        </body>
+      </method>
+
+      <!-- Inserts a new scene at the specified BODY offset -->
+      <method name="insertSceneAt">
+        <parameter name="pos"/>
+        <body>
+        <![CDATA[
+          this.editor.beginTransaction();
+          var scene = this.createScene();
+          this.editor.insertNode(scene, this.editor.document.body, pos);
+          this.editor.selectElement(scene.firstChild);
+          this.editor.selection.collapseToStart();
+          this.maybeScroll();
+          this.editor.endTransaction();
+        ]]>
+        </body>
+      </method>
+
+      <method name="deleteScene">
+        <parameter name="id"/>
+        <body>
+        <![CDATA[
+          var range = this.rangeOfScene(id);
+          if (! range) return false;
+
+          var rv     = false;
+          var bpos   = range.endOffset;
+          var bnodes = this.editor.document.body.childNodes;
+          var limit  = bpos >= bnodes.length ? null : bnodes[bpos];
+          var setSel = this.editor.shouldTxnSetSelection();
+
+          try {
+            this.editor.setShouldTxnSetSelection(false);
+            this.editor.beginTransaction();
+
+            var delNode = bnodes[range.startOffset];
+            var nextNode;
+            while (delNode && delNode != limit) {
+              nextNode = delNode.nextSibling;
+              this.editor.deleteNode(delNode);
+              delNode = nextNode;
+            }
+            rv = true;
+          }
+          catch (ex) {
+            dump("deleteScene: " + ex + "\n");
+          }
+          finally {
+            this.editor.endTransaction();
+            this.editor.setShouldTxnSetSelection(setSel);
+          }
+
+          return rv;
+        ]]>
+        </body>
+      </method>
+
+      <method name="cursorToScene">
+        <parameter name="id"/>
+        <body>
+        <![CDATA[
+        try {
+          var para = this.editor.document.getElementById(id);
+          if (! para) return;
+
+          var sel = this.editor.selection;
+          sel.removeAllRanges();
+          var rng = this.editor.document.createRange();
+          rng.selectNodeContents(para);
+          rng.collapse(true);
+          sel.addRange(rng);
+
+          // Ensure scene is scrolled to top of window
+          this.editorElement.contentWindow.scrollTo(0, para.offsetTop);
+        }
+        catch (ex) {
+          dump("cursorToScene: " + ex + "\n");
+        }
+        ]]>
+        </body>
+      </method>
+
+      <!-- One-based -->
+      <method name="scenePosition">
+        <parameter name="id"/>
+        <body>
+        <![CDATA[
+          var xpath = new XPathEvaluator();
+          var xset  = xpath.evaluate('//p[@class="sceneheading"]',
+                                     this.editor.document,
+                                     null,
+                                     XPathResult.ORDERED_NODE_ITERATOR_TYPE,
+                                     null);
+          var i = 0;
+          var elem;
+          while (elem = xset.iterateNext()) {
+            i++;
+            if (elem.id == id) return i;
+          }
+          return 0;  // Not found
+        ]]>
+        </body>
+      </method>
+
+      <method name="sceneAt">
+        <parameter name="pos"/>
+        <body>
+        <![CDATA[
+          if (pos < 1 || pos > this.sceneCount) return;
+          var xpath = new XPathEvaluator();
+          var rv = xpath.evaluate('//p[@class="sceneheading"][' + pos + ']',
+                                  this.editor.document,
+                                  null,
+                                  XPathResult.FIRST_ORDERED_NODE_TYPE,
+                                  null);
+          return rv.singleNodeValue;
+        ]]>
+        </body>
+      </method>
+
+      <method name="moveScene">
+        <parameter name="oldPos"/>
+        <parameter name="newPos"/>
+        <body>
+        <![CDATA[
+          dump("moveScene: " + oldPos + " -> " + newPos + "\n");
+          if (newPos < 1 || newPos > this.sceneCount || newPos == oldPos) return;
+
+          var source = this.sceneAt(oldPos);
+          var target = this.sceneAt(newPos);
+          if (! source || ! target) return;
+
+          var sourceRange = this.rangeOfScene(source.id);
+          if (! sourceRange) return;
+
+          var frag = sourceRange.cloneContents();
+
+          var setSel = this.editor.shouldTxnSetSelection()
+
+          try {
+            this.editor.setShouldTxnSetSelection(false);
+            this.editor.beginTransaction();
+
+            this.deleteScene(source.id);
+
+            var targetRange = this.rangeOfScene(target.id);
+            var insPos = newPos > oldPos  ? targetRange.endOffset
+                                          : targetRange.startOffset;
+            this.editor.insertNode(frag, this.editor.document.body, insPos);
+          }
+          catch (ex) {
+            dump("moveScene: " + ex + "\n");
+          }
+          finally {
+            this.editor.endTransaction();
+            this.editor.setShouldTxnSetSelection(setSel);
+          }
+        ]]>
+        </body>
+      </method>
+
+      <method name="rangeOfScene">
+        <parameter name="id"/>
+        <body>
+        <![CDATA[
+          var doc = this.editor.document;
+          var startNode = doc.getElementById(id);
+          if (! startNode) return;
+
+          var rng = doc.createRange();
+          rng.setStartBefore(startNode);
+
+          var node = startNode.nextSibling;
+          while (node) {
+            if (node.nodeType == Node.ELEMENT_NODE &&
+                node.className == 'sceneheading') break;
+            node = node.nextSibling;
+          }
+          if (node) {
+            rng.setEndBefore(node);
+          }
+          else {
+            // Hit end of document
+            rng.setEndAfter(doc.body.lastChild);
+          }
+
+          return rng;
+        ]]>
+        </body>
+      </method>
+
+      <method name="beginSceneImport">
+        <body>
+        <![CDATA[
+          // Remove any blank sceneheadings
+          var xpath = new XPathEvaluator();
+          var list  = [];
+          var xset, e;
+          var str = '//p[@class="sceneheading" ' +
+                    'and normalize-space(string(.)) = ""]';
+          try {
+            xset = xpath.evaluate(str, this.editor.document, null, 0, null);
+            while (e = xset.iterateNext()) list.push(e);
+            // Don't delete them right away or we get a bogus empty document
+            // state in the editor, even after importing, if the initial
+            // script is empty.
+            this._blankNodesToRemove = list;
+          }
+          catch (ex) {
+            dump("beginSceneImport: " + ex + "\n");
+          }
+        ]]>
+        </body>
+      </method>
+
+
+      <method name="endSceneImport">
+        <body>
+        <![CDATA[
+          this.editor.beginTransaction();
+          var list = this._blankNodesToRemove;
+          for (var i = 0; i < list.length; i++) {
+            this.editor.deleteNode(list[i]);
+          }
+          this._blankNodesToRemove = null;
+          this.editor.endTransaction();
+        ]]>
+        </body>
+      </method>
+
+
+      <method name="importScene">
+        <parameter name="scene"/>
+        <body>
+        <![CDATA[
+          if (! scene) return;
+
+          try {
+            var doc = this.editor.document;
+            var imp, i;
+
+            this.editor.beginTransaction();
+
+            for (i = 0; i < scene.childNodes.length; i++) {
+              imp = doc.importNode(scene.childNodes[i], true);
+              this.editor.insertNode(imp, doc.body, doc.body.childNodes.length);
+            }
+
+            this.editor.endTransaction();
+          }
+          catch (ex) {
+            dump("importScene: " + ex + "\n");
+          }
+        ]]>
+        </body>
+      </method>
+
+
+
+
+      <method name="insertNote">
+        <parameter name="note"/>
+        <body>
+          try {
+            var noteElem = this.editor.createElementWithDefaults('span');
+            noteElem.className = 'note';
+            noteElem.setAttribute('text', note.text);
+            noteElem.setAttribute('id', note.id);
+
+            this.editor.insertElementAtSelection(noteElem, false);
+          }
+          catch (ex) {
+            dump("insertNote: " + ex + "\n");
+          }
+        </body>
+      </method>
+
+      <method name="highlight">
+        <parameter name="uri"/>
+        <body>
+        <![CDATA[
+          var xpath = new XPathEvaluator();
+          var list  = [];
+          var xset, e;
+          var str = '/html/body/descendant::*[@ref="' + uri + '"]';
+
+          // Maybe use a treeWalker here instead?
+          try {
+            xset = xpath.evaluate(str, this.editor.document, null, 0, null);
+            while (e = xset.iterateNext()) list.push(e);
+            for (var i = 0; i < list.length; i++) {
+              list[i].setAttribute('active', true);
+            }
+          }
+          catch (ex) {
+            dump(ex);
+          }
+        ]]>
+        </body>
+      </method>
+
+      <method name="findCastRefs">
+        <body>
+        <![CDATA[
+          var refs = {};
+          
+          var xpath = new XPathEvaluator();
+          var xset, e, name, uri;
+
+          try {
+            xset = xpath.evaluate('//span[@class="cast" and @ref]',
+                                  this.editor.document, null, 0, null);
+            while (e = xset.iterateNext()) {
+              name = stringify(e).toUpperCase();
+              name = name.replace(/\s*\(.*\)/, '');
+              if (name == '' || name in refs) continue;
+              refs[name] = e.getAttribute('ref');
+            }
+
+            xset = xpath.evaluate('//p[@class="character"]',
+                                  this.editor.document, null, 0, null);
+            while (e = xset.iterateNext()) {
+              name = stringify(e).toUpperCase();
+              name = name.replace(/\s*\(.*\)/, '');
+              if (name == '' || name in refs) continue;
+              refs[name] = '';
+            }
+
+            return refs;
+          }
+          catch (ex) {
+            dump("findCastRefs: " + ex + "\n");
+          }
+        ]]>
+        </body>
+      </method>
+
+    </implementation>
+
+    <handlers>
+      <handler event="keypress" keycode="VK_TAB">
+        if (this.popup) {
+          if (this.popup.keyPressed(event)) return;
+        }
+        event.preventDefault();
+	this.handleTab();
+      </handler>
+      <handler event="keypress" keycode="VK_RETURN">
+        if (this.popup) {
+          if (this.popup.keyPressed(event)) return;
+        }
+        event.preventDefault();
+	this.handleEnter();
+      </handler>
+      <handler event="keypress" keycode="VK_RETURN" modifiers="accel">
+        event.preventDefault();
+        this.handleCtrlEnter();
+      </handler>
+      <handler event="keypress" keycode="VK_ENTER" modifiers="accel">
+        event.preventDefault();
+        this.handleCtrlEnter();
+      </handler>
+      <handler event="keypress" keycode="VK_RETURN" modifiers="shift">
+        event.preventDefault();
+        this.handleShiftEnter();
+      </handler>
+      <handler event="keypress" keycode="VK_ENTER" modifiers="shift">
+        event.preventDefault();
+        this.handleShiftEnter();
+      </handler>
+
+      <!-- Events of potential interest to popups -->
+      <handler event="keypress" keycode="VK_UP">
+        if (this.popup) this.popup.keyPressed(event);
+      </handler>
+      <handler event="keypress" keycode="VK_DOWN">
+        if (this.popup) this.popup.keyPressed(event);
+      </handler>
+      <handler event="keypress" keycode="VK_RIGHT">
+        if (this.popup) this.popup.keyPressed(event);
+      </handler>
+      <handler event="keypress" keycode="VK_LEFT">
+        if (this.popup) this.popup.keyPressed(event);
+      </handler>
+      <handler event="keypress" keycode="VK_ESCAPE">
+        if (this.popup) this.popup.keyPressed(event);
+      </handler>
+      <handler event="keypress" keycode="VK_F3">
+        this.debugDump();
+      </handler>
+
+      <!-- Formatting events -->
+      <handler event="keypress" key="1" modifiers="accel">
+        this.format("sceneheading");
+      </handler>
+      <handler event="keypress" key="2" modifiers="accel">
+        this.format("action");
+      </handler>
+      <handler event="keypress" key="3" modifiers="accel">
+        this.format("character");
+      </handler>
+      <handler event="keypress" key="4" modifiers="accel">
+        this.format("dialog");
+      </handler>
+      <handler event="keypress" key="5" modifiers="accel">
+        this.format("parenthetical");
+      </handler>
+      <handler event="keypress" key="6" modifiers="accel">
+        this.format("transition");
+      </handler>
+      <handler event="keypress" key="7" modifiers="accel">
+        this.format("shot");
+      </handler>
+      <handler event="keypress" key="8" modifiers="accel">
+        this.format("");
+      </handler>
+    </handlers>
+
+
+  </binding>
+
+
+  <!-- A 'tied' text field -->
+  <binding id="text-field">
+    <implementation>
+      <field name="tb"/>
+      <field name="dirty"/>
+      <constructor>
+        this.init();
+      </constructor>
+      <method name="init">
+        <body>
+          this.tb = document.getAnonymousElementByAttribute(this, 'anonid', 'tb');
+          this.dirty = false;
+        </body>
+      </method>
+      <method name="change">
+        <body>
+        <![CDATA[
+          dump("change: " + this.tb.value + "\n");
+          try {
+            var rs   = getRDFService();
+            var res  = rs.GetResource(this.getAttribute('res'));
+            var prop = rs.GetResource(this.getAttribute('property'));
+
+            var ds, curval;
+            var newval = rs.GetLiteral(this.tb.value);
+            var src = this.parentNode.database.GetDataSources();
+            while (src.hasMoreElements()) {
+              ds = src.getNext();
+              ds = ds.QueryInterface(Components.interfaces.nsIRDFDataSource);
+              if (ds.URI == 'rdf:localstore') continue;
+              ds.beginUpdateBatch();
+              curval = ds.GetTarget(res, prop, true);
+              if (curval) {
+                ds.Change(res, prop, curval, newval);
+              }
+              else {
+                ds.Assert(res, prop, newval, true);
+              }
+              ds.endUpdateBatch();
+            }
+            this.dirty = false;
+          }
+          catch (ex) {
+            dump("text-field: change: " + ex + "\n");
+          }
+        ]]>
+        </body>
+      </method>
+      <method name="beforeChange">
+        <body>
+          if (this.dirty) this.change();
+        </body>
+      </method>
+    </implementation>
+    <handlers>
+      <handler event="change" action="this.change()"/>
+      <handler event="input"  action="if (! this.dirty) this.dirty = true"/>
+    </handlers>
+  </binding>
+
+
+  <binding id="title-box" extends="#text-field">
+    <content>
+      <xul:vbox xbl:inherits="flex">
+        <xul:label value="&title.label;"/>
+        <xul:textbox anonid="tb" xbl:inherits="value"/>
+      </xul:vbox>
+    </content>
+  </binding>
+
+
+  <binding id="desc-box" extends="#text-field">
+    <content>
+      <xul:vbox>
+        <xul:label value="&description.label;"/>
+        <xul:textbox anonid="tb" multiline="true" xbl:inherits="value,width,rows"/>
+      </xul:vbox>
+    </content>
+  </binding>
+
+
+  <binding id="media-item-video"
+           extends="chrome://mozapps/content/shared/richview.xml#richview-item">
+    <content>
+      <xul:hbox class="media-box" flex="1">
+        <xul:vbox pack="start">
+          <xul:image src="chrome://celtx/content/res/video.png"
+                     class="mediaitem-icon"/>
+        </xul:vbox>
+        <xul:vbox flex="1">
+          <xul:hbox>
+            <editlabel anonid="item-label" xbl:inherits="value=title"/>
+          </xul:hbox>
+        </xul:vbox>
+      </xul:hbox>
+    </content>  
+    <implementation>
+      <field name="eventPrefix">"media-item-"</field>
+      <constructor>
+        this.init();
+      </constructor>
+      <method name="init">
+        <body>
+        </body>
+      </method>
+      <property name="title" readonly="true">
+        <getter>
+          var lbl =
+            document.getAnonymousElementByAttribute(this, 'anonid', 'item-label');
+          return lbl.value;
+        </getter>
+      </property>
+    </implementation>
+    <handlers>
+      <handler event="editlabel-change">
+        event.preventBubble();
+        this.fireEvent('change');
+      </handler>
+    </handlers>
+  </binding>
+
+
+  <binding id="media-item-audio"
+           extends="chrome://mozapps/content/shared/richview.xml#richview-item">
+    <content>
+      <xul:hbox class="media-box" flex="1">
+        <xul:vbox pack="start">
+          <xul:image src="chrome://celtx/content/res/audio.png"
+                     class="mediaitem-icon"/>
+        </xul:vbox>
+        <xul:vbox flex="1">
+          <xul:hbox>
+            <editlabel anonid="item-label" xbl:inherits="value=title"/>
+          </xul:hbox>
+        </xul:vbox>
+      </xul:hbox>
+    </content>  
+    <implementation>
+      <field name="eventPrefix">"media-item-"</field>
+      <constructor>
+        this.init();
+      </constructor>
+      <method name="init">
+        <body>
+        </body>
+      </method>
+      <property name="title" readonly="true">
+        <getter>
+          var lbl =
+            document.getAnonymousElementByAttribute(this, 'anonid', 'item-label');
+          return lbl.value;
+        </getter>
+      </property>
+    </implementation>
+    <handlers>
+      <handler event="editlabel-change">
+        event.preventBubble();
+        this.fireEvent('change');
+      </handler>
+    </handlers>
+  </binding>
+
+
+  <binding id="media-item-image"
+           extends="chrome://mozapps/content/shared/richview.xml#richview-item">
+    <content>
+      <xul:hbox class="media-box" flex="1">
+        <xul:vbox pack="start">
+          <imagepreview anonid="img"/>
+        </xul:vbox>
+        <xul:vbox flex="1">
+          <xul:hbox>
+            <editlabel anonid="item-label" xbl:inherits="value=title"/>
+          </xul:hbox>
+        </xul:vbox>
+      </xul:hbox>
+    </content>  
+    <implementation>
+      <field name="eventPrefix">"media-item-"</field>
+      <constructor>
+        this.init();
+      </constructor>
+      <method name="init">
+        <body>
+          var ios = getIOService();
+          var uri = ios.newURI(this.id, null, null);
+          uri = uri.QueryInterface(Components.interfaces.nsIURL);
+          // TODO: how to get path prefix? Property of parentNode?
+          this.setImage(top.gProjWin.project.fileURLOf(uri.fileName));
+        </body>
+      </method>
+      <method name="setImage">
+        <parameter name="url"/>
+        <body>
+          try {
+            // dump("setImage: " + url + "\n");
+            var img = document.getAnonymousElementByAttribute(this, 'anonid', 'img');
+            img.src = url;
+          }
+          catch (ex) {
+            dump("setImage: " + ex + "\n");
+          }
+        </body>
+      </method>
+      <property name="title" readonly="true">
+        <getter>
+          var lbl =
+            document.getAnonymousElementByAttribute(this, 'anonid', 'item-label');
+          return lbl.value;
+        </getter>
+      </property>
+    </implementation>
+    <handlers>
+      <handler event="editlabel-change">
+        event.preventBubble();
+        this.fireEvent('change');
+      </handler>
+    </handlers>
+  </binding>
+
+
+  <binding id="media-item-downloading"
+           extends="chrome://mozapps/content/shared/richview.xml#richview-item">
+    <content>
+      <xul:hbox class="media-box" flex="1">
+        <xul:vbox pack="start">
+          <xul:image src="chrome://celtx/content/res/downloading.png"
+                     class="mediaitem-icon"/>
+        </xul:vbox>
+        <xul:vbox flex="1">
+          <xul:hbox>
+            <xul:progressmeter class="media-download-meter"
+                               xbl:inherits="value=progress"/>
+            <xul:label value="Cancel"/>
+          </xul:hbox>
+          <xul:label value="Adding file..."/>
+        </xul:vbox>
+      </xul:hbox>
+    </content>  
+    <implementation>
+      <field name="eventPrefix">"media-item-"</field>
+      <constructor>
+        dump("media-item-downloading ctor\n");
+      </constructor>
+    </implementation>
+  </binding>
+
+
+  <binding id="imagepreview">
+    <content>
+      <xul:vbox collapsed="true">
+        <html:img class="thumbnail"/>
+      </xul:vbox>
+    </content>
+    <implementation>
+      <field name="img"/>
+      <field name="box"/>
+      <field name="src"/>
+      <field name="thumbHeight">75</field>
+      <field name="thumbWidth">75</field>
+      <constructor>
+        this.init();
+      </constructor>
+      <method name="init">
+        <body>
+          this.box = document.getAnonymousNodes(this)[0];
+          this.img = this.box.firstChild;
+
+          var _self = this;
+          function _loaded () { _self.loaded(); };
+          this.img.addEventListener('load', _loaded, true);
+
+          this.img.src = this.src;
+        </body>
+      </method>
+      <method name="loaded">
+        <body>
+        <![CDATA[
+          var actualWidth  = this.img.naturalWidth;
+          var actualHeight = this.img.naturalHeight;
+          if (actualWidth == 0 || actualHeight == 0) return;
+          // dump("actual w: " + actualWidth + ", h: " + actualHeight + "\n");
+
+          var width  = actualWidth;
+          var height = actualHeight;
+
+          if (actualWidth < this.thumbWidth) {
+            width  = this.thumbWidth;
+            height = actualHeight * (this.thumbWidth / actualWidth);
+          }
+          if (height > this.thumbHeight) {
+            height = this.thumbHeight;
+            width  = actualWidth * (this.thumbHeight / actualHeight);
+          }
+
+          // dump("resize w: " + width + ", h: " + height + "\n");
+
+          this.img.width  = Math.floor(width);
+          this.img.height = Math.floor(height);
+          this.box.collapsed = false;
+        ]]>
+        </body>
+      </method>
+    </implementation>
+  </binding>
+
+
+  <binding id="autotext-popup"
+           extends="chrome://global/content/bindings/popup.xml#popup">
+
+    <content>
+      <xul:tree anonid="tree" class="autotext-tree plain"
+                hidecolumnpicker="true" flex="1">
+        <xul:treecols anonid="treecols">
+          <xul:treecol class="autotext-treecol" flex="1"/>
+        </xul:treecols>
+        <xul:treechildren class="autotext-treebody"/>
+      </xul:tree>
+    </content>
+
+    <implementation>
+      <field name="_open">false</field>
+      <field name="block"/>
+      <field name="editor"/>
+      <field name="lastBlock"/>
+      <field name="lastCompletion"/>
+
+      <property name="maxRows" readonly="true" onget="return 10"/>
+
+      <property name="tree" readonly="true">
+        <getter>
+          return document.getAnonymousElementByAttribute(this, "anonid", "tree");
+        </getter>
+      </property>
+
+      <constructor>
+        this.setAttribute("ignorekeys", true);  // So we don't eat keypresses
+      </constructor>
+
+      <property name="isOpen" readonly="true" onget="return this._open"/>
+
+      <property name="view"
+                onget="return this._view">
+        <setter>
+        <![CDATA[
+          this._view = val;
+          var bx = this.tree.boxObject;
+          bx = bx.QueryInterface(Components.interfaces.nsITreeBoxObject);
+          bx.view = val;
+        ]]>
+        </setter>
+      </property>
+
+      <property name="selectedIndex"
+                onget="return this.tree.currentIndex">
+        <setter>
+        <![CDATA[
+        this.tree.view.selection.select(val);
+        if (this.tree.treeBoxObject.height > 0) {
+          this.tree.treeBoxObject.ensureRowIsVisible(val < 0 ? 0 : val);
+        }
+        return val;
+        ]]>
+        </setter>
+      </property>
+
+      <method name="open">
+        <parameter name="editor"/>
+        <parameter name="block"/>
+        <parameter name="view"/>
+        <body>
+        <![CDATA[
+          if (this.isOpen) return;
+
+          this.block  = block;
+          this.editor = editor;
+          this.view = view;
+
+          var doc = block.ownerDocument;
+          var box = doc.getBoxObjectFor(block);
+          var x = box.screenX;
+          var y = box.screenY + box.height;
+
+          var xo = window.content.pageXOffset;
+          var yo = window.content.pageYOffset;
+
+          x -= xo;
+          y -= yo;
+
+          this.invalidate();
+
+          this.removeAttribute('hidden');
+          this.setAttribute('width', 150);
+
+          document.popupNode = null;
+          this.showPopup(editor, x, y, 'popup', null, null);
+        ]]>
+        </body>
+      </method>
+
+      <method name="close">
+        <body>
+        <![CDATA[
+          if (! this.isOpen) return;
+          this.selectedIndex = -1;
+          this.hidePopup();
+          document.popupNode = null;
+          this.setAttribute('hidden', true);
+        ]]>
+        </body>
+      </method>
+
+      <method name="invalidate">
+        <body>
+        <![CDATA[
+          this.adjustHeight();
+          this.tree.treeBoxObject.invalidate();
+        ]]>
+        </body>
+      </method>
+
+      <method name="adjustHeight">
+        <body>
+        <![CDATA[
+          var view   = this.view;
+          var rows   = Math.min(view.rowCount, this.maxRows);
+          var height = rows * view.rowHeight;
+          
+          if (height == 0) {
+            this.tree.setAttribute('collapsed', true);
+          }
+          else {
+            if (this.tree.hasAttribute('collapsed')) {
+              this.tree.removeAttribute('collapsed');
+            }
+            this.tree.setAttribute('height', height);
+          }
+          this.tree.setAttribute('hidescrollbar', view.rowCount <= rows);
+        ]]>
+        </body>
+      </method>
+
+      <method name="selectBy">
+        <parameter name="reverse"/>
+        <parameter name="page"/>
+        <body>
+        <![CDATA[
+          try {
+            var max = this.tree.view.rowCount - 1;
+            if (max < 0) return;
+
+            var i = this.selectedIndex;
+            var n = i + (reverse ? -1 : 1) * (page ? 5 : 1);
+
+            if      (reverse && i == -1 || n > max && i != max) n = max;
+            else if (! reverse && i == -1 || n < 0 && i != 0)   n = 0;
+            else if (n < 0 && i == 0 || n > max && i == max)    n = -1;
+
+            this.selectedIndex = n;
+          }
+          catch (ex) {
+            // Ignore
+          }
+        ]]>
+        </body>
+      </method>
+
+      <method name="clicked">
+        <parameter name="evt"/>
+        <body>
+          this.handleEnter();
+        </body>
+      </method>
+      
+
+      <method name="handleEnter">
+        <body>
+        <![CDATA[
+          if (this.selectedIndex == -1) {
+            // TODO: perhaps default to first item in list, if any?
+            this.close();
+            return false;
+          }
+          else {
+            var str = this.view.valueOf(this.selectedIndex);
+            this.editor.replaceBlockContents(this.block, str);
+            this.lastCompletion = str;
+            this.lastBlock = this.block;
+            this.close();
+            return true;
+          }
+        ]]>
+        </body>
+      </method>
+
+
+      <method name="keyPressed">
+        <parameter name="evt"/>
+        <body>
+        <![CDATA[
+          if (evt.ctrlKey || evt.altKey) return;
+
+          var cancel = false;
+          switch (evt.keyCode) {
+            case KeyEvent.DOM_VK_ESCAPE:
+              this.close();
+              break;
+            case KeyEvent.DOM_VK_TAB:
+            case KeyEvent.DOM_VK_DOWN:
+              this.selectBy(0, 0);
+              cancel = true;
+              break;
+            case KeyEvent.DOM_VK_UP:
+              this.selectBy(1, 0);
+              cancel = true;
+              break;
+            case KeyEvent.DOM_VK_LEFT:
+              this.close();
+              break;
+            case KeyEvent.DOM_VK_RIGHT:
+              this.close();
+              cancel = true;
+              break;
+            case KeyEvent.DOM_VK_RETURN:
+              cancel = this.handleEnter();
+              break;
+            default:
+              break;
+          }
+              
+          if (cancel) {
+            evt.stopPropagation();
+            evt.preventDefault();
+          }
+
+          return cancel;
+        ]]>
+        </body>
+      </method>
+
+    </implementation>
+
+
+    <handlers>
+      <handler event="popupshowing">
+        this.editor.popup = this;
+        this._open = true;
+      </handler>
+      <handler event="popuphiding">
+        setTimeout(function (self) {
+                     self._open = false;
+                     self.editor.popup = null;
+                     self.editor = null;
+                     self.block = null;
+                   }, 0, this);
+      </handler>
+    </handlers>
+
+  </binding>
+
+
+  <binding id="autotext-tree"
+           extends="chrome://global/content/bindings/tree.xml#tree">
+    <content>
+      <children includes="treecols"/>
+      <xul:treerows class="autotext-treerows tree-rows"
+                    xbl:inherits="hidescrollbar" flex="1">
+         <children/>
+       </xul:treerows>
+     </content>
+  </binding>
+
+
+  <binding id="autotext-treebody">
+    <implementation>
+      <field name="lastMoved">new Date()</field>
+ 
+      <method name="getHoverCell">
+        <parameter name="evt"/>
+        <body>
+        <![CDATA[
+          var row = {}; var col = {}; var obj = {};
+          var bx = document.documentElement.boxObject;
+          var x = evt.screenX - bx.screenX;
+          var y = evt.screenY - bx.screenY;
+          this.parentNode.treeBoxObject.getCellAt(x, y, row, col, obj);
+          return row.value >= 0 ? { row: row.value } : null;
+        ]]>
+        </body>
+      </method>
+    </implementation>
+     
+     <handlers>
+       <!--
+            this.parentNode: tree
+            this.parentNode.parentNode: popup
+       -->
+       <handler event="mouseout"
+                action="this.parentNode.currentIndex = -1;"/>
+
+       <handler event="mouseup"
+                action="this.parentNode.parentNode.clicked(event);"/>
+ 
+       <handler event="mousemove">
+       <![CDATA[
+         if (new Date() - this.lastMoved > 30) {
+          var rc = this.getHoverCell(event);
+          if (rc && rc.row != this.parentNode.currentIndex)
+             this.parentNode.view.selection.select(rc.row);
+          this.lastMoved = new Date();
+         }
+       ]]>
+       </handler>
+     </handlers>
+
+  </binding>
+
+
+  <binding id="autotext-treerows">
+    <content onmousedown="event.preventDefault()">
+      <xul:hbox flex="1" class="tree-bodybox">
+
+      </xul:hbox>
+      <xul:scrollbar xbl:inherits="collapsed=hidescrollbar"
+                     class="tree-scrollbar"
+                     orient="vertical" />
+    </content>
+  </binding>
+
+
+  <binding id="editable-label">
+    <content>
+      <xul:stack>
+        <xul:description anonid="lbl" class="editable" xbl:inherits="value"/>
+        <xul:textbox anonid="tbox"
+                     hidden="true"/>
+      </xul:stack>
+    </content>
+    <implementation>
+      <field name="modified">false</field>
+      <field name="editing">false</field>
+      <field name="_value"/>
+      <property name="value" readonly="true" onget="return this._value"/>
+      <property name="textBox" readonly="true">
+        <getter>
+          return document.getAnonymousElementByAttribute(this, 'anonid', 'tbox');
+        </getter>
+      </property>
+      <property name="textLabel" readonly="true">
+        <getter>
+          return document.getAnonymousElementByAttribute(this, 'anonid', 'lbl');
+        </getter>
+      </property>
+      <constructor>
+        this.init();
+      </constructor>
+      <method name="init">
+        <body>
+          this._value = this.getAttribute('value');
+        </body>
+      </method>
+      <method name="setEditable">
+        <parameter name="editable"/>
+        <body>
+        <![CDATA[
+        var txt = this.textBox;
+        if (editable) {
+          txt.hidden = false;
+          txt.value = this.value;
+          txt.select();
+          txt.addEventListener('blur', this.fieldChange, true);
+          txt.addEventListener('keypress', this.fieldKeyDown, false);
+          this.editing = true;
+        }
+        else {
+          this.textLabel.value = this.value;
+          txt.hidden = true;
+          txt.removeEventListener('blur', this.fieldChange, true);
+          txt.removeEventListener('keypress', this.fieldKeyDown, false);
+          txt.blur();
+          this.editing = false;
+        }
+        ]]>
+        </body>
+      </method>
+      <method name="fieldChange">
+        <body>
+          var o = this.parentNode.parentNode;
+          o.setValue(this.value);
+        </body>
+      </method>
+      <method name="fieldKeyDown">
+        <parameter name="evt"/>
+        <body>
+        <![CDATA[
+          // this == textbox
+          var o = this.parentNode.parentNode;
+          if (evt.keyCode == KeyEvent.DOM_VK_ESCAPE) {
+            o.setValue(o.value);
+          }
+          else if (evt.keyCode == KeyEvent.DOM_VK_RETURN) {
+            o.setValue(this.value);
+          }
+          evt.preventBubble();
+        ]]>
+        </body>
+      </method>
+      <method name="setValue">
+        <parameter name="val"/>
+        <body>
+          this._value = val;
+          this.setEditable(false);
+          var e = document.createEvent('Events');
+          e.initEvent('editlabel-change', false, true);
+          this.dispatchEvent(e);
+        </body>
+      </method>
+    </implementation>
+    <handlers>
+      <handler event="click">
+        event.preventBubble();
+        if (! this.editing) this.setEditable(true);
+      </handler>
+      <handler event="dblclick">
+        event.preventBubble();
+      </handler>
+    </handlers>
+  </binding>
+
+
+  <binding id="media-view"
+           extends="chrome://mozapps/skin/shared/richview.xml#richview">
+    <handlers>
+      <handler event="media-item-change">
+        var h = this.getAttribute('onitemchange');
+        if (h) {
+          var f = new Function('item', h);
+          f(event.originalTarget);
+        }
+      </handler>
+    </handlers>
+  </binding>
+
+
+  <binding id="autosave-textbox"
+           extends="chrome://global/content/bindings/textbox.xml#textbox">
+    <implementation>
+      <field name="_modified"/>
+      <field name="_orig"/>
+      <property name="modified" readonly="true" onget="return this._modified"/>
+      <method name="assign">
+        <parameter name="val"/>
+        <body>
+          this.value = val;
+          this._orig = val;
+          this._modified = false;
+        </body>
+      </method>
+      <method name="fieldChange">
+        <body>
+          if (! this._modified) return;
+          dump("fieldChange: modified\n");
+          this._modified = false;
+          var h = this.getAttribute('onsave');
+          if (h) {
+            var f = new Function(h);
+            f();
+          }
+        </body>
+      </method>
+      <method name="cancelEdit">
+        <body>
+          if (! this._modified) return;
+          this.assign(this._orig);
+        </body>
+      </method>
+    </implementation>
+    <handlers>
+      <handler event="input">
+        if (! this._modified) this._modified = true;
+      </handler>
+      <handler event="blur" phase="capturing">
+        this.removeAttribute('focused');  // Copied from #textbox
+        this.fieldChange();
+      </handler>
+      <handler event="keypress" keycode="VK_RETURN">
+        this.inputField.blur();
+      </handler>
+      <handler event="keypress" keycode="VK_ESCAPE">
+        this.cancelEdit();
+        this.inputField.blur();
+      </handler>
+    </handlers>
+  </binding>
+
+
+  <!-- Largely a duplicate of autosave-textbox above, but XBL doesn't yet
+       allow multiple inheritance -->
+  <binding id="autosave-textarea"
+           extends="chrome://global/content/bindings/textbox.xml#textarea">
+    <implementation>
+      <field name="_modified"/>
+      <field name="_orig"/>
+      <property name="modified" readonly="true" onget="return this._modified"/>
+      <method name="assign">
+        <parameter name="val"/>
+        <body>
+          this.value = val;
+          this._orig = val;
+          this._modified = false;
+        </body>
+      </method>
+      <method name="fieldChange">
+        <body>
+          if (! this._modified) return;
+          dump("fieldChange: modified\n");
+          this._modified = false;
+          var h = this.getAttribute('onsave');
+          if (h) {
+            var f = new Function(h);
+            f();
+          }
+        </body>
+      </method>
+      <method name="cancelEdit">
+        <body>
+          if (! this._modified) return;
+          this.assign(this._orig);
+        </body>
+      </method>
+    </implementation>
+    <handlers>
+      <handler event="input">
+        if (! this._modified) this._modified = true;
+      </handler>
+      <handler event="blur" phase="capturing">
+        this.removeAttribute('focused');  // Copied from #textbox
+        this.fieldChange();
+      </handler>
+<!--
+      <handler event="keypress" keycode="VK_RETURN">
+        event.preventDefault();
+        this.inputField.blur();
+      </handler>
+-->
+      <handler event="keypress" keycode="VK_ESCAPE">
+        this.cancelEdit();
+        this.inputField.blur();
+      </handler>
+    </handlers>
+  </binding>
+
+
+</bindings>

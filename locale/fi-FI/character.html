@@ -1,0 +1,130 @@
+<html>
+<head>
+<title>Characters</title>
+<style>
+body {
+margin: 20px;
+font-family: helvetica, arial, verdana;
+font-size: 12px;
+}
+textarea {
+height:100px;
+width: 90%;
+font-family: helvetica, arial, verdana;
+font-size: 12px;
+padding: 1px;
+}
+p {
+float: left;
+width: 50%;
+}
+br {
+clear: both;
+}
+
+
+
+.container {
+margin-bottom: 15px;
+}
+
+.scene {
+  background-color: lightblue;
+  border: 1px solid blue;
+  padding: 5px 2px 5px 10px;
+  font-weight: normal;
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-topright: 6px;
+}
+
+.contents {
+  border: 1px solid blue;
+  border-top: 0px;
+  background-color: #FFFFFF;
+  -moz-border-radius-bottomleft: 6px;
+  -moz-border-radius-bottomright: 6px;
+  padding: 8px 6px 8px 24px;
+}
+</style>
+</head>
+<body>
+<form>
+
+<div class="container">
+<div class="scene"><span style="font-weight:bold;">Yksityiskohtainen fyysinen
+kuvaus</span></div>
+<div class="contents">
+<p>Ikä:<br />
+<input type="text" name="age" style="width:90%;"/></p>
+<p>Erottuvat piirteet:<br />
+<input type="text" name="dist_feat" style="width:90%;"/></p>
+<br />
+<p>Hiukset:<br />
+<input type="text" name="hair" style="width:90%;"/></p>
+<p>Silmät:<br />
+<input type="text" name="eyes" style="width:90%;"/></p>
+<br />
+<p>Korkeus:<br />
+<input type="text" name="height" style="width:90%;"/></p>
+<p>Paino:<br />
+<input type="text" name="weight" style="width:90%;"/></p>
+<br />
+</div>
+</div>
+
+<div class="container">
+<div class="scene"><span style="font-weight:bold;">Hahmon piirteet</span></div>
+<div class="contents">
+<p>Kolme avainpiirrettä hahmossa:<br />
+<input type="text" name="trait1" style="width:90%;margin-bottom:10px;"/></textarea><br /><input type="text" name="trait2" style="width:90%;margin-bottom:10px;"/></textarea><br /><input type="text" name="trait3" style="width:90%;margin-bottom:10px;"/></textarea></p>
+<p>Mikä on hahmon pääasiallinen virka?<br />
+<select name="princ_func">
+<option>protagonisti</option>
+<option>antagonisti</option>
+<option>paras ystävä</option>
+<option>rakkaudenkohde</option>
+<option>luotettu</option>
+<option>partneri</option>
+<option>katalysaattori</option>
+<option>&quot;oppi-isä&quot;</option>
+<option>tarinan koomikko</option>
+<option>muu</option>
+</select></p>
+<br />
+</div>
+</div>
+
+<div class="container">
+<div class="scene"><span style="font-weight:bold;">Motivaatio</span></div>
+<div class="contents">
+<p>Mikä on hahmon tavoite?<br />
+<textarea type="text" name="goal" /></textarea></p>
+<p>Mikä on hahmon suunnitelma saavuttaakseen tavoitteensa?<br />
+<textarea type="text" name="ach_goalmotivation2" /></textarea></p>
+<br />
+</div>
+</div>
+
+<div class="container">
+<div class="scene"><span style="font-weight:bold;">Hahmon tausta</span></div>
+<div class="contents">
+<p>Perhetausta:<br />
+<textarea type="text" name="fam_back" /></textarea></p>
+<p>Tottumukset/Paheet:<br />
+<textarea type="text" name="upbring" /></textarea></p>
+<br />
+<p>Koulutus:<br />
+<textarea type="text" name="education" /></textarea></p>
+<p>Persoonallisuus:<br />
+<textarea type="text" name="person" /></textarea></p>
+<p>Pitää:<br />
+<textarea type="text" name="likes" /></textarea></p>
+<p>Ei pidä:<br />
+<textarea type="text" name="dislikes" style="align:bottom;"/></textarea></p>
+<br />
+</div>
+</div>
+</form>
+</body>
+
+</html>

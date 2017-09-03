@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:chrome="http://www.mozilla.org/rdf/chrome#">
+  <!-- list all the packages being supplied -->
+  <rdf:Seq rdf:about="urn:mozilla:package:root">
+    <rdf:li rdf:resource="urn:mozilla:package:celtx-platform"/>
+  </rdf:Seq>
+  <!-- package information -->
+  <rdf:Description rdf:about="urn:mozilla:package:celtx-platform"
+		   chrome:displayName="Celtx Platform Specific"
+		   chrome:author="Greyfirst Corp."
+		   chrome:packageVersion="0.9.5"
+		   chrome:name="celtx-platform"
+		   chrome:platformPackage="true">
+  </rdf:Description>
+</rdf:RDF>

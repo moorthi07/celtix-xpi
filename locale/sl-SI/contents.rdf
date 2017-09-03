@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:chrome="http://www.mozilla.org/rdf/chrome#">
+
+  <rdf:Seq rdf:about="urn:mozilla:locale:root">
+    <rdf:li rdf:resource="urn:mozilla:locale:sl-SI"/>
+  </rdf:Seq>
+
+  <rdf:Description rdf:about="urn:mozilla:locale:sl-SI"
+        chrome:displayName="Slovenian (SI)"
+        chrome:author="Greyfirst Corp."
+        chrome:name="sl-SI"
+        chrome:previewURL="http://www.mozilla.org/locales/sl-SI.gif">
+    <chrome:packages>
+      <rdf:Seq rdf:about="urn:mozilla:locale:sl-SI:packages">
+        <rdf:li rdf:resource="urn:mozilla:locale:sl-SI:celtx"/>
+      </rdf:Seq>
+    </chrome:packages>
+  </rdf:Description>
+</rdf:RDF>

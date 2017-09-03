@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2005 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<?xml-stylesheet href='chrome://celtx/content/celtx.css' type='text/css'?>
+<?xul-overlay href='chrome://celtx/content/menuoverlay.xul'?>
+
+<!DOCTYPE window [
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+%browserDTD;
+<!ENTITY % brandDTD SYSTEM "chrome://global/locale/brand.dtd" >
+%brandDTD;
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<window id='printScript'
+        windowtype='celtx:print'
+        xmlns='http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul'
+        title='&printCmd.label;'
+        onload='loaded()'
+        height='500'
+        width='600'
+        screenX='4'
+        screenY='4'
+        persist='height width screenX screenY'
+        >
+
+  <script src='chrome://global/content/globalOverlay.js'
+          type='application/x-javascript' />
+  <script src='chrome://global/content/printUtils.js'
+          type='application/x-javascript' />
+  <script src='chrome://celtx/content/util.js'
+          type='application/x-javascript' />
+  <script src='chrome://celtx/content/printscript.js'
+          type='application/x-javascript' />
+
+  <keyset id='file-keyset' />
+  <commandset id='file-command-set' />
+
+#ifdef XP_MACOSX
+  <keyset id='window-keyset' />
+  <commandset id='window-command-set' />
+#endif
+
+  <toolbox>
+    <menubar>
+      <menu id='file-menu' />
+      <menu id='edit-menu' />
+#ifdef XP_MACOSX
+      <menu id='window-menu' />
+#endif
+    </menubar>
+  </toolbox>
+
+  <browser id='content'
+           type='content-primary'
+           src='about:blank'
+           flex='1'
+           disablehistory='true'
+           />
+
+</window>
+

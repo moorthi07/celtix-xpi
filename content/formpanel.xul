@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE overlay [
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<overlay id="formpanel-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<page id="panel-page">
+
+  <script type="application/x-javascript"
+          src="chrome://global/content/globalOverlay.js"/>
+  <script type="application/x-javascript"
+          src="chrome://global/content/nsDragAndDrop.js"/>
+  <script type="application/x-javascript"
+          src="chrome://global/content/nsTransferable.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/util.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/rdfmodel.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/formpanel.js"/>
+
+  <commandset id="form-command-set">
+    <command id="cmd-add-media"
+             oncommand="panel.addMedia()"/>
+    <command id="cmd-remove-media"
+             oncommand="panel.removeMedia()"/>
+  </commandset>
+
+  <commandset commandupdater="true"
+              events="richview-select"
+              oncommandupdate="panel.updateCommands()"/>
+
+  <vbox flex="1" class="formpanel-box">
+
+    <deck id="deck" flex="1">
+
+      <description id="msg" class="fp-msg" value="Loading..."/>
+
+      <vbox flex="1" class="fp-scroll-box" style="overflow: auto;">
+
+        <hbox class="fp-label-box">
+          <label id="label" flex="1" class="fp-label"/>
+        </hbox>
+
+        <vbox flex="1">
+
+          <hbox class="fp-details-box" flex="1">
+
+            <vbox class="fp-details-col" flex="8">
+              <label id="title-label" value="&fullName.label;"/>
+              <textbox id="title"
+                       type="autosave"
+                       class="fp-textbox"
+                       onsave="panel.titleChanged()"
+                       value=""/>
+              
+              <label value="&description.label;"/>
+              <textbox id="desc"
+                       multiline="true"
+                       rows="5"
+                       type="autosave"
+                       class="fp-textbox"
+                       onsave="panel.descChanged()"
+                       value=""/>
+            </vbox>
+
+            <spacer flex="1"/>
+
+            <vbox class="fp-details-col" flex="8" height="150">
+
+              <label value="&objViewMediaTab.label;"/>
+
+              <mediaview id="panel-media-view"
+                         flex="1"
+                         ondblclick="panel.mediaDoubleClick(event)"
+                         onitemchange="panel.mediaItemChanged(item)"
+                         ondragover="panel.mediaDragOver(event)"
+                         ondragdrop="panel.mediaDragDrop(event)"
+                         datasources="rdf:null">
+                <template>
+                  <rule>
+                    <conditions>
+                      <content uri="?uri"/>
+                      <triple subject="?uri"
+                              predicate="http://celtx.com/NS/v1/media"
+                              object="?media"/>
+                      <member container="?media" child="?item"/>
+                      <triple subject="?item"
+                              predicate="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                              object="?type"/>
+                    </conditions>
+                    <bindings>
+                      <binding subject="?item"
+                               predicate="http://purl.org/dc/elements/1.1/title"
+                               object="?title"/>
+                      <binding subject="?item"
+                               predicate="http://celtx.com/NS/v1/state"
+                               object="?state"/>
+                      <binding subject="?item"
+                               predicate="http://celtx.com/NS/v1/progress"
+                               object="?progress"/>
+                    </bindings>
+                    <action>
+                      <mediaitem uri="?item" title="?title" type="?type"
+                                 state="?state" progress="?progress"/>
+                    </action>
+                  </rule>
+                </template>
+              </mediaview>
+
+              <hbox align="right">
+                <button label="&add.label;" maxwidth="75" command="cmd-add-media"/>
+                <button label="&remove.label;" maxwidth="75" command="cmd-remove-media"/>
+              </hbox>
+
+            </vbox>
+
+          </hbox>
+
+          <vbox class="fp-frame-box" flex="1">
+            <iframe id="frame" src="" flex="1"
+                    style="overflow: hidden; min-height: 1000px;"/>
+          </vbox>
+
+        </vbox>
+
+      </vbox>
+
+    </deck>
+
+  </vbox>
+
+</page>
+
+</overlay>

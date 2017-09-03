@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!DOCTYPE window [
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<overlay id="object-view-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+  <vbox id="object-view" flex="1">
+
+    <label class="sidebar-header" value="&objViewOverviewTab.label;"/>
+
+        <vbox id="details-box">
+
+        <vbox id="title-box" datasources="rdf:null"
+              xref="project" xrefnotify="before">
+          <template>
+            <rule>
+              <conditions>
+                <content uri="?uri"/>
+                <triple subject="?uri"
+                        predicate="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                        object="?type"/>
+              </conditions>
+              <bindings>
+                <binding subject="?uri"
+                         predicate="http://purl.org/dc/elements/1.1/title"
+                         object="?title"/>
+              </bindings>
+              <action>
+                <titlebox uri="?type"
+                          res="?uri"
+                          flex="1"
+                          property="http://purl.org/dc/elements/1.1/title"
+                          value="?title"/>
+              </action>
+            </rule>
+          </template>
+        </vbox>
+
+        <vbox id="desc-box" datasources="rdf:null"
+              xref="project" xrefnotify="before">
+          <template>
+            <rule>
+              <conditions>
+                <content uri="?uri"/>
+                <triple subject="?uri"
+                        predicate="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                        object="?type"/>
+              </conditions>
+              <bindings>
+                <binding subject="?uri"
+                         predicate="http://purl.org/dc/elements/1.1/description"
+                         object="?desc"/>
+              </bindings>
+              <action>
+                <descbox uri="?type"
+                         res="?uri"
+                         property="http://purl.org/dc/elements/1.1/description"
+                         width="240"
+                         rows="5"
+                         value="?desc"/>
+              </action>
+            </rule>
+          </template>
+        </vbox>
+
+        </vbox>
+
+        <label class="sidebar-header" value="&objViewMediaTab.label;"/>
+
+        <!-- TODO: can inline style be moved to CSS? -->
+        <mediaview id="media-view"
+                   flex="1"
+                   style="overflow: auto;"
+                   xref="project"
+                   tooltiptext="&mediaBox.tooltip;"
+                   ondblclick="mediaViewDoubleClick(event)"
+                   ondragover="mediaViewDragOver(event)"
+                   ondragdrop="mediaViewDrop(event)"
+                   datasources="rdf:null">
+          <template>
+            <rule>
+              <conditions>
+                <content uri="?uri"/>
+                <triple subject="?uri"
+                        predicate="http://celtx.com/NS/v1/media"
+                        object="?media"/>
+                <member container="?media" child="?item"/>
+                <triple subject="?item"
+                        predicate="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                        object="?type"/>
+              </conditions>
+              <bindings>
+                <binding subject="?item"
+                        predicate="http://purl.org/dc/elements/1.1/title"
+                        object="?title"/>
+                <binding subject="?item"
+                         predicate="http://celtx.com/NS/v1/state"
+                         object="?state"/>
+              </bindings>
+              <action>
+                <mediaitem uri="?item" title="?title" type="?type"
+                           state="?state" progress="0"/>
+              </action>
+            </rule>
+          </template>
+        </mediaview>
+
+        <hbox>
+          <button id="add-media" label="&addMedia.label;"
+                  command="cmd-add-media"/>
+          <button id="del-media" label="&removeMedia.label;"
+                  command="cmd-delete-media"/>
+        </hbox>
+
+        <toolbox>
+          <toolbar id="search-toolbar">
+            <menulist id='media-search-menu' flex='1'>
+              <menupopup>
+                <menuitem id="google-search-item"
+                          label="Google Images"
+                          gis="true"
+                          class="menuitem-iconic"
+                          selected="true" />
+                <menuitem label="photo.net"
+                          value="photo.net"
+                          gis="true" />
+                <menuitem label="Valentine Armouries"
+                          value="www.varmouries.com"
+                          gis="true" />
+                <menuseparator />
+                <menuitem id="cbc-search-item"
+                          label="CBC Costumes"
+                          value="http://www.radio-canada.ca/costume/"
+                          class="menuitem-iconic" />
+                <menuitem label="Toronto Props"
+                          value="http://www.vintageprops.com/" />
+                <menuitem label="Meta Prop"
+                          value="http://www.om.ca/zng/catalogue/index.htm" />
+              </menupopup>
+            </menulist>
+            <toolbarbutton id="search-button"
+                           tooltiptext="&imageSearch.tooltip;"
+                           command='cmd-media-search' />
+          </toolbar>
+        </toolbox>
+
+  </vbox>
+
+</overlay>
+ 

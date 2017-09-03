@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE dialog [
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<?xml-stylesheet href="chrome://browser/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://celtx/content/celtx.css" type="text/css"?>
+<?xml-stylesheet href="chrome://celtx-platform/content/fileicons.css"
+                 type="text/css"?>
+
+<!-- TODO: i18n -->
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="add-project-dialog"
+        title="&newProjCmd.label;"
+        buttons="accept,cancel"
+        enterDefaultAlways="true"
+        onload="Loaded()"
+        ondialogaccept="return Accepted();"
+        ondialogcancel="return Canceled();">
+
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/util.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/guiutils.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/rdfmodel.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/project.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/addproj.js"/>
+
+  <stringbundleset>
+    <stringbundle id="celtx-stringbundle"
+                  src="chrome://celtx/locale/celtx.properties"/>
+  </stringbundleset>
+
+  <vbox>
+    <grid flex="1">
+      <columns>
+        <column/>
+        <column flex="1"/>
+      </columns>
+      <rows>
+        <row align="center">
+          <label value="&regWiz.nameLabel;"/>
+          <textbox id="name-textbox"
+                   flex="1"
+                   oninput="ValidateInput()"
+                   value="&untitled.label;"/>
+        </row>
+        <row>
+          <spacer/>
+          <deck id="warning-deck"
+                flex="1">
+            <label value=""
+                   flex="1"/>
+            <label value="&invalidFilename.label;"
+                   flex="1"/>
+          </deck>
+        </row>
+        <row align="center">
+          <label value="&locationField.label;"/>
+          <hbox align="center">
+            <image id="location-image"
+                   class="folder"
+                   ondblclick="RevealLocation()"/>
+            <label id="location-textbox"
+                   tooltiptext=""
+                   flex="1"/>
+            <button label="&browseCmd.label;"
+                    class="dialog"
+                    oncommand="Browse()"/>
+          </hbox>
+        </row>
+        <row align="center">
+          <spacer/>
+          <checkbox id="savedircheckbox" label="&saveDirCheckbox.label;"
+                    checked="false"/>
+        </row>
+      </rows>
+    </grid>
+  </vbox>
+</dialog>
+

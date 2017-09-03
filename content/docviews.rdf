@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2005 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!DOCTYPE RDF [
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<RDF:RDF xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:cx="http://celtx.com/NS/v1/"
+         xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+  <!-- Pseudo-document descriptions -->
+  <RDF:Description RDF:about="urn:celtx:document:script"
+                   dc:title="&script.label;"
+                   cx:filename="script.html">
+    <cx:editor RDF:resource="urn:celtx:editor:script"/>
+  </RDF:Description>
+
+  <RDF:Description RDF:about="urn:celtx:document:project"
+                   dc:title="Project">
+    <cx:editor RDF:resource="urn:celtx:editor:project"/>
+  </RDF:Description>
+
+  <RDF:Description RDF:about="urn:celtx:document:titlepage"
+                   dc:title="&titlePage;">
+    <cx:editor RDF:resource="urn:celtx:editor:titlepage"/>
+  </RDF:Description>
+
+  <RDF:Description RDF:about="urn:celtx:document:reports"
+                   dc:title="&reportsMenu.label;">
+    <cx:editor RDF:resource="urn:celtx:editor:reports"/>
+  </RDF:Description>
+
+  <RDF:Description RDF:about="urn:celtx:document:browser"
+                   dc:title="&research.label;">
+    <cx:editor RDF:resource="urn:celtx:editor:browser"/>
+  </RDF:Description>
+
+  <RDF:Description RDF:about="urn:celtx:document:schedule"
+                   dc:title="&schedule.label;">
+    <cx:editor RDF:resource="urn:celtx:editor:schedule"/>
+  </RDF:Description>
+
+  <RDF:Description RDF:about="urn:celtx:document:characters"
+                   dc:title="&characters.label;">
+    <cx:editor RDF:resource="urn:celtx:editor:characters"/>
+  </RDF:Description>
+
+  <RDF:Description RDF:about="urn:celtx:document:scenedet"
+                   dc:title="&sceneDetails.label;">
+    <cx:editor RDF:resource="urn:celtx:editor:scenedet"/>
+  </RDF:Description>
+
+  <!-- Editor descriptions -->
+  <RDF:Description RDF:about="urn:celtx:editor:script"
+                   cx:element="script"
+                   cx:image="chrome://celtx/content/res/Script.png" />
+
+  <RDF:Description RDF:about="urn:celtx:editor:project"
+                   cx:element="project"
+                   cx:image="chrome://celtx/content/res/CeltxMini.png" />
+
+  <RDF:Description RDF:about="urn:celtx:editor:reports"
+                   cx:element="reports"
+                   cx:image="chrome://celtx/content/res/Database.png" />
+
+  <RDF:Description RDF:about="urn:celtx:editor:titlepage"
+                   cx:element="titlepage"
+                   cx:image="chrome://celtx/content/res/Script.png" />
+
+  <RDF:Description RDF:about="urn:celtx:editor:browser"
+                   cx:element="browser"
+                   cx:image="chrome://celtx/content/res/Research.png" />
+
+  <RDF:Description RDF:about="urn:celtx:editor:schedule"
+                   cx:element="schedule"
+                   cx:image="chrome://celtx/content/res/Schedule.png" />
+
+  <RDF:Description RDF:about="urn:celtx:editor:characters"
+                   cx:element="character"
+                   cx:image="chrome://celtx/content/res/Characters.png" />
+
+  <RDF:Description RDF:about="urn:celtx:editor:scenedet"
+                   cx:element="scenedet"
+                   cx:image="chrome://celtx/content/res/SceneDetails.png" />
+</RDF:RDF>

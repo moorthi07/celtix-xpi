@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE overlay [
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+%browserDTD;
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<overlay id="breakdown-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/breakdown.js"/>
+  <vbox id="breakdown-panel">
+    <hbox equalsize="always" flex="1">
+      <listbox id="scene-listbox"
+               flex="1"
+               seltype="multiple"
+               ref="urn:celtx:scenes"
+               datasources="rdf:null"
+               onselect="BD_SceneSelectionChanged()">
+        <listhead>
+          <listheader label="Scene"/>
+        </listhead>
+        <listcols>
+          <listcol flex="1"/>
+        </listcols>
+        <listitem label="ALL"
+                  value="all"/>
+        <template>
+          <rule>
+            <conditions>
+              <content uri="?uri"/>
+              <member container="?uri"
+                      child="?scene"/>
+              <triple subject="?scene"
+                      predicate="http://purl.org/dc/elements/1.1/title"
+                      object="?title"/>
+              <triple subject="?scene"
+                      predicate="http://celtx.com/NS/v1/ordinal"
+                      object="?ordinal"/>
+            </conditions>
+            <action>
+              <listitem uri="?scene"
+                        label="?ordinal ?title"
+                        value="?scene"/>
+            </action>
+          </rule>
+        </template>
+      </listbox>
+      <listbox id="dept-listbox"
+               flex="1"
+               seltype="multiple"
+               ref=""
+               datasources="chrome://celtx/content/schema.rdf"
+               onselect="BD_DeptSelectionChanged()">
+        <listhead>
+          <listheader label="Department"/>
+        </listhead>
+        <listcols>
+          <listcol flex="1"/>
+        </listcols>
+        <listitem label="ALL"
+                  selected="true"/>
+        <template>
+          <rule>
+            <conditions>
+              <content uri="?uri"/>
+              <member container="?uri"
+                      child="?markup"/>
+              <triple subject="?markup"
+                      predicate="http://www.w3.org/2000/01/rdf-schema#label"
+                      object="?title"/>
+            </conditions>
+            <action>
+              <listitem uri="?markup"
+                        label="?title"
+                        value="?markup"/>
+            </action>
+          </rule>
+        </template>
+      </listbox>
+      <listbox id="item-listbox"
+               flex="1"
+               seltype="multiple"
+               ref="http://celtx.com/selection/scenes"
+               datasources="rdf:null"
+               onselect="BD_ItemSelectionChanged()">
+        <listhead>
+          <listheader label="Item"/>
+        </listhead>
+        <listcols>
+          <listcol flex="1"/>
+        </listcols>
+        <template>
+          <rule>
+            <conditions>
+              <content uri="?uri"/>
+              <member container="?uri"
+                      child="?scene"/>
+              <triple subject="?scene"
+                      predicate="http://celtx.com/NS/v1/members"
+                      object="?itemlist"/>
+              <member container="?itemlist"
+                      child="?item"/>
+              <triple subject="?item"
+                      predicate="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                      object="?type"/>
+              <triple subject="http://celtx.com/selection/departments"
+                      predicate="http://celtx.com/NS/v1/member"
+                      object="?type"/>
+              <triple subject="?item"
+                      predicate="http://purl.org/dc/elements/1.1/title"
+                      object="?title"/>
+            </conditions>
+            <action>
+              <listitem uri="?item"
+                        label="?title"
+                        value="?item"/>
+            </action>
+          </rule>
+        </template>
+      </listbox>
+      <vbox hidden="true">
+        <listbox id="media-listbox"
+                 flex="1"
+                 seltype="multiple"
+                 ref="http://celtx.com/selection/items"
+                 datasources="rdf:null">
+          <listhead>
+            <listheader label="Media"/>
+          </listhead>
+          <listcols>
+            <listcol flex="1"/>
+          </listcols>
+          <template>
+            <rule>
+              <conditions>
+                <content uri="?uri"/>
+                <member container="?uri"
+                        child="?item"/>
+                <triple subject="?item"
+                        predicate="http://celtx.com/NS/v1/media"
+                        object="?media"/>
+                <member container="?media"
+                        child="?image"/>
+                <triple subject="?image"
+                        predicate="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                        object="http://celtx.com/NS/v1/Image"/>
+                <triple subject="?image"
+                        predicate="http://purl.org/dc/elements/1.1/title"
+                        object="?title"/>
+              </conditions>
+              <action>
+                <listitem uri="?image"
+                          label="?title"
+                          value="?image"/>
+              </action>
+            </rule>
+          </template>
+        </listbox>
+      </vbox>
+    </hbox>
+    <toolbar>
+      <toolbarspacer flex="1"/>
+      <toolbaritem>
+        <checkbox id="media-checkbox"
+                  label="Display Media"
+                  checked="true"
+                  oncommand="BD_MediaCheckboxChanged()"/>
+      </toolbaritem>
+    </toolbar>
+    <browser id="reportframe"
+             type="content"
+             src="about:blank"
+             width="800"
+             height="400"
+             flex="1"/>
+  </vbox>
+</overlay>
+

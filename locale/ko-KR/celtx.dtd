@@ -1,0 +1,476 @@
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!ENTITY appName "Celtx">
+
+<!ENTITY celtxWindow.titleModifier "Celtx">
+<!ENTITY celtxWindow.titleMenuSeparator " - ">
+
+<!ENTITY reportsMenu.label "분류/인쇄">
+<!ENTITY reportsMenu.accessKey "R">
+
+<!ENTITY resMenu.label "참고자료">
+<!ENTITY resMenu.accessKey "s">
+
+<!ENTITY helpMenu.label "도움말">
+<!ENTITY helpMenu.accessKey "H">
+
+<!ENTITY helpSupportCmd.label "온라인 지원">
+<!ENTITY helpSupportCmd.accessKey "O">
+
+<!ENTITY helpReportBugCmd.label "버그 보고하기">
+<!ENTITY helpReportBugCmd.accessKey "R">
+
+<!ENTITY helpAboutCmd.label "&appName;에 관하여">
+<!ENTITY helpAboutCmd.accessKey "A">
+
+<!ENTITY celtxAccountCmd.label "&appName; 계정...">
+<!ENTITY celtxAccountCmd.accessKey "C">
+
+<!ENTITY openProjCmd.label "프로젝트 열기...">
+
+<!ENTITY newProjCmd.label "새 프로젝트...">
+
+<!ENTITY copyProjCmd.label "프로젝트 복사...">
+
+<!ENTITY saveProjCmd.label "저장">
+
+<!ENTITY downloadProjCmd.label "프로젝트 내려받기...">
+<!ENTITY downloadProjCmd.toolbarLabel "내려받기">
+<!ENTITY downloadProjCmd.accessKey "D">
+
+<!ENTITY publishProjCmd.label "프로젝트 올리기...">
+<!ENTITY publishProjCmd.toolbarLabel "올리기">
+<!ENTITY publishProjCmd.accessKey "u">
+<!ENTITY uploadProjCmd.label "프로젝트 올리기...">
+<!ENTITY uploadProjCmd.toolbarLabel "올리기">
+<!ENTITY uploadProjCmd.accessKey "u">
+
+<!ENTITY importCmd.label "시나리오 가져오기...">
+<!ENTITY importCmd.accessKey "I">
+<!ENTITY importCmd.toolbarLabel "가져오기">
+
+<!-- *** LOCALISE ME *** -->
+<!ENTITY exportScriptCmd.label "Export Script...">
+<!ENTITY exportScriptCmd.accessKey "E">
+<!ENTITY exportScriptCmd.toolbarLabel "Export">
+
+<!ENTITY insertNoteCmd.label "메모 작성...">
+<!ENTITY insertNoteCmd.toolbarLabel "메모">
+
+<!ENTITY insertSceneCmd.label "씬 삽입...">
+<!ENTITY insertSceneCmd.toolbarLabel "씬">
+
+<!ENTITY titlePage "타이틀 페이지">
+
+<!ENTITY delResCmd.label "삭제">
+<!ENTITY gotoResCmd.label "보내기">
+
+<!ENTITY showResCmd.toolbarLabel "보기">
+
+<!ENTITY removeMarkupCmd.label "제거">
+
+<!ENTITY newMarkup.label "새...">
+
+<!ENTITY openProj.title "프로젝트 열기">
+
+<!ENTITY resources.label "각 씬별로 분류">
+
+<!ENTITY options.label "옵션">
+
+<!ENTITY projects.label "프로젝트">
+<!ENTITY title.label "제목">
+<!ENTITY description.label "설명">
+<!ENTITY created.label "작성일시">
+
+<!ENTITY objViewOverviewTab.label "설명">
+<!ENTITY objViewMediaTab.label "미디어">
+
+<!ENTITY insertScene.title     "씬 삽입">
+<!ENTITY insertScene.caption   "씬 삽입">
+<!ENTITY insertScene.after     "현재 씬 뒤에">
+<!ENTITY insertScene.before    "현재 씬 앞에">
+<!ENTITY insertScene.beginning "시나리오 맨 앞에">
+<!ENTITY insertScene.end       "시나리오 맨 뒤에">
+
+<!ENTITY projDialog.title      "프로젝트 속성">
+
+<!ENTITY noteDialog.title      "메모 작성">
+<!ENTITY note.label            "메모">
+
+<!ENTITY untitled.label "(제목없음)">
+
+<!ENTITY regDialog.title "&appName; 등록">
+
+<!ENTITY getProjDialog.title   "프로젝트 내려받기">
+<!ENTITY getProjDialog.caption "공개 프로젝트">
+
+<!ENTITY nameCol.label     "이름">
+<!ENTITY createdCol.label  "작성일시">
+<!ENTITY modifiedCol.label "수정일시">
+<!ENTITY creatorCol.label  "작성자">
+
+<!ENTITY downloadDialog.title   "프로젝트 내려받는 중">
+
+<!ENTITY publishDialog.title        "내려받을 수 있는 프로젝트">
+<!ENTITY uploadDialog.title         "내려받을 수 있는 프로젝트">
+<!ENTITY publishDialog.serverLabel  "서버">
+<!ENTITY publishDialog.publicLabel  "공개">
+<!ENTITY publishDialog.privateLabel "비공개">
+<!ENTITY publishDialog.sharedLabel  "특정인과 공유">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY publishDialog.userList     "User List">
+<!ENTITY publishDialog.findUsers    "Find Users">
+
+
+<!-- Formatting toolbar -->
+<!ENTITY formatAction.label  "지문">
+<!ENTITY formatChar.label    "등장인물">
+<!ENTITY formatDialog.label  "대사">
+<!ENTITY formatHeading.label "씬넘버/장소/시간">
+<!ENTITY formatParen.label   "행동 지문">
+<!ENTITY formatTrans.label   "전환">
+<!ENTITY formatShot.label    "샷">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY formatText.label    "Text">
+
+
+<!-- Debugging -->
+<!ENTITY debugMenu.label "디버그">
+<!ENTITY debugMenu.accessKey "D">
+
+<!ENTITY dumpCmd.label "버리기">
+
+<!ENTITY wiz.clickNext "시작하시려면 '다음' 버튼을 누르시오.">
+<!ENTITY wiz.clickFinish "마법사를 마치시려면 '완료' 버튼을 누르시오.">
+
+
+<!-- Migration wizard -->
+<!ENTITY migWiz.title "&appName; 가져오기 마법사">
+<!ENTITY migWiz.prevVersionDetected
+  "&appName;가 이전 버전의 소프트웨어에서 프로젝트 파일을 발견하였습니다.">
+
+<!ENTITY migWiz.aboutThis
+  "이 마법사는 존재하는 모든 프로젝트롤 가저올 수 있도록 도와줍니다.">
+
+<!ENTITY migWiz.clickNext "&wiz.clickNext;">
+
+<!ENTITY migWiz.clickFinish "&wiz.clickFinish;">
+
+<!ENTITY migWiz.optionsLabel "가져오기 옵션">
+
+<!ENTITY migWiz.chooseOption
+  "다음 옵션중 하나를 선택하시고 '다음'을 누르시오.">
+
+<!ENTITY migWiz.optionImport
+  "이전 버전의 &appName;에서 프로젝트 가져오기">
+
+<!ENTITY migWiz.optionNoImport "가져오기 취소">
+
+<!ENTITY migWiz.migratingLabel "프로젝트 이동">
+
+<!ENTITY migWiz.doneLabel "이동 완료">
+
+
+<!ENTITY regWiz.title "&appName; 등록 마법사">
+
+<!ENTITY regWiz.intro "&appName;의 온라인 기능을 사용하시려면, 우선 &appName;에 계정을 만들어야 합니다.">
+
+<!ENTITY regWiz.aboutThis "이 마법사는 등록에 필요한 정보를 수집합니다.">
+
+<!ENTITY regWiz.identityLabel "등록자 정보">
+
+<!ENTITY regWiz.identityInstructions "이름과 소속기관, 그리고 이메일을 기입하시오.">
+
+<!ENTITY regWiz.nameLabel  "이름:">
+<!ENTITY regWiz.orgLabel   "소속기관:">
+<!ENTITY regWiz.emailLabel "이메일:">
+<!ENTITY regWiz.uidLabel   "&appName; 아이디:">
+
+<!ENTITY regWiz.accountLabel "사용자 계정">
+
+<!ENTITY regWiz.accountInstructions "&appName; 계정으로 사용할 아이디와 비밀번호를 기입하시오.">
+
+<!ENTITY regWiz.usernameLabel      "아이디:">
+<!ENTITY regWiz.passwordLabel      "비밀번호:">
+<!ENTITY regWiz.passwordAgainLabel "비밀번호 재기입:">
+
+<!ENTITY regWiz.noteUsername "아이디는 문자나 숫자만을 사용, 세 글자 이상이어야 합니다..">
+
+<!ENTITY regWiz.notePassword "비밀번호는 다섯 글자 이상이어야 합니다.">
+
+<!ENTITY regWiz.noteCaseSensitive "&appName; 계정 아이디와 비밀번호는 영문 대-소문자를 구분합니다.">
+
+<!ENTITY regWiz.checkLabel "계정 정보 확인">
+
+<!ENTITY regWiz.confirmLabel "세팅 확인">
+
+<!ENTITY regWiz.confirmIntro "당신은 다음 정보를 기입하셨습니다:">
+
+<!ENTITY regWiz.clickFinish "기입하신 정보를 확인하신 후 '완료' 버튼을 눌러 등록을 실행합니다.">
+<!ENTITY regWiz.clickNext "기입하신 정보를 확인하신 후 '다음' 버튼을 눌러 등록을 실행합니다.">
+
+<!ENTITY report.sample "분류 샘플">
+<!ENTITY report.script "시나리오">
+<!ENTITY report.allBreakdown "모든 분류">
+
+<!ENTITY script.label     "시나리오">
+<!ENTITY scene.label      "씬">
+<!ENTITY scenes.label     "씬">
+
+<!-- Breakdown categories -->
+<!-- *** LOCALISE ME *** -->
+<!ENTITY bdc.addlabour    "Additional Labour">
+<!ENTITY bdc.animals      "Animals">
+<!ENTITY bdc.handler      "Animal Handler">
+<!ENTITY bdc.camera       "카메라">
+<!ENTITY bdc.cast         "등장인물">
+<!ENTITY bdc.cgi          "CGI">
+<!ENTITY bdc.construction "Construction">
+<!ENTITY bdc.electrics    "Electrics">
+<!ENTITY bdc.extras       "엑스트라">
+<!ENTITY bdc.greenery     "Greenery">
+<!ENTITY bdc.hair         "Hair">
+<!ENTITY bdc.lights       "조명">
+<!ENTITY bdc.livestock    "Livestock">
+<!ENTITY bdc.location     "로케이션">
+<!ENTITY bdc.makeup       "Makeup">
+<!ENTITY bdc.mechfx       "Mechanical FX">
+<!ENTITY bdc.misc         "Miscellaneous">
+<!ENTITY bdc.music        "Music">
+<!ENTITY bdc.opticalfx    "Optical FX">
+<!ENTITY bdc.painting     "Painting">
+<!ENTITY bdc.prodnotes    "Production Notes">
+<!ENTITY bdc.props        "소품">
+<!ENTITY bdc.security     "Security">
+<!ENTITY bdc.set          "세트">
+<!ENTITY bdc.setdressing  "세트 꾸미기">
+<!ENTITY bdc.sound        "음향">
+<!ENTITY bdc.soundfx      "Sound FX">
+<!ENTITY bdc.equip        "Special Equipment">
+<!ENTITY bdc.specialfx    "Special FX">
+<!ENTITY bdc.storyboard   "Storyboard">
+<!ENTITY bdc.stunts       "Stunts">
+<!ENTITY bdc.vehicles     "Vehicles">
+<!ENTITY bdc.wardrobe     "의상">
+<!ENTITY bdc.weapons      "Weapons">
+
+<!ENTITY splash.welcomePrefix "Celtx에 오신것을 환영합니다. v.">
+<!ENTITY splash.projects      "프로젝트">
+<!ENTITY splash.webServices   "웹 서비스">
+<!ENTITY splash.help          "도움말">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY splash.discussion    "DISCUSSION">
+
+<!ENTITY splash.newProject      "새 프로젝트">
+<!ENTITY splash.openProject     "프로젝트 열기">
+<!ENTITY splash.helpAccount     "계정 만들기">
+<!ENTITY splash.downloadProject "프로젝트 내려받기">
+<!ENTITY splash.projectCentral  "프로젝트 센터">
+<!ENTITY splash.walkthru        "Celtx 둘러보기">
+<!ENTITY splash.guide           "Celtx 사용자 가이드">
+<!ENTITY splash.forums          "Celtx 포럼">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY splash.featureTour     "Feature Tour">
+
+<!ENTITY authDialog.title       "Celtx 로그인">
+<!ENTITY authDialog.description
+  "이 기능을 사용하시려면 Celtx 계정으로 로그인 하셔야 합니다.">
+
+<!ENTITY list.label "리스트...">
+
+<!ENTITY pdfDownloadDialog.title "PDF로 변환">
+<!ENTITY downloadingPDF.label    "PDF로 변환...">
+
+<!ENTITY add.label    "더하기">
+<!ENTITY remove.label "제거">
+
+<!ENTITY mediaBox.tooltip "이곳에 미디어 파일을 드래그 앤 드롭.">
+<!ENTITY imageSearch.tooltip "드래그 앤 드롭할 이미지 찾기.">
+
+<!-- Spellcheck -->
+
+<!ENTITY spellCheckCmd.label "맞춤법 검사">
+
+<!ENTITY addToUserDictionaryButton.accessKey "d">
+<!ENTITY addToUserDictionaryButton.label "단어 추가">
+<!ENTITY checkwordButton.accessKey "k">
+<!ENTITY checkwordButton.label "단어 검사">
+<!ENTITY closeButton.accessKey "C">
+<!ENTITY closeButton.label "닫기">
+<!ENTITY editUserDictionaryButton.accessKey "E">
+<!ENTITY editUserDictionaryButton.label "편집...">
+<!ENTITY ignoreAllButton.accessKey "n">
+<!ENTITY ignoreAllButton.label "모두 무시">
+<!ENTITY ignoreButton.accessKey "I">
+<!ENTITY ignoreButton.label "무시">
+<!ENTITY languagePopup.accessKey "L">
+<!ENTITY languagePopup.label "언어:">
+<!ENTITY misspelledWord.label "맞춤법이 틀린 단어:">
+<!ENTITY moreDictionaries.label "다운로드">
+<!ENTITY recheckButton.accessKey "P">
+<!ENTITY recheckButton.label "다시 검사">
+<!ENTITY replaceAllButton.accessKey "A">
+<!ENTITY replaceAllButton.label "모두 바꾸기">
+<!ENTITY replaceButton.accessKey "R">
+<!ENTITY replaceButton.label "바꾸기">
+<!ENTITY sendButton.accessKey "S">
+<!ENTITY sendButton.label "보냄">
+<!ENTITY stopButton.accessKey "t">
+<!ENTITY stopButton.label "중지">
+<!ENTITY suggestions.accessKey "u">
+<!ENTITY suggestions.label "추천 단어">
+<!ENTITY userDictionary.label "개인 사전:">
+<!ENTITY windowTitle.label "맞춤법 검사">
+<!ENTITY wordEditField.accessKey "w">
+<!ENTITY wordEditField.label "바꿀 단어:">
+
+<!-- Find and Replace -->
+
+<!ENTITY findCmd.label "찾기">
+<!ENTITY replaceCmd.label "대치">
+<!ENTITY findReplaceCmd.label "찾기 &amp; 대치...">
+<!ENTITY findNextCmd.label    "다음">
+<!ENTITY findPrevCmd.label    "이전">
+
+<!ENTITY replaceDialog.title "찾기 &amp; 대치">
+<!ENTITY findField.label "텍스트 찾기:">
+<!ENTITY findField.accesskey "n">
+<!ENTITY replaceField.label "대치:">
+<!ENTITY replaceField.accesskey "e">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY caseSensitiveCheckbox.label "Match upper/lower case">
+<!ENTITY caseSensitiveCheckbox.accesskey "c">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY wrapCheckbox.label "Wrap around">
+<!ENTITY wrapCheckbox.accesskey "W">
+<!ENTITY backwardsCheckbox.label "역방행으로 검색">
+<!ENTITY backwardsCheckbox.accesskey "b">
+<!ENTITY findNextButton.label "다음">
+<!ENTITY findNextButton.accesskey "F">
+<!ENTITY replaceButton.label "대치">
+<!ENTITY replaceButton.accesskey "R">
+<!ENTITY replaceAndFindButton.label "대치 &amp; 찾기">
+<!ENTITY replaceAndFindButton.accesskey "d">
+<!ENTITY replaceAllButton.label "모두 대치">
+<!ENTITY replaceAllButton.accesskey "A">
+<!ENTITY notFoundWarning.label "입력하신 텍스트를 찾을 수 없습니다.">
+
+<!ENTITY regWiz.newOrExistingLabel
+  "새 계정을 만들거나 기존 계정 사용하기:">
+<!ENTITY regWiz.createNewAccountLabel
+  "새 계정 만들기.">
+<!ENTITY regWiz.useExistingAccountLabel
+  "기존 계정 사용하기.">
+<!ENTITY regWiz.loginSuccessfulLabel
+  "감사합니다. &appName; 로 로그인 되었습니다.">
+
+<!ENTITY propertiesTab.label "속성">
+<!ENTITY author.label "저자">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY projSource.label "Based on">
+<!ENTITY copyright.label "저작권">
+<!ENTITY contactInfo.label "연락처">
+<!ENTITY printSceneNumbers.label "씬넘버 인쇄:">
+
+<!ENTITY none "없음">
+<!ENTITY left "왼쪽">
+<!ENTITY right "오른쪽">
+<!ENTITY both "양쪽">
+
+<!ENTITY splashScreen.label "스플래쉬 스크린">
+
+<!ENTITY generatePDF.label "PDF 생성...">
+<!ENTITY publishMode.label "출판모드">
+
+<!ENTITY addMedia.label "미디어 추가...">
+<!ENTITY removeMedia.label "미디어 제거">
+
+<!-- *** LOCALISE ME *** -->
+<!ENTITY report.titleBy "By">
+<!ENTITY report.titleBasedOn "Based on">
+<!ENTITY report.titleRights "저작권">
+
+<!ENTITY bold.label "볼드">
+<!ENTITY italic.label "이탤릭">
+<!ENTITY underline.label "밑줄">
+
+<!ENTITY styleDialog.title "포맷 세팅">
+<!ENTITY styleSettings.label "포맷 세팅...">
+<!ENTITY template.label "템플렛">
+
+<!-- *** LOCALISE ME *** -->
+<!ENTITY saveAsCmd.label "Save As...">
+<!ENTITY saveAsCmd.accessKey "A">
+<!ENTITY saveAsCmd.toolbarLabel "Save As">
+
+<!ENTITY mediaViewer.title "미디어 보기">
+
+<!-- *** LOCALISE ME *** -->
+<!ENTITY browseCmd.label "Browse...">
+<!ENTITY tagItemCmd.label "Tag">
+<!ENTITY delItemCmd.label "Delete">
+<!ENTITY chooseProjsDir.label "Choose where you want to save your projects:">
+<!ENTITY createProjsDir.label "&appName; needs a place to store your projects before it can save them. Please create the directory where &appName; should save your projects:">
+<!ENTITY createCmd.label "Create...">
+<!ENTITY invalidFilename.label "The name given is not a valid file name.">
+
+<!ENTITY breakdownCmd.label "Breakdown">
+
+<!ENTITY sidebar.label "Sidebar">
+
+<!ENTITY moveDownCmd.label "Move Down">
+<!ENTITY moveUpCmd.label   "Move Up">
+
+<!ENTITY department.label "Department">
+<!ENTITY item.label "Item">
+
+<!ENTITY category.label "Category">
+<!ENTITY database.label "Database">
+<!ENTITY research.label "Web Research">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY schedule.label "Schedule">
+<!ENTITY characters.label "Characters">
+<!ENTITY sceneDetails.label "Scene Details">
+
+<!ENTITY recycleCmd.label "Send to Scratchpad">
+
+<!-- Breakdown View -->
+<!ENTITY breakdownReport.label "Breakdown Report">
+
+<!ENTITY fullName.label "Full Name">
+
+<!ENTITY sceneBreakdown.label "Scene Breakdown">
+<!ENTITY sceneBreakdownWithDesc.label "Scene Breakdown with Descriptions">
+<!ENTITY allUppercase.label "ALL">
+<!ENTITY displayMedia.label "Display Media">
+
+<!-- *** LOCALISE ME *** -->
+<!ENTITY locationField.label "로케이션:">
+<!ENTITY saveDirCheckbox.label "Save here by default">
+

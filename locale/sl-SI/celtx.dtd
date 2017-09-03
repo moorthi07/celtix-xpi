@@ -1,0 +1,471 @@
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!ENTITY appName "Celtx">
+
+<!ENTITY celtxWindow.titleModifier "celtx">
+<!ENTITY celtxWindow.titleMenuSeparator " - ">
+
+<!ENTITY reportsMenu.label "Poročila">
+<!ENTITY reportsMenu.accessKey "l">
+
+<!ENTITY resMenu.label "Viri">
+<!ENTITY resMenu.accessKey "r">
+
+<!ENTITY helpMenu.label "Pomoč">
+<!ENTITY helpMenu.accessKey "m">
+
+<!ENTITY helpSupportCmd.label "Pomoč na spletu">
+<!ENTITY helpSupportCmd.accessKey "z">
+
+<!ENTITY helpReportBugCmd.label "Prijavite hrošča">
+<!ENTITY helpReportBugCmd.accessKey "R">
+
+<!ENTITY helpAboutCmd.label "O programu &appName;">
+<!ENTITY helpAboutCmd.accessKey "a">
+
+<!ENTITY celtxAccountCmd.label "Račun &appName; ...">
+<!ENTITY celtxAccountCmd.accessKey "C">
+
+<!ENTITY openProjCmd.label "Odpri projekt ...">
+
+<!ENTITY newProjCmd.label "Nov projekt ...">
+
+<!ENTITY copyProjCmd.label "Kopiraj projekt ...">
+
+<!ENTITY saveProjCmd.label "Shrani">
+
+<!ENTITY downloadProjCmd.label "Prenesi projekt ...">
+<!ENTITY downloadProjCmd.toolbarLabel "Prenesi">
+<!ENTITY downloadProjCmd.accessKey "P">
+
+<!ENTITY publishProjCmd.label "Objavi projekt ...">
+<!ENTITY publishProjCmd.toolbarLabel "Objavi">
+<!ENTITY publishProjCmd.accessKey "o">
+<!ENTITY uploadProjCmd.label "Objavi projekt ...">
+<!ENTITY uploadProjCmd.toolbarLabel "Objavi">
+<!ENTITY uploadProjCmd.accessKey "o">
+
+<!ENTITY importCmd.label "Uvozi scenarij ...">
+<!ENTITY importCmd.accessKey "U">
+<!ENTITY importCmd.toolbarLabel "Uvozi">
+
+<!ENTITY exportScriptCmd.label "Izvozi scenarij ...">
+<!ENTITY exportScriptCmd.accessKey "I">
+<!ENTITY exportScriptCmd.toolbarLabel "Izvozi">
+
+<!ENTITY saveAsCmd.label "Shrani kot ...">
+<!ENTITY saveAsCmd.accessKey "A">
+<!ENTITY saveAsCmd.toolbarLabel "Shrani kot">
+
+<!ENTITY insertNoteCmd.label "Vstavi opombo ...">
+<!ENTITY insertNoteCmd.toolbarLabel "Opomba">
+
+<!ENTITY insertSceneCmd.label "Vstavi prizor ...">
+<!ENTITY insertSceneCmd.toolbarLabel "Prizor">
+
+<!ENTITY titlePage "Naslovnica">
+
+<!ENTITY delResCmd.label "Odstrani">
+<!ENTITY gotoResCmd.label "Pojdi na">
+
+<!ENTITY showResCmd.toolbarLabel "Prikaži">
+
+<!ENTITY removeMarkupCmd.label "Odstrani">
+
+<!ENTITY newMarkup.label "Novo ...">
+
+<!ENTITY openProj.title "Odpri projekt">
+
+<!ENTITY resources.label "Viri">
+
+<!ENTITY options.label "Options">
+
+<!ENTITY projects.label "Projekti">
+<!ENTITY title.label "Naslov">
+<!ENTITY description.label "Opis">
+<!ENTITY created.label "Ustvarjeno">
+
+<!ENTITY objViewOverviewTab.label "Pregled">
+<!ENTITY objViewMediaTab.label "Datoteke">
+
+<!ENTITY insertScene.title     "Vstavi prizor">
+<!ENTITY insertScene.caption   "Vstavi prizor">
+<!ENTITY insertScene.after     "pred trenutnim prizorom">
+<!ENTITY insertScene.before    "za trenutnim prizorom">
+<!ENTITY insertScene.beginning "na začetek scenarija">
+<!ENTITY insertScene.end       "na konec scenarija">
+
+<!ENTITY projDialog.title      "Lastnosti projekta">
+
+<!ENTITY noteDialog.title      "Uredi opombo">
+<!ENTITY note.label            "Opomba">
+
+<!ENTITY untitled.label "(brez naslova)">
+
+<!ENTITY regDialog.title "Registracija &appName;">
+
+<!ENTITY getProjDialog.title   "Prenesi projekt">
+<!ENTITY getProjDialog.caption "Projekti na voljo">
+
+<!ENTITY nameCol.label     "Ime">
+<!ENTITY createdCol.label  "Ustvarjeno">
+<!ENTITY modifiedCol.label "Spremenjeno">
+<!ENTITY creatorCol.label  "Ustvarjalec">
+
+<!ENTITY downloadDialog.title   "Prenašanje projekta">
+
+<!ENTITY publishDialog.title        "Objavi projekt">
+<!ENTITY uploadDialog.title         "Objavi projekt">
+<!ENTITY publishDialog.serverLabel  "Strežnik">
+<!ENTITY publishDialog.publicLabel  "javen">
+<!ENTITY publishDialog.privateLabel "zaseben">
+<!ENTITY publishDialog.sharedLabel  "s soustvarjalci">
+<!ENTITY publishDialog.userList     "Seznam uporabnikov">
+<!ENTITY publishDialog.findUsers    "Najdi uporabnike">
+
+
+<!-- Formatting toolbar -->
+<!ENTITY formatAction.label  "Dogajanje">
+<!ENTITY formatChar.label    "Lik">
+<!ENTITY formatDialog.label  "Dialog">
+<!ENTITY formatHeading.label "Naslov">
+<!ENTITY formatParen.label   "Opis">
+<!ENTITY formatTrans.label   "Prehod">
+<!ENTITY formatShot.label    "Kader">
+<!ENTITY formatText.label    "Besedilo">
+
+
+<!-- Debugging -->
+<!ENTITY debugMenu.label "Razhroščevalnik">
+<!ENTITY debugMenu.accessKey "h">
+
+<!ENTITY dumpCmd.label "Opusti">
+
+<!ENTITY wiz.clickNext "Kliknite gumb 'Naprej' za začetek.">
+<!ENTITY wiz.clickFinish "Kliknite gumb 'Dokončaj' za dokončanje čarovnika.">
+
+
+<!-- Migration wizard -->
+<!ENTITY migWiz.title "Čarovnik za migracijo &appName;">
+<!ENTITY migWiz.prevVersionDetected "&appName; je zaznal datoteko projekta starejše različice programa.">
+
+
+<!ENTITY migWiz.aboutThis "Čarovnik omogoča uvoz obstoječih projektov.">
+
+
+<!ENTITY migWiz.clickNext "&wiz.clickNaprej;">
+
+<!ENTITY migWiz.clickFinish "&wiz.clickDokončaj;">
+
+<!ENTITY migWiz.optionsLabel "Možnosti uvoza">
+
+<!ENTITY migWiz.chooseOption "Prosimo izberite eno od ponujenih možnosti in kliknite 'Naprej'.">
+
+
+<!ENTITY migWiz.optionImport "Uvoz projektov predhodne različice programa &appName;">
+
+
+<!ENTITY migWiz.optionNoImport "Ne uvozi ničesar">
+
+<!ENTITY migWiz.migratingLabel "Projekti v migraciji">
+
+<!ENTITY migWiz.doneLabel "Migracija zaključena">
+
+
+<!ENTITY regWiz.title "Čarovnik za registracijo &appName;">
+
+<!ENTITY regWiz.intro "Za dostop do spletnih storitev &appName; morate najprej odpreti račun &appName;.">
+
+
+<!ENTITY regWiz.aboutThis "Čarovnik zbere potrebne informacije za registracijo.">
+
+
+<!ENTITY regWiz.identityLabel "Identiteta">
+
+<!ENTITY regWiz.identityInstructions "Prosimo vnesite svoje ime, ime organizacije in svoj e-poštni naslov.">
+
+
+<!ENTITY regWiz.nameLabel  "Ime:">
+<!ENTITY regWiz.orgLabel   "Organizacija:">
+<!ENTITY regWiz.emailLabel "E-poštni naslov:">
+<!ENTITY regWiz.uidLabel   "Ime računa &appName;:">
+
+<!ENTITY regWiz.accountLabel "Uporabniški račun">
+
+<!ENTITY regWiz.accountInstructions "Prosimo izberite uporabniško ime in geslo za svoj račun &appName;.">
+
+
+<!ENTITY regWiz.usernameLabel      "Uporabniško ime:">
+<!ENTITY regWiz.passwordLabel      "Geslo:">
+<!ENTITY regWiz.passwordAgainLabel "Potrditev gesla:">
+
+<!ENTITY regWiz.noteUsername "Uporabniško ime mora biti dolgo vsaj 3 znake in lahko vsebuje le črke in številke.">
+
+
+<!ENTITY regWiz.notePassword "Geslo mora biti dolgo vsaj 5 znakov.">
+
+
+<!ENTITY regWiz.noteCaseSensitive "Uporabniška imena in gesla za &appName; so občutljiva na velike začetnice.">
+
+
+<!ENTITY regWiz.checkLabel "Preizkus informacij o računu">
+
+<!ENTITY regWiz.confirmLabel "Potrditev nastavitev">
+
+<!ENTITY regWiz.confirmIntro "Vnesli ste naslednje:">
+
+<!ENTITY regWiz.clickFinish "Če ste s temi vrednostmi zadovoljni, kliknite gumb 'Dokončaj' za oddajo registracije.">
+<!ENTITY regWiz.clickNext "Če ste s temi vrednostmi zadovoljni, kliknite gumb 'Naprej' za oddajo registracije.">
+
+
+<!ENTITY report.sample "Primer poročila">
+<!ENTITY report.script "Izpis scenarija">
+<!ENTITY report.allBreakdown "Celotna razdelava">
+
+<!ENTITY report.titleBy "">
+<!ENTITY report.titleBasedOn "Po predlogi">
+<!ENTITY report.titleRights "Copyright">
+
+<!ENTITY scene.label      "Prizor">
+<!ENTITY scenes.label     "Prizori">
+<!ENTITY script.label     "Scenarij">
+
+<!-- Breakdown categories -->
+<!ENTITY bdc.addlabour    "Dodatna delovna sila">
+<!ENTITY bdc.animals      "Živali">
+<!ENTITY bdc.handler      "Trener živali">
+<!ENTITY bdc.camera       "Kamera">
+<!ENTITY bdc.cast         "Zasedba">
+<!ENTITY bdc.cgi          "CGI">
+<!ENTITY bdc.construction "Gradnja">
+<!ENTITY bdc.electrics    "Elektrika">
+<!ENTITY bdc.extras       "Statisti">
+<!ENTITY bdc.greenery     "Zelenje">
+<!ENTITY bdc.hair         "Frizer">
+<!ENTITY bdc.lights       "Luči">
+<!ENTITY bdc.livestock    "Živina">
+<!ENTITY bdc.location     "Lokacije">
+<!ENTITY bdc.makeup       "Maska">
+<!ENTITY bdc.mechfx       "Mehanski učinki">
+<!ENTITY bdc.misc         "Razno">
+<!ENTITY bdc.music        "Glasba">
+<!ENTITY bdc.opticalfx    "Optični učinki">
+<!ENTITY bdc.painting     "Barvanje">
+<!ENTITY bdc.prodnotes    "Produkcijske beležke">
+<!ENTITY bdc.props        "Rekviziti">
+<!ENTITY bdc.security     "Varnostniki">
+<!ENTITY bdc.set          "Snemalno mesto">
+<!ENTITY bdc.setdressing  "Opremljanje scene">
+<!ENTITY bdc.sound        "Zvok">
+<!ENTITY bdc.soundfx      "Zvočni učinki">
+<!ENTITY bdc.equip        "Posebna oprema">
+<!ENTITY bdc.specialfx    "Posebni učinki">
+<!ENTITY bdc.storyboard   "Zgodboris">
+<!ENTITY bdc.stunts       "Kaskaderji">
+<!ENTITY bdc.vehicles     "Vozila">
+<!ENTITY bdc.wardrobe     "Garderoba">
+<!ENTITY bdc.weapons      "Orožje">
+
+
+<!ENTITY splash.welcomePrefix "dobrodošli v celtx r.">
+<!ENTITY splash.projects      "PROJEKTI">
+<!ENTITY splash.webServices   "SPLETNE STORITVE">
+<!ENTITY splash.help          "POMOČ">
+<!ENTITY splash.discussion    "RAZPRAVE">
+
+<!ENTITY splash.newProject      "Začni nov projekt">
+<!ENTITY splash.openProject     "Odpri obstoječi projekt">
+<!ENTITY splash.helpAccount     "Ustvari račun">
+<!ENTITY splash.downloadProject "Prenesi projekt">
+<!ENTITY splash.projectCentral  "Projektno središče">
+<!ENTITY splash.walkthru        "Kratki uvod v Celtx">
+<!ENTITY splash.guide           "Uporabniški vodnik za Celtx">
+<!ENTITY splash.forums          "Forumi Celtx">
+<!ENTITY splash.featureTour     "Pregled funkcionalnosti">
+
+<!ENTITY authDialog.title       "Avtentikacija Celtx">
+<!ENTITY authDialog.description "Ta funkcija zahteva prijavo na strežnik Celtx.">
+
+
+<!ENTITY list.label "Seznam ...">
+
+<!ENTITY pdfDownloadDialog.title "Pretvorba v PDF">
+<!ENTITY downloadingPDF.label    "Pretvorba v PDF je v teku ...">
+
+<!ENTITY add.label "Dodaj">
+<!ENTITY remove.label "Odstrani">
+
+<!ENTITY mediaBox.tooltip "Povlecite in spustite predstavnostne datoteke sem.">
+<!ENTITY imageSearch.tooltip "Iskanje podob za povleci in spusti.">
+
+<!-- Spellcheck -->
+
+<!ENTITY spellCheckCmd.label "Preveri črkovanje">
+
+<!ENTITY addToUserDictionaryButton.accessKey "d">
+<!ENTITY addToUserDictionaryButton.label "Dodaj besedo">
+<!ENTITY checkwordButton.accessKey "b">
+<!ENTITY checkwordButton.label "Preveri besedo">
+<!ENTITY closeButton.accessKey "Z">
+<!ENTITY closeButton.label "Zapri">
+<!ENTITY editUserDictionaryButton.accessKey "U">
+<!ENTITY editUserDictionaryButton.label "Uredi ...">
+<!ENTITY ignoreAllButton.accessKey "r">
+<!ENTITY ignoreAllButton.label "Prezri vse">
+<!ENTITY ignoreButton.accessKey "P">
+<!ENTITY ignoreButton.label "Prezri">
+<!ENTITY languagePopup.accessKey "J">
+<!ENTITY languagePopup.label "Jezik:">
+<!ENTITY misspelledWord.label "Nepravilno črkovana beseda:">
+<!ENTITY moreDictionaries.label "Prenesi druge">
+<!ENTITY recheckButton.accessKey "P">
+<!ENTITY recheckButton.label "Ponovno preveri stran">
+<!ENTITY replaceAllButton.accessKey "v">
+<!ENTITY replaceAllButton.label "Zamenjaj vse">
+<!ENTITY replaceButton.accessKey "Z">
+<!ENTITY replaceButton.label "Zamenjaj">
+<!ENTITY sendButton.accessKey "P">
+<!ENTITY sendButton.label "Pošlji">
+<!ENTITY stopButton.accessKey "t">
+<!ENTITY stopButton.label "Ustavi">
+<!ENTITY suggestions.accessKey "g">
+<!ENTITY suggestions.label "Predlogi:">
+<!ENTITY userDictionary.label "Osebni slovar:">
+<!ENTITY windowTitle.label "Preverjanje črkovanja">
+<!ENTITY wordEditField.accessKey "z">
+<!ENTITY wordEditField.label "Zamenjaj z:">
+
+<!-- Find and Replace -->
+<!ENTITY findCmd.label "Najdi">
+<!ENTITY replaceCmd.label "Zamenjaj">
+<!ENTITY findReplaceCmd.label "Najdi in zamenjaj ...">
+<!ENTITY findNextCmd.label "Išči navzdol">
+<!ENTITY findPrevCmd.label "Išči navzgor">
+
+<!ENTITY replaceDialog.title "Najdi in zamenjaj">
+<!ENTITY findField.label "Najdi besedilo:">
+<!ENTITY findField.accesskey "b">
+<!ENTITY replaceField.label "Zamenjaj z:">
+<!ENTITY replaceField.accesskey "e">
+<!ENTITY caseSensitiveCheckbox.label "Razlikuj velike in male črke">
+<!ENTITY caseSensitiveCheckbox.accesskey "č">
+<!ENTITY wrapCheckbox.label "Išči naprej od začetka">
+<!ENTITY wrapCheckbox.accesskey "o">
+<!ENTITY backwardsCheckbox.label "Išči v nasprotni smeri">
+<!ENTITY backwardsCheckbox.accesskey "s">
+<!ENTITY findNextButton.label "Najdi naslednjega">
+<!ENTITY findNextButton.accesskey "n">
+<!ENTITY replaceButton.label "Zamenjaj">
+<!ENTITY replaceButton.accesskey "Z">
+<!ENTITY replaceAndFindButton.label "Zamenjaj in najdi">
+<!ENTITY replaceAndFindButton.accesskey "d">
+<!ENTITY replaceAllButton.label "Zamenjaj vse">
+<!ENTITY replaceAllButton.accesskey "v">
+<!ENTITY notFoundWarning.label "Besedilo ne vsebuje iskanega niza.">
+
+<!ENTITY regWiz.newOrExistingLabel "Ustvarite nov uporabniški račun ali uporabite že obstoječega:">
+
+<!ENTITY regWiz.createNewAccountLabel "Ustvarite nov uporabniški račun.">
+
+<!ENTITY regWiz.useExistingAccountLabel "Uporabite obstoječi uporabniški račun.">
+
+<!ENTITY regWiz.loginSuccessfulLabel "Hvala, zdaj ste vpisani v &appName;.">
+
+
+<!ENTITY propertiesTab.label "Lastnosti">
+<!ENTITY author.label "Avtor">
+<!ENTITY projSource.label "Po predlogi">
+<!ENTITY copyright.label "Copyright">
+<!ENTITY contactInfo.label "Kontaktni naslovi">
+<!ENTITY printSceneNumbers.label "Natisni številke prizorov:">
+
+<!ENTITY none "brez">
+<!ENTITY left "na levi">
+<!ENTITY right "na desni">
+<!ENTITY both "oboje">
+
+<!ENTITY splashScreen.label "Pojavni zaslon">
+
+<!ENTITY generatePDF.label "Ustvari PDF ...">
+<!ENTITY publishMode.label "Objavni način">
+
+<!ENTITY addMedia.label "Dodaj datoteko ...">
+<!ENTITY removeMedia.label "Odstrani datoteko">
+
+<!ENTITY bold.label "krepko">
+<!ENTITY italic.label "ležeče">
+<!ENTITY underline.label "podčrtano">
+
+<!ENTITY styleDialog.title "Oblikovne nastavitve">
+<!ENTITY styleSettings.label "Oblikovne nastavitve ...">
+<!ENTITY template.label "Predloga">
+
+<!ENTITY mediaViewer.title "Pregledovalnik datotek">
+
+<!ENTITY browseCmd.label "Prebrskaj ...">
+<!ENTITY tagItemCmd.label "Označi">
+<!ENTITY delItemCmd.label "Zbriši">
+<!ENTITY chooseProjsDir.label "Izberite, kam želite shraniti projekte:">
+<!ENTITY createProjsDir.label "&appName; potrebuje imenik, kjer bodo zapisani vaši projekti, preden jih lahko shrani. Prosimo, ustvarite imenik, kjer bodo shranjeni vaši projekti:">
+<!ENTITY createCmd.label "Ustvari ...">
+<!ENTITY invalidFilename.label "Vneseno ime ni veljavno ime za datoteko.">
+
+<!ENTITY breakdownCmd.label "Razdelaj">
+
+<!ENTITY sidebar.label "Stranska vrstica">
+
+<!ENTITY moveDownCmd.label "Premakni dol">
+<!ENTITY moveUpCmd.label   "Premakni gor">
+
+<!ENTITY department.label "Oddelek">
+<!ENTITY item.label "Postavka">
+
+<!ENTITY category.label "Kategorija">
+<!ENTITY database.label "Zbirka podatkov">
+<!ENTITY research.label "Spletna raziskava">
+
+<!ENTITY schedule.label "Urnik">
+<!ENTITY characters.label "Liki">
+<!ENTITY sceneDetails.label "Podrobnosti o prizoru">
+
+<!ENTITY recycleCmd.label "Pošlji v beležko">
+
+<!-- Breakdown View -->
+<!ENTITY breakdownReport.label "Poročilo razdelave">
+
+<!ENTITY fullName.label "Polno ime">
+
+<!ENTITY sceneBreakdown.label "Razdelava po prizorih">
+<!ENTITY sceneBreakdownWithDesc.label "Razdelava po prizorih z opisi">
+<!ENTITY allUppercase.label "VSE">
+<!ENTITY displayMedia.label "Pokaži medijske datoteke">
+
+<!ENTITY locationField.label "Lokacije:">
+<!ENTITY saveDirCheckbox.label "Privzeto mesto shranjevanja">
+

@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<?xml-stylesheet href="chrome://celtx/content/celtx.css" type="text/css"?> 
+<?xul-overlay href="chrome://celtx/content/menuoverlay.xul"?>
+
+<!DOCTYPE window [
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+%browserDTD;
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="spellcheck-dialog"
+        title="&windowTitle.label;"
+        persist="screenX screenY width height"
+        onload="loaded()"
+        onunload="unloaded()">
+
+  <script type="application/x-javascript"
+          src="chrome://global/content/globalOverlay.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/util.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/spellcheck.js"/>
+
+  <stringbundleset>
+    <stringbundle id="celtx-bundle"
+                  src="chrome://celtx/locale/celtx.properties"/>
+    <stringbundle id="languageBundle"
+                  src="chrome://global/locale/languageNames.properties"/>
+  </stringbundleset>
+
+  <keyset id="file-keyset" />
+  <keyset id="edit-keyset" />
+
+  <commandset id="update-command-set" />
+  <commandset id="file-command-set" />
+  <commandset id="edit-command-set" />
+
+#ifdef XP_MACOSX
+  <keyset id="window-keyset" />
+  <commandset id="window-command-set" />
+#endif
+
+  <commandset id="spellcheck-command-set"
+              commandupdater="true"
+              events="clipboard,undo"
+              oncommandupdate="updateCommands()">
+    <command id="cmd-replace-word"
+             oncommand="replaceWord()"
+             disabled="true"/>
+    <command id="cmd-replace-all"
+             oncommand="replaceAll()"
+             disabled="true"/>
+    <command id="cmd-ignore-word"
+             oncommand="ignoreWord()"
+             disabled="true"/>
+    <command id="cmd-ignore-all"
+             oncommand="ignoreAll()"
+             disabled="true"/>
+    <command id="cmd-add-word"
+             oncommand="addWord()"
+             disabled="true"/>
+    <command id="cmd-change-dictionary"
+             oncommand="changeDictionary()"/>
+  </commandset>
+
+#ifdef XP_MACOSX
+  <toolbox id="main-toolbox">
+    <menubar id="spellcheck-menubar">
+      <menu id="file-menu" />
+      <menu id="edit-menu" />
+      <menu id="window-menu" />
+    </menubar>
+  </toolbox>
+#endif
+
+  <grid>
+    <columns>
+      <column/>
+      <column flex="1"/>
+      <column/>
+    </columns>
+    <rows>
+      <row>
+        <label value="&misspelledWord.label;"/>
+        <label class="bold" id="mispelled-word"/>
+        <spacer/>
+      </row>
+      <row>
+        <label value="&wordEditField.label;"
+               control="word-edit-field"
+               accesskey="&wordEditField.accessKey;"/>
+        <textbox id="word-edit-field"
+                 oninput="wordEditInput()"
+                 flex="1"/>
+        <button id="replace-button"
+                label="&replaceButton.label;"
+                command="cmd-replace-word"
+                accesskey="&replaceButton.accessKey;"/>
+      </row>
+      <row>
+        <label value="&suggestions.label;"
+               control="suggestions-list"
+               accesskey="&suggestions.accessKey;"/>
+        <listbox id="suggestions-list"
+                 rows="8"
+                 onselect="selectSuggestion()"
+                 ondblclick="suggestionDoubleClicked()"/>
+        <vbox>
+          <button id="replace-all-button"
+                  command="cmd-replace-all"
+                  label="&replaceAllButton.label;"
+                  accesskey="&replaceAllButton.accessKey;"/>
+          <button id="ignore-button"
+                  command="cmd-ignore-word"
+                  label="&ignoreButton.label;"
+                  accesskey="&ignoreButton.accessKey;"/>
+          <button id="ignore-all-button"
+                  command="cmd-ignore-all"
+                  label="&ignoreAllButton.label;"
+                  accesskey="&ignoreAllButton.accessKey;"/>
+          <button id="add-word-button"
+                  command="cmd-add-word"
+                  label="&addToUserDictionaryButton.label;"
+                  accesskey="&addToUserDictionaryButton.accessKey;"/>
+        </vbox>
+      </row>
+      <row>
+        <spacer/>
+        <menulist id='languageMenu' command='cmd-change-dictionary'>
+          <menupopup />
+        </menulist>
+        <spacer />
+      </row>
+    </rows>
+  </grid>
+
+</window>
+

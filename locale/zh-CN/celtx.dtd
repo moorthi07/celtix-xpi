@@ -1,0 +1,471 @@
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<!ENTITY appName "Celtx">
+
+<!ENTITY celtxWindow.titleModifier "celtx">
+<!ENTITY celtxWindow.titleMenuSeparator " - ">
+
+<!ENTITY reportsMenu.label "报告(R)">
+<!ENTITY reportsMenu.accessKey "R">
+
+<!ENTITY resMenu.label "资源(S)">
+<!ENTITY resMenu.accessKey "s">
+
+<!ENTITY helpMenu.label "帮助(H)">
+<!ENTITY helpMenu.accessKey "H">
+
+<!ENTITY helpSupportCmd.label "在线支持(O)">
+<!ENTITY helpSupportCmd.accessKey "O">
+
+<!ENTITY helpReportBugCmd.label "错误报告(R)">
+<!ENTITY helpReportBugCmd.accessKey "R">
+
+<!ENTITY helpAboutCmd.label "关于 &appName;(A)">
+<!ENTITY helpAboutCmd.accessKey "A">
+
+<!ENTITY celtxAccountCmd.label "&appName; 帐户...(C)">
+<!ENTITY celtxAccountCmd.accessKey "C">
+
+<!ENTITY openProjCmd.label "打开文件...">
+
+<!ENTITY newProjCmd.label "新建文件...">
+
+<!ENTITY copyProjCmd.label "复制文件...">
+
+<!ENTITY saveProjCmd.label "保存">
+
+<!ENTITY downloadProjCmd.label "下载文件...">
+<!ENTITY downloadProjCmd.toolbarLabel "下载(D)">
+<!ENTITY downloadProjCmd.accessKey "D">
+
+<!ENTITY publishProjCmd.label "公开文件...">
+<!ENTITY publishProjCmd.toolbarLabel "公开(u)">
+<!ENTITY publishProjCmd.accessKey "u">
+<!ENTITY uploadProjCmd.label "公开文件...">
+<!ENTITY uploadProjCmd.toolbarLabel "公开(u)">
+<!ENTITY uploadProjCmd.accessKey "u">
+
+<!ENTITY importCmd.label "引入剧本...(I)">
+<!ENTITY importCmd.accessKey "I">
+<!ENTITY importCmd.toolbarLabel "引入">
+
+<!-- *** LOCALISE ME *** -->
+<!ENTITY exportScriptCmd.label "Export Script...">
+<!ENTITY exportScriptCmd.accessKey "E">
+<!ENTITY exportScriptCmd.toolbarLabel "Export">
+
+<!ENTITY saveAsCmd.label "另存为(A)...">
+<!ENTITY saveAsCmd.accessKey "A">
+<!ENTITY saveAsCmd.toolbarLabel "另存为">
+
+<!ENTITY insertNoteCmd.label "插入注释...">
+<!ENTITY insertNoteCmd.toolbarLabel "注释">
+
+<!ENTITY insertSceneCmd.label "插入情景...">
+<!ENTITY insertSceneCmd.toolbarLabel "情景">
+
+<!ENTITY titlePage "扉页">
+
+<!ENTITY delResCmd.label "移动">
+<!ENTITY gotoResCmd.label "转到">
+
+<!ENTITY showResCmd.toolbarLabel "显示">
+
+<!ENTITY removeMarkupCmd.label "移动">
+
+<!ENTITY newMarkup.label "新建...">
+
+<!ENTITY openProj.title "打开文件">
+
+<!ENTITY resources.label "资源">
+
+<!ENTITY options.label "选项">
+
+<!ENTITY projects.label "文件">
+<!ENTITY title.label "名称">
+<!ENTITY description.label "描述">
+<!ENTITY created.label "建立">
+
+<!ENTITY objViewOverviewTab.label "总结">
+<!ENTITY objViewMediaTab.label "媒体">
+
+<!ENTITY insertScene.title     "插入情景">
+<!ENTITY insertScene.caption   "插入情景">
+<!ENTITY insertScene.after     "在当前情景后">
+<!ENTITY insertScene.before    "在当前情景前">
+<!ENTITY insertScene.beginning "剧本开始 ">
+<!ENTITY insertScene.end       "剧本结束">
+
+<!ENTITY projDialog.title      "文件属性">
+
+<!ENTITY noteDialog.title      "编辑注释">
+<!ENTITY note.label            "注释">
+
+<!ENTITY untitled.label "(无标题)">
+
+<!ENTITY regDialog.title "&appName; 注册">
+
+<!ENTITY getProjDialog.title   "下载文件">
+<!ENTITY getProjDialog.caption "可用文件">
+
+<!ENTITY nameCol.label     "名称">
+<!ENTITY createdCol.label  "建立">
+<!ENTITY modifiedCol.label "修改">
+<!ENTITY creatorCol.label  "创建者">
+
+<!ENTITY downloadDialog.title   "下载文件">
+
+<!ENTITY publishDialog.title        "公开文件">
+<!ENTITY uploadDialog.title         "公开文件">
+<!ENTITY publishDialog.serverLabel  "服务器">
+<!ENTITY publishDialog.publicLabel  "公开">
+<!ENTITY publishDialog.privateLabel "私人">
+<!ENTITY publishDialog.sharedLabel  "共享为">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY publishDialog.userList     "User List">
+<!ENTITY publishDialog.findUsers    "Find Users">
+
+
+<!-- Formatting toolbar -->
+<!ENTITY formatAction.label  "正文">
+<!ENTITY formatChar.label    "人物">
+<!ENTITY formatDialog.label  "对话">
+<!ENTITY formatHeading.label "标题">
+<!ENTITY formatParen.label   "插入">
+<!ENTITY formatTrans.label   "转换">
+<!ENTITY formatShot.label    "像片">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY formatText.label    "Text">
+
+
+<!-- Debugging -->
+<!ENTITY debugMenu.label "调试(D)">
+<!ENTITY debugMenu.accessKey "D">
+
+<!ENTITY dumpCmd.label "堆存">
+
+<!ENTITY wiz.clickNext "点击’下一个’按钮开始.">
+<!ENTITY wiz.clickFinish "点击 '完成' 按钮去完成这个向导.">
+
+
+<!-- Migration wizard -->
+<!ENTITY migWiz.title "&appName; 迁移向导">
+<!ENTITY migWiz.prevVersionDetected
+  "&appName; 从早先版本中发现一个文件">
+
+<!ENTITY migWiz.aboutThis
+  "向导将允许您输入任何现有的文件">
+
+<!ENTITY migWiz.clickNext "&wiz.clickNext;">
+
+<!ENTITY migWiz.clickFinish "&wiz.clickFinish;">
+
+<!ENTITY migWiz.optionsLabel "输入选项 ">
+
+<!ENTITY migWiz.chooseOption
+  "请选择下列任何一个选项, 然后点击'下一个'">
+
+<!ENTITY migWiz.optionImport
+  "从早先版本的&appName;中输入文件">
+
+<!ENTITY migWiz.optionNoImport "不能输入">
+
+<!ENTITY migWiz.migratingLabel "迁移文件">
+
+<!ENTITY migWiz.doneLabel "迁移完成">
+
+
+<!ENTITY regWiz.title "&appName; 注册向导">
+
+<!ENTITY regWiz.intro "如果您想在线获得&appName;信息,请先注册一个&appName;帐户">
+
+<!ENTITY regWiz.aboutThis "注册向导将会收集注册需要的信息.">
+
+<!ENTITY regWiz.identityLabel "身份">
+
+<!ENTITY regWiz.identityInstructions "请输入您的姓名,单位,和电子信函地址">
+
+<!ENTITY regWiz.nameLabel  "姓名:">
+<!ENTITY regWiz.orgLabel   "单位:">
+<!ENTITY regWiz.emailLabel "电子信函:">
+<!ENTITY regWiz.uidLabel   "&appName; 用户名:">
+
+<!ENTITY regWiz.accountLabel "用户帐户">
+
+<!ENTITY regWiz.accountInstructions "请选择您&appName;帐户用户名和密码">
+
+<!ENTITY regWiz.usernameLabel      "用户名:">
+<!ENTITY regWiz.passwordLabel      "密码:">
+<!ENTITY regWiz.passwordAgainLabel "重新输入密码:">
+
+<!ENTITY regWiz.noteUsername "用户名最短3个英文字符，并且只允许用字母和数字">
+
+<!ENTITY regWiz.notePassword "密码最少5个英文字符">
+
+<!ENTITY regWiz.noteCaseSensitive "&appName; 帐户的用户名和密码是要区分大小写.">
+
+<!ENTITY regWiz.checkLabel "检查帐户信息">
+
+<!ENTITY regWiz.confirmLabel "确定设置">
+
+<!ENTITY regWiz.confirmIntro "您已经进入下列项目:">
+
+<!ENTITY regWiz.clickFinish "如果您已经确定,请按'完成'按钮去提交注册申请.">
+<!ENTITY regWiz.clickNext "如果您已经确定,请按'下一个'按钮去提交注册申请.">
+
+<!ENTITY report.sample "样本报告">
+<!ENTITY report.script "剧本报告 ">
+<!ENTITY report.allBreakdown "所以的细目分类">
+
+<!ENTITY report.titleBy "经过">
+<!ENTITY report.titleBasedOn "基于">
+<!ENTITY report.titleRights "版权">
+
+<!ENTITY script.label     "剧本">
+<!ENTITY scene.label      "情景">
+<!ENTITY scenes.label     "情景">
+
+<!-- Breakdown categories -->
+<!-- *** LOCALISE ME *** -->
+<!ENTITY bdc.addlabour    "Additional Labour">
+<!ENTITY bdc.animals      "Animals">
+<!ENTITY bdc.handler      "Animal Handler">
+<!ENTITY bdc.camera       "相机">
+<!ENTITY bdc.cast         "特性">
+<!ENTITY bdc.cgi          "CGI">
+<!ENTITY bdc.construction "Construction">
+<!ENTITY bdc.electrics    "Electrics">
+<!ENTITY bdc.extras       "额外">
+<!ENTITY bdc.greenery     "Greenery">
+<!ENTITY bdc.hair         "Hair">
+<!ENTITY bdc.lights       "灯光">
+<!ENTITY bdc.livestock    "Livestock">
+<!ENTITY bdc.location     "地点">
+<!ENTITY bdc.makeup       "Makeup">
+<!ENTITY bdc.mechfx       "Mechanical FX">
+<!ENTITY bdc.misc         "Miscellaneous">
+<!ENTITY bdc.music        "Music">
+<!ENTITY bdc.opticalfx    "Optical FX">
+<!ENTITY bdc.painting     "Painting">
+<!ENTITY bdc.prodnotes    "Production Notes">
+<!ENTITY bdc.props        "支持者">
+<!ENTITY bdc.security     "Security">
+<!ENTITY bdc.set          "调整">
+<!ENTITY bdc.setdressing  "调整装饰">
+<!ENTITY bdc.sound        "声音">
+<!ENTITY bdc.soundfx      "Sound FX">
+<!ENTITY bdc.equip        "Special Equipment">
+<!ENTITY bdc.specialfx    "Special FX">
+<!ENTITY bdc.storyboard   "Storyboard">
+<!ENTITY bdc.stunts       "Stunts">
+<!ENTITY bdc.vehicles     "Vehicles">
+<!ENTITY bdc.wardrobe     "剧装">
+<!ENTITY bdc.weapons      "Weapons">
+
+<!ENTITY splash.welcomePrefix "欢迎您来到 celtx v">
+<!ENTITY splash.projects      "文件">
+<!ENTITY splash.webServices   "网络服务">
+<!ENTITY splash.help          "帮助">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY splash.discussion    "DISCUSSION">
+
+<!ENTITY splash.newProject      "新建文件">
+<!ENTITY splash.openProject     "打开现有文件">
+<!ENTITY splash.helpAccount     "建立帐户">
+<!ENTITY splash.downloadProject "下载文件">
+<!ENTITY splash.projectCentral  "文件中心">
+<!ENTITY splash.walkthru        "3分钟速成">
+<!ENTITY splash.guide           "Celtx 用户手册">
+<!ENTITY splash.forums          "Celtx 论坛">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY splash.featureTour     "Feature Tour">
+
+<!ENTITY authDialog.title       "Celtx 鉴定">
+<!ENTITY authDialog.description
+  "请登陆您的Celtx帐户来通过鉴定">
+
+<!ENTITY list.label "列出...">
+
+<!ENTITY pdfDownloadDialog.title "转换到RDF">
+<!ENTITY downloadingPDF.label    "转换到RDF...">
+
+<!ENTITY add.label    "加">
+<!ENTITY remove.label "移动">
+
+<!ENTITY mediaBox.tooltip "拖放媒体文件在这里">
+<!ENTITY imageSearch.tooltip "拖放搜索的图像">
+
+<!-- Spellcheck -->
+
+<!ENTITY spellCheckCmd.label "语法检查">
+
+<!ENTITY addToUserDictionaryButton.accessKey "d">
+<!ENTITY addToUserDictionaryButton.label "添加字(d)">
+<!ENTITY checkwordButton.accessKey "k">
+<!ENTITY checkwordButton.label "检查字(k)">
+<!ENTITY closeButton.accessKey "C">
+<!ENTITY closeButton.label "关闭(c)">
+<!ENTITY editUserDictionaryButton.accessKey "E">
+<!ENTITY editUserDictionaryButton.label "编辑...(E)">
+<!ENTITY ignoreAllButton.accessKey "n">
+<!ENTITY ignoreAllButton.label "忽略所有(n)">
+<!ENTITY ignoreButton.accessKey "I">
+<!ENTITY ignoreButton.label "忽略(I)">
+<!ENTITY languagePopup.accessKey "L">
+<!ENTITY languagePopup.label "语言:(L)">
+<!ENTITY misspelledWord.label "拼写错误:">
+<!ENTITY moreDictionaries.label "更多下载">
+<!ENTITY recheckButton.accessKey "P">
+<!ENTITY recheckButton.label "再核对页(p)">
+<!ENTITY replaceAllButton.accessKey "A">
+<!ENTITY replaceAllButton.label "代替全部(A)">
+<!ENTITY replaceButton.accessKey "R">
+<!ENTITY replaceButton.label "代替(R)">
+<!ENTITY sendButton.accessKey "S">
+<!ENTITY sendButton.label "发送(S)">
+<!ENTITY stopButton.accessKey "t">
+<!ENTITY stopButton.label "停止(t)">
+<!ENTITY suggestions.accessKey "u">
+<!ENTITY suggestions.label "意见:(u)">
+<!ENTITY userDictionary.label "个人字典:">
+<!ENTITY windowTitle.label "检查语法">
+<!ENTITY wordEditField.accessKey "w">
+<!ENTITY wordEditField.label "代替为(w):">
+
+<!-- Find and Replace -->
+
+<!ENTITY findCmd.label "查找">
+<!ENTITY replaceCmd.label "代替">
+<!ENTITY findReplaceCmd.label "查找并代替...">
+<!ENTITY findNextCmd.label    "查找下一个">
+<!ENTITY findPrevCmd.label    "查找前一个">
+
+<!ENTITY replaceDialog.title "查找并代替">
+<!ENTITY findField.label "查找文本:(n)">
+<!ENTITY findField.accesskey "n">
+<!ENTITY replaceField.label "代替为:(e)">
+<!ENTITY replaceField.accesskey "e">
+<!ENTITY caseSensitiveCheckbox.label "匹配大写和小写(c)">
+<!ENTITY caseSensitiveCheckbox.accesskey "c">
+<!ENTITY wrapCheckbox.label "环绕(W)">
+<!ENTITY wrapCheckbox.accesskey "W">
+<!ENTITY backwardsCheckbox.label "向后查找(b) ">
+<!ENTITY backwardsCheckbox.accesskey "b">
+<!ENTITY findNextButton.label "查找下一个(F)">
+<!ENTITY findNextButton.accesskey "F">
+<!ENTITY replaceButton.label "代替(R)">
+<!ENTITY replaceButton.accesskey "R">
+<!ENTITY replaceAndFindButton.label "代替和查找(d)">
+<!ENTITY replaceAndFindButton.accesskey "d">
+<!ENTITY replaceAllButton.label "代替所以(A)">
+<!ENTITY replaceAllButton.accesskey "A">
+<!ENTITY notFoundWarning.label "您输入的文本没有发现">
+
+<!ENTITY regWiz.newOrExistingLabel
+  "建立新的帐户或使用现有的帐户:">
+<!ENTITY regWiz.createNewAccountLabel
+  "建立新的帐户">
+<!ENTITY regWiz.useExistingAccountLabel
+  "使用现有的帐户">
+<!ENTITY regWiz.loginSuccessfulLabel
+  "谢谢, 您已经成功的登陆&appName;">
+
+<!ENTITY propertiesTab.label "属性">
+<!ENTITY author.label "作者">
+<!ENTITY projSource.label "基于">
+<!ENTITY copyright.label "版权">
+<!ENTITY contactInfo.label "联系信息">
+<!ENTITY printSceneNumbers.label "出版号:">
+
+<!ENTITY none "无">
+<!ENTITY left "左">
+<!ENTITY right "右">
+<!ENTITY both "两者">
+
+<!ENTITY splashScreen.label "银幕斑点">
+
+<!ENTITY generatePDF.label "建立PDF...">
+<!ENTITY publishMode.label "公开模式">
+
+<!ENTITY addMedia.label "添加媒体...">
+<!ENTITY removeMedia.label "移动媒体">
+
+<!ENTITY bold.label "粗体">
+<!ENTITY italic.label "斜体">
+<!ENTITY underline.label " 下划线 ">
+
+<!ENTITY styleDialog.title "格式化设置">
+<!ENTITY styleSettings.label "格式化设置...">
+<!ENTITY template.label "模板">
+
+<!ENTITY mediaViewer.title "媒体播放器 ">
+
+<!-- *** LOCALISE ME *** -->
+<!ENTITY browseCmd.label "Browse...">
+<!ENTITY tagItemCmd.label "Tag">
+<!ENTITY delItemCmd.label "Delete">
+<!ENTITY chooseProjsDir.label "Choose where you want to save your projects:">
+<!ENTITY createProjsDir.label "&appName; needs a place to store your projects before it can save them. Please create the directory where &appName; should save your projects:">
+<!ENTITY createCmd.label "Create...">
+<!ENTITY invalidFilename.label "The name given is not a valid file name.">
+
+<!ENTITY breakdownCmd.label "Breakdown">
+
+<!ENTITY sidebar.label "Sidebar">
+
+<!ENTITY moveDownCmd.label "Move Down">
+<!ENTITY moveUpCmd.label   "Move Up">
+
+<!ENTITY department.label "Department">
+<!ENTITY item.label "Item">
+
+<!ENTITY category.label "Category">
+<!ENTITY database.label "Database">
+<!ENTITY research.label "Web Research">
+<!-- *** LOCALISE ME *** -->
+<!ENTITY schedule.label "Schedule">
+<!ENTITY characters.label "Characters">
+<!ENTITY sceneDetails.label "Scene Details">
+
+<!ENTITY recycleCmd.label "Send to Scratchpad">
+
+<!-- Breakdown View -->
+<!ENTITY breakdownReport.label "Breakdown Report">
+
+<!ENTITY fullName.label "Full Name">
+
+<!ENTITY sceneBreakdown.label "Scene Breakdown">
+<!ENTITY sceneBreakdownWithDesc.label "Scene Breakdown with Descriptions">
+<!ENTITY allUppercase.label "ALL">
+<!ENTITY displayMedia.label "Display Media">
+
+<!-- *** LOCALISE ME *** -->
+<!ENTITY locationField.label "地点:">
+<!ENTITY saveDirCheckbox.label "Save here by default">
+

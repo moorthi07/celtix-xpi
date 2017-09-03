@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<?xml-stylesheet href="chrome://celtx/content/toolbar.css" type="text/css"?>
+
+<!DOCTYPE toolbar [
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+%browserDTD;
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<overlay id="project-toolbar-overlay"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <toolbar id="celtx:project-toolbar">
+    <toolbarbutton id="celtx-new-button"
+                   class="main-toolbar-button"
+                   label="&newMenu.label;"
+                   tooltiptext="&newMenu.label;"
+                   command="cmd-new-project">
+      <observes element="small-icons" attribute="iconsize"/>
+    </toolbarbutton>
+    <toolbarbutton id="celtx-open-button"
+                   class="main-toolbar-button"
+                   label="&openLinkInWindowCmd.label;"
+                   tooltiptext="&openLinkInWindowCmd.label;"
+                   command="cmd-open-project">
+      <observes element="small-icons" attribute="iconsize"/>
+    </toolbarbutton>
+    <toolbarbutton id="celtx-import-button"
+                   class="main-toolbar-button"
+                   label="&importCmd.toolbarLabel;"
+                   tooltiptext="&importCmd.toolbarLabel;"
+                   command="cmd-import">
+      <observes element="small-icons" attribute="iconsize"/>
+    </toolbarbutton>
+    <toolbarbutton id="celtx-save-button"
+                   class="main-toolbar-button"
+                   label="&saveProjCmd.label;"
+                   tooltiptext="&saveProjCmd.label;"
+                   command="cmd-save-project">
+      <observes element="small-icons" attribute="iconsize"/>
+    </toolbarbutton>
+    <toolbarseparator />
+    <toolbarbutton id="celtx-print-button"
+                   class="main-toolbar-button"
+                   label="&printCmd.label;"
+                   tooltiptext="&printCmd.label;"
+                   command="cmd-print">
+      <observes element="small-icons" attribute="iconsize"/>
+    </toolbarbutton>
+    <toolbarseparator />
+    <toolbarbutton id="celtx-download-button"
+                   class="main-toolbar-button"
+                   label="&downloadProjCmd.toolbarLabel;"
+                   tooltiptext="&downloadProjCmd.toolbarLabel;"
+                   command="cmd-download-project">
+      <observes element="small-icons" attribute="iconsize"/>
+    </toolbarbutton>
+    <toolbarbutton id="celtx-publish-button"
+                   class="main-toolbar-button"
+                   label="&uploadProjCmd.toolbarLabel;"
+                   tooltiptext="&uploadProjCmd.toolbarLabel;"
+                   command="cmd-publish-project">
+      <observes element="small-icons" attribute="iconsize"/>
+    </toolbarbutton>
+    <toolbarseparator/>
+    <toolbarbutton class="celtx-undo-button format-toolbar-button"
+                   tooltiptext="&undoCmd.label;"
+                   command="cmd_undo" />
+    <toolbarbutton class="celtx-redo-button format-toolbar-button"
+                   tooltiptext="&redoCmd.label;"
+                   command="cmd_redo" />
+    <toolbarseparator />
+    <toolbarbutton class="celtx-cut-button format-toolbar-button"
+                   tooltiptext="&cutCmd.label;"
+                   command="cmd_cut" />
+    <toolbarbutton class="celtx-copy-button format-toolbar-button"
+                   tooltiptext="&copyCmd.label;"
+                   command="cmd_copy" />
+    <toolbarbutton class="celtx-paste-button format-toolbar-button"
+                   tooltiptext="&pasteCmd.label;"
+                   command="cmd_paste" />
+    <toolbarseparator/>
+    <toolbarbutton id="celtx-sidebar-button"
+                   class="main-toolbar-button"
+                   label="&sidebar.label;"
+                   tooltiptext="&sidebar.label;"
+                   command="cmd-toggle-sidebar">
+      <observes element="small-icons" attribute="iconsize"/>
+    </toolbarbutton>
+    <toolbarseparator/>
+  </toolbar>
+</overlay>
+

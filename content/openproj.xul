@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<?xml-stylesheet href="chrome://celtx/content/celtx.css" type="text/css"?> 
+
+<!DOCTYPE dialog [
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+%browserDTD;
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="open-project-dialog"
+        title="&openProj.title;"
+        pack="right"
+        buttons="accept,cancel"
+        ondialogaccept="return accepted()"
+        ondialogcancel="return canceled()"
+        onload="loaded()">
+
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/util.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/rdfmodel.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/project.js"/>
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/openproj.js"/>
+
+  <stringbundleset>
+    <stringbundle id="celtx-bundle"
+                  src="chrome://celtx/locale/celtx.properties"/>
+    <stringbundle id="dialog-bundle"
+                  src="chrome://global/locale/dialog.properties"/>
+  </stringbundleset>
+
+  <broadcasterset id="openproj-broadcasters">
+    <broadcaster id="project-selected" disabled="true"/>
+  </broadcasterset>
+
+  <commandset id="openproj-commands">
+    <command id="cmd-delete-project"
+             observes="project-selected"
+             oncommand="deleteProject()"/>
+  </commandset>
+
+  <popupset id="popups">
+    <popup id="tree-popup">
+      <menuitem id="tree-delete-project"
+                label="&deleteCmd.label;"
+                command="cmd-delete-project"/>
+    </popup>
+  </popupset>
+
+  <vbox flex="1">
+
+    <description>&projects.label;:</description>
+
+    <tree id="projects-tree" flex="1"
+          context="tree-popup"
+          datasources="rdf:null"
+          ref="http://celtx.com/local-projects"
+          flags="dont-build-content"
+          rows="10"
+          seltype="single"
+          ondblclick="doubleClicked()"
+          onselect="selected()">
+      <treecols>
+        <treecol id="title" label="&title.label;" primary="true" flex="2"
+                 persist="width ordinal hidden sortActive sortDirection"
+                 sort="?title" class="sortDirectionIndicator" />
+        <splitter class="tree-splitter"/>
+        <treecol id="description" label="&description.label;" flex="3"
+                 persist="width ordinal hidden sortActive sortDirection"
+                 sort="?description" class="sortDirectionIndicator"
+                 hidden="true" />
+        <splitter class="tree-splitter"/>
+        <treecol id="created" label="&created.label;" flex="1"
+                 persist="width ordinal hidden sortActive sortDirection"
+                 sort="?created" class="sortDirectionIndicator" />
+      </treecols>
+      <template>
+
+        <!-- Projects without corresponding project folders -->
+        <rule>
+          <conditions>
+            <content uri="?uri"/>
+            <member container="?uri" child="?res"/>
+            <triple subject="?res"
+                    predicate="http://purl.org/dc/elements/1.1/title"
+                    object="?title"/>
+            <triple subject="?res"
+                    predicate="http://celtx.com/NS/v1/missing"
+                    object="true"/>
+          </conditions>
+          <bindings>
+            <binding subject="?res"
+                     predicate="http://purl.org/dc/elements/1.1/description"
+                     object="?description"/>
+            <binding subject="?res"
+                     predicate="http://purl.org/dc/elements/1.1/created"
+                     object="?created"/>
+            </bindings>
+            <action>
+              <treechildren>
+                <treeitem uri="?res">
+                  <treerow properties="missing">
+                  <treecell label="?title"/>
+                  <treecell label="?description"/>
+                  <treecell label="?created"/>
+                </treerow>
+              </treeitem>
+            </treechildren>
+          </action>
+        </rule>
+
+        <rule>
+          <conditions>
+            <content uri="?uri"/>
+            <member container="?uri" child="?res"/>
+            <triple subject="?res"
+                    predicate="http://purl.org/dc/elements/1.1/title"
+                    object="?title"/>
+          </conditions>
+          <bindings>
+            <binding subject="?res"
+                     predicate="http://purl.org/dc/elements/1.1/description"
+                     object="?description"/>
+            <binding subject="?res"
+                     predicate="http://purl.org/dc/elements/1.1/created"
+                     object="?created"/>
+            </bindings>
+            <action>
+              <treechildren>
+                <treeitem uri="?res">
+                  <treerow>
+                  <treecell label="?title"/>
+                  <treecell label="?description"/>
+                  <treecell label="?created"/>
+                </treerow>
+              </treeitem>
+            </treechildren>
+          </action>
+        </rule>
+
+        <!-- For projects with no title -->
+        <rule>
+          <conditions>
+            <content uri="?uri"/>
+            <member container="?uri" child="?res"/>
+          </conditions>
+          <bindings>
+            <binding subject="?res"
+                     predicate="http://purl.org/dc/elements/1.1/description"
+                     object="?description"/>
+            <binding subject="?res"
+                     predicate="http://purl.org/dc/elements/1.1/created"
+                     object="?created"/>
+          </bindings>
+          <action>
+            <treechildren>
+              <treeitem uri="?res">
+                <treerow>
+                  <treecell label="&untitled.label;"/>
+                  <treecell label="?description"/>
+                  <treecell label="?created"/>
+                </treerow>
+              </treeitem>
+            </treechildren>
+          </action>
+        </rule>
+
+      </template>
+    </tree>
+
+    <hbox>
+      <button label="&browseCmd.label;" oncommand="browseForProject()"/>
+      <button label="&deleteCmd.label;" command="cmd-delete-project"/>
+      <spacer flex="1"/>
+      <button dlgtype="cancel" label="xxx"/>
+      <button dlgtype="accept" label="xxx"/>
+    </hbox>
+
+  </vbox>
+
+</dialog>
+

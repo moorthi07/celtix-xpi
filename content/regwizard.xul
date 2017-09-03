@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+
+<!--
+/* ***** BEGIN LICENCE BLOCK *****
+ * Version: CePL 1.1
+ * 
+ * The contents of this file are subject to the Celtx Public License
+ * Version 1.1 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://www.celtx.com/CePL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and limitations
+ * under the License.
+ * 
+ * The Original Code is Celtx Script Manager.
+ * 
+ * The Initial Developer of the Original Code is Chad House and 4067479
+ * Canada Inc. t/a CELTX.
+ * 
+ * Portions created by Chad House are Copyright (C) 2000-2004 Chad House,
+ * parts created by Celtx are Copyright (C) 4067479 Canada Inc. All Rights
+ * Reserved.
+ * 
+ * Contributor(s):
+ *
+ ***** END LICENCE BLOCK ***** */
+-->
+
+<?xml-stylesheet href="chrome://celtx/content/celtx.css" type="text/css"?> 
+
+<!DOCTYPE wizard [
+<!ENTITY % celtxDTD SYSTEM "chrome://celtx/locale/celtx.dtd" >
+%celtxDTD;
+]>
+
+<wizard id="registration-wizard"
+        title="&regWiz.title;"
+        onload="loaded()"
+        onwizardcancel="return canceled();"
+        onwizardfinish="return finished();"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/util.js" />
+  <script type="application/x-javascript"
+          src="chrome://celtx/content/regwizard.js"/>
+
+  <stringbundleset>
+    <stringbundle id="celtx-bundle"
+                  src="chrome://celtx/locale/celtx.properties"/>
+  </stringbundleset>
+
+  <wizardpage pageid="start-page" label="&regWiz.title;"
+            next="identity-page" onpageshow="showStart()">
+
+    <description>&regWiz.intro;</description>
+
+    <separator/>
+
+    <description>&regWiz.aboutThis;</description>
+
+    <separator/>
+
+    <description>&wiz.clickNext;</description>
+
+  </wizardpage>
+
+
+  <wizardpage pageid="identity-page" label="&regWiz.identityLabel;"
+            next="show-account-page" onpageshow="showIdentity()">
+
+    <label value="&regWiz.newOrExistingLabel;" />
+    <radiogroup id="registration-mode-radiogroup">
+      <radio id="create-mode-radio" label="&regWiz.createNewAccountLabel;"
+          value="create" oncommand="toggleRegistrationMode(false)"
+       selected="true" />
+      <radio id="existing-mode-radio" label="&regWiz.useExistingAccountLabel;"
+          value="existing" oncommand="toggleRegistrationMode(true)" />
+    </radiogroup>
+
+    <separator/>
+
+    <deck id="registration-mode-deck">
+      <!-- Account Creation Card -->
+      <vbox>
+        <description>&regWiz.identityInstructions;</description>
+
+        <grid>
+          <columns>
+            <column/>
+            <column flex="1"/>
+          </columns>
+          <rows>
+
+            <row align="center">
+             <label class="wiz-text" control="user-name" value="&regWiz.nameLabel;"/>
+             <textbox id="user-name" oninput="checkIdentity()"/>
+            </row>
+
+            <row align="center">
+             <label class="wiz-text" control="user-org" value="&regWiz.orgLabel;"/>
+             <textbox id="user-org" oninput="checkIdentity()"/>
+            </row>
+
+            <row align="center">
+             <label class="wiz-text" control="user-email" value="&regWiz.emailLabel;"/>
+             <textbox id="user-email" oninput="checkIdentity()"/>
+            </row>
+
+          </rows>
+        </grid>
+      </vbox>
+
+      <!-- Existing Account Card -->
+      <grid>
+        <columns>
+          <column />
+          <column flex="1" />
+        </columns>
+
+        <rows>
+          <row align="center">
+            <label class="wiz-text" control="existing-user-id"
+                   value="&regWiz.usernameLabel;" />
+            <textbox id="existing-user-id" maxlength="20"
+                oninput="checkIdentity()" />
+          </row>
+          <row align="center">
+           <label class="wiz-text" control="existing-password"
+                  value="&regWiz.passwordLabel;"/>
+           <textbox id="existing-password" type="password" maxlength="20"
+               oninput="checkIdentity()" />
+          </row>
+        </rows>
+      </grid>
+    </deck>
+
+  </wizardpage>
+
+
+  <wizardpage pageid="show-account-page" label="&regWiz.accountLabel;"
+            next="check-account-page" onpageshow="showAccount()">
+
+    <description>&regWiz.accountInstructions;</description>
+
+    <separator/>
+
+    <grid>
+      <columns>
+        <column/>
+        <column flex="1"/>
+      </columns>
+      <rows>
+
+        <row align="center">
+         <label class="wiz-text" control="user-id"
+                value="&regWiz.usernameLabel;"/>
+         <textbox id="user-id" maxlength="20" oninput="checkAccount()"/>
+        </row>
+
+        <row align="center">
+         <label class="wiz-text" control="user-password"
+                value="&regWiz.passwordLabel;"/>
+         <textbox id="user-password" type="password" maxlength="20"
+                  oninput="checkAccount()"/>
+        </row>
+
+        <row align="center">
+         <label class="wiz-text" control="user-repeat"
+                value="&regWiz.passwordAgainLabel;"/>
+         <textbox id="user-repeat" type="password" maxlength="20"
+                  oninput="checkAccount()"/>
+        </row>
+
+      </rows>
+    </grid>
+
+    <separator/>
+
+    <description>&regWiz.noteUsername;</description>
+
+    <description>&regWiz.notePassword;</description>
+
+    <description>&regWiz.noteCaseSensitive;</description>
+
+  </wizardpage>
+
+
+  <wizardpage pageid="check-account-page" label="&regWiz.checkLabel;"
+            next="summary-page" onpageshow="showCheckAccount()">
+
+
+    <vbox id="check-progress">
+      <description id="check-message" value=""/>
+      <progressmeter id="check-meter" mode="determined"/>
+    </vbox>
+
+    <separator/>
+
+    <description id="check-result"></description>
+
+  </wizardpage>
+  
+
+
+  <wizardpage pageid="summary-page" label="&regWiz.confirmLabel;"
+            next="submission-page" onpageshow="showSummary()"
+              onpagerewound="wizard.rewinding = true;">
+
+    <description>&regWiz.confirmIntro;</description>
+
+    <separator/>
+
+    <grid>
+      <columns>
+        <column/>
+        <column flex="1"/>
+      </columns>
+      <rows>
+        <row>
+         <label class="wiz-text" value="&regWiz.nameLabel;"/>
+         <label id="summary-name" value=""/>
+        </row>
+        <row>
+         <label class="wiz-text" value="&regWiz.orgLabel;"/>
+         <label id="summary-org" value=""/>
+        </row>
+        <row>
+         <label class="wiz-text" value="&regWiz.emailLabel;"/>
+         <label id="summary-email" value=""/>
+        </row>
+        <row>
+         <label class="wiz-text" value="&regWiz.uidLabel;"/>
+         <label id="summary-id" value=""/>
+        </row>
+      </rows>
+    </grid>
+
+    <separator/>
+
+    <description>&regWiz.clickNext;</description>
+
+  </wizardpage>
+
+  <wizardpage pageid="submission-page" next="complete-page"
+              onpageshow="showSubmission()"
+              onpagerewound="wizard.rewinding = true;">
+    <label id="submit-message" value=""/>
+    <progressmeter id="submit-meter" mode="determined" value="0"/>
+    <separator/>
+    <description id="submit-desc"></description>
+  </wizardpage>
+
+  <wizardpage pageid="complete-page" onpageshow="showCompletion()">
+    <description>&regWiz.loginSuccessfulLabel; &wiz.clickFinish;</description>
+  </wizardpage>
+
+
+</wizard>
+
